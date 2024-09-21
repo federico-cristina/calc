@@ -7,11 +7,13 @@ set(HEADERS
     "errno.h"
     "error.h"
     "bits.h"
+    "dload.h"
 )
 
 set(SOURCES
     "errno.c"
     "error.c"
+    "dload.c"
 )
 
 calc_add_library(base
