@@ -3,7 +3,7 @@
 #if CALC_PLATFORM_IS_WINDOWS
 #   include <windows.h>
 #else
-#   include <dlfnc.h>
+#   include <dlfcn.h>
 #endif
 
 handle_t CALC_STDCALL dlload_current(void)
