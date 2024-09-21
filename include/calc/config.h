@@ -120,6 +120,26 @@
                                       || (CALC_COMPILER_ID == CALC_COMPILER_ID_MSVC))
 #endif
 
+#ifndef CALC_COMPILER_NAME
+#   if   CALC_COMPILER_ID == CALC_COMPILER_ID_NONE
+/// @brief This macro represents the name of the compiler that compiled
+///        this header.
+#       define CALC_COMPILER_NAME "none"
+#   elif CALC_COMPILER_ID == CALC_COMPILER_ID_LLVM
+/// @brief This macro represents the name of the compiler that compiled
+///        this header.
+#       define CALC_COMPILER_NAME "clang"
+#   elif CALC_COMPILER_ID == CALC_COMPILER_ID_MVSC
+/// @brief This macro represents the name of the compiler that compiled
+///        this header.
+#       define CALC_COMPILER_NAME "mvsc"
+#   elif CALC_COMPILER_ID == CALC_COMPILER_ID_GNUC
+/// @brief This macro represents the name of the compiler that compiled
+///        this header.
+#       define CALC_COMPILER_NAME "gcc"
+#   endif
+#endif // CALC_COMPILER_NAME
+
 // Platform Infos
 
 /// @brief Unrecognized Platform.
@@ -177,6 +197,34 @@
                                       || (CALC_PLATFORM_ID == CALC_PLATFORM_ID_LINUX) \
                                       || (CALC_PLATFORM_ID == CALC_PLATFORM_ID_MACOS))
 #endif // CALC_PLATFORM_IS_UNIX
+
+#ifndef CALC_PLATFORM_NAME
+#   if   CALC_PLATFORM_ID == CALC_PLATFORM_ID_NONE
+/// @brief This macro represents the name of the platform on which has
+///        been compiled this header.
+#       define CALC_PLATFORM_NAME "none"
+#   elif CALC_PLATFORM_ID == CALC_PLATFORM_ID_WIN64
+/// @brief This macro represents the name of the platform on which has
+///        been compiled this header.
+#       define CALC_PLATFORM_NAME "Win64"
+#   elif CALC_PLATFORM_ID == CALC_PLATFORM_ID_WIN32
+/// @brief This macro represents the name of the platform on which has
+///        been compiled this header.
+#       define CALC_PLATFORM_NAME "Win32"
+#   elif CALC_PLATFORM_ID == CALC_PLATFORM_ID_UNIX
+/// @brief This macro represents the name of the platform on which has
+///        been compiled this header.
+#       define CALC_PLATFORM_NAME "Unix"
+#   elif CALC_PLATFORM_ID == CALC_PLATFORM_ID_LINUX
+/// @brief This macro represents the name of the platform on which has
+///        been compiled this header.
+#       define CALC_PLATFORM_NAME "Linux"
+#   elif CALC_PLATFORM_ID == CALC_PLATFORM_ID_MACOS
+/// @brief This macro represents the name of the platform on which has
+///        been compiled this header.
+#       define CALC_PLATFORM_NAME "macOS"
+#   endif
+#endif // CALC_PLATFORM_NAME
 
 // Other
 
