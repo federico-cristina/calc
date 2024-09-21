@@ -1,5 +1,8 @@
 # The calc Programming Language
 
+This is the main repository for the **calc** programming language and its tools,
+documentation and standard library.
+
 ## Goals and Principles
 
 The main goal of the **calc** project is to design and develop a programming
