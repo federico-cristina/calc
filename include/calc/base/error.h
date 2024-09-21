@@ -150,7 +150,7 @@ CALC_INLINE CALC_NORETURN void CALC_CDECL _fail(const char *const format, ...)
 #ifndef failno
 /// @brief Aborts program execution printing an error message based on
 ///        the current value of errno.
-#   define failno() fail("errno %d (%s): %s", errno, errnoname(errno), strerror(errno))
+#   define failno() (fail("errno %d (%s): %s", errno, errnoname(errno), strerror(errno)), NULL)
 #endif // failno
 
 #ifndef unreach
