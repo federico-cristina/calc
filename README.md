@@ -23,16 +23,17 @@ of integrate **calc** project in alredy-existent **C**/**C++** projects.
 > will go through many and radical changes.
 
 The language will be designed following these principles and paradigms:
-  - ***Imperative***, the programmer have the control of the machine *by the
+
+- ***Imperative***, the programmer have the control of the machine *by the
     program*, if something can be done, the programmer can do it, with effects
     and consequences, but without explicit limitations (only suggestions).
-  - ***Functional***, each problem has sub-problems that can be divided into
+- ***Functional***, each problem has sub-problems that can be divided into
     small sequences of actions, some actions influencing the others by modifying
     or completing them.
-  - ***Objective***, each concrete problem can be abstracted into a virtual,
+- ***Objective***, each concrete problem can be abstracted into a virtual,
     decomposable and composable representation, which can evolve during execution,
     bringing with it its own information about the problem to be solved.
-  - ***Modular***, each solved problem contains the solution, which can be used
+- ***Modular***, each solved problem contains the solution, which can be used
     by other more complex problems to avoid ‘reinventing the wheel’.
 
 Some of those principles and paradigms can sometimes collide, but a programmer
