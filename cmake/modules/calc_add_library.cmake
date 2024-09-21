@@ -16,7 +16,7 @@ set(CALC_INCLUDE_PREFIX "${CALC_INCLUDE_DIR}/calc")
 # Adds a library target with calc specific naming and appends it into the global
 # properties CALC_LIBRARY and CALC_TARGETS.
 #
-function(calc_add_libary TARGET)
+function(calc_add_library TARGET)
     set(_OPTIONS STATIC SHARED INSTALL)
     set(_ONE_VAL DESTINATION)
     set(_MUL_VAL SOURCES HEADERS DEPENDS)
