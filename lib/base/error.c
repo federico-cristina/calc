@@ -13,7 +13,7 @@ static inline jmpframe_t *CALC_STDCALL _new_jmpframe(jmp_buf *const buf, jmpfram
     jmpframe_t *frame = (jmpframe_t *)malloc(sizeof(jmpframe_t));
 
     if (!frame)
-        fail("error: cannot allocate jmpframe");
+        fail("error: cannot allocate jmpframe", NULL);
 
     frame->jump = buf;
     frame->prev = prev;
