@@ -241,4 +241,10 @@
 #   endif
 #endif // CALC_INLINE
 
+#ifndef CALC_EXTERN
+/// @brief Marks a function that is not defined in the current
+///        header.
+#   define CALC_EXTERN extern
+#endif // CALC_EXTERN
+
 #endif // CALC_BASE_DEFS_H_
