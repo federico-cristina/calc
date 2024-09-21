@@ -5,11 +5,13 @@ set(HEADERS
     "byte.h"
     "api.h"
     "errno.h"
+    "error.h"
     "bits.h"
 )
 
 set(SOURCES
     "errno.c"
+    "error.c"
 )
 
 calc_add_library(base

@@ -20,7 +20,12 @@
 
 #include "calc/base/errno.h"
 
+#include <setjmp.h>
+#include <signal.h>
+
 CALC_C_HEADER_BEGIN
+
+// Fatal errors handling
 
 #ifndef CALC_ERROR_TRACE_SPACES
 /// @brief This macro contains the default number of spaces used at the
@@ -160,6 +165,47 @@ CALC_INLINE CALC_NORETURN void CALC_CDECL _fail(const char *const format, ...)
 ///        fails when reach it.
 #   define notimpl() (fail("error: not implemented yet", NULL), NULL)
 #endif // noimpl
+
+// Non-fatal errors handling
+
+/// @brief Pushes on the top of the jmpstack the value of buf.
+/// @param buf Saved status to push onto the jmpstack.
+CALC_EXTERN void CALC_STDCALL jmptop(jmp_buf *const buf);
+/// @brief Pops the top of the jmpstack, deleting it.
+CALC_EXTERN void CALC_STDCALL jmppop(void);
+
+/// @brief Callback datatype.
+typedef int (*callback_t)(int);
+
+/// @brief Helper function for jmpback macro. DON'T CALL THIS FUNCTION
+///        DIRECTLY.
+CALC_INLINE int CALC_STDCALL _jmpback(int value, jmp_buf *const buf, callback_t callback)
+{
+    CALC_REGISTER int result;
+
+    if (value)
+        result = callback(value);
+    else
+        result = 0, jmptop(buf);
+
+    return result;
+}
+
+#ifndef jmpback
+/// @brief Saves the current status of the program into buf, when longjmp
+///        function the control returns to this function that calls a
+///        callback function to handle the longjmp signal value.
+/// @param buf The jmp_buf in which save the current execution status.
+/// @param callback Callback function address.
+/// @return Zero when the error status has been saved correcly, else the
+///         value passed to longjmp function when has been called.
+#   define jmpback(buf, callback) _jmpback(setjmp(buf), &(buf), (callback))
+#endif // jmpback
+
+/// @brief Jumps to the last jmp_buf on the jmpstack, or fails the execution
+///        if there's no one.
+/// @param value Value of the signal to report to the handler.
+CALC_EXTERN CALC_NORETURN void CALC_STDCALL jump(int value);
 
 CALC_C_HEADER_END
 
