@@ -1,7 +1,18 @@
 #pragma once
 
 /**
+ * @file        error.h
  * 
+ * @author      Federico Cristina <federico.cristina@outlook.it>
+ * 
+ * @copyright   Copyright (c) 2024 Federico Cristina
+ *              
+ *              This file is part of the calc scripting language project,
+ *              under the Apache License v2.0. See LICENSE for license
+ *              informations.
+ * 
+ * @brief       In this header are defined macros and functions to handle
+ *              internal fatal and non-fatal errors and.
  */
 
 #ifndef CALC_BASE_ERROR_H_
