@@ -36,7 +36,7 @@ CALC_C_HEADER_BEGIN
 CALC_INLINE void *CALC_STDCALL _check(void *const block, const char *const errMsg)
 {
     if (!block)
-        return fail("errno %d (%s): %s (%s)", errno, errnoname(errno), strerror(errno), errMsg), NULL;
+        return failno(errMsg);
     else
         return block;
 }
