@@ -40,7 +40,7 @@ handle_t CALC_STDCALL dlimpf(handle_t handle, const char *const name)
 #if CALC_PLATFORM_IS_WINDOWS
     func = (handle_t)GetProcAddress((HMODULE)handle, (LPCSTR)name);
 #else
-    func = (handle_t)dlsymb((void *)lib, name);
+    func = (handle_t)dlsymb((void *)handle, name);
 #endif
 
     return func;
