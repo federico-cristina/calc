@@ -10,6 +10,7 @@ set(HEADERS
     "dload.h"
     "alloc.h"
     "string.h"
+    "file.h"
 )
 
 set(SOURCES
@@ -17,6 +18,7 @@ set(SOURCES
     "error.c"
     "dload.c"
     "string.c"
+    "file.c"
 )
 
 calc_add_library(base
