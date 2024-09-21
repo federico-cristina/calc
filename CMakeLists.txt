@@ -27,7 +27,7 @@ set(CALC_RUNTIME_DIR "${CALC_DIR}/runtime")
 
 list(APPEND CMAKE_MODULE_PATH "${CALC_MODULES_DIR}")
 
-set(CALC_CONFIG_PATH "${CALC_INCLUDE_DIR}/CALC/config.h")
+set(CALC_CONFIG_PATH "${CALC_INCLUDE_DIR}/calc/config.h")
 
 configure_file("${CALC_CONFIG_PATH}.in" "${CALC_CONFIG_PATH}")
 message(NOTICE "${CALC_LOG_PREFIX}: config file ${CALC_CONFIG_PATH}")
