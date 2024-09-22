@@ -94,7 +94,7 @@ CALC_API CalcDiagnosticLevel_t CALC_STDCALL calcGetDiagnosticLevel(CalcDiagnosti
 
 // Diagnostic Location
 
-CALC_API CalcDiagnosticLocation_t *CALC_STDCALL clacInitDiagnosticLocation(CalcDiagnosticLocation_t *const location, char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber)
+CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcInitDiagnosticLocation(CalcDiagnosticLocation_t *const location, char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber)
 {
     location->file = file;
     location->func = func;
@@ -105,7 +105,7 @@ CALC_API CalcDiagnosticLocation_t *CALC_STDCALL clacInitDiagnosticLocation(CalcD
     return location;
 }
 
-CALC_API CalcDiagnosticLocation_t *CALC_STDCALL clacCreateDiagnosticLocation(char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber)
+CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcCreateDiagnosticLocation(char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber)
 {
     return calcInitDiagnosticLocation(alloc(CalcDiagnosticLocation_t), file, func, line, lineLength, lineNumber);
 }
