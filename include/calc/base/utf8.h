@@ -247,6 +247,18 @@ typedef enum _utf8_boundclass
     UTF8_BOUNDCLASS_SPACINGMARK = 12,        /// @brief Spacingmark
     UTF8_BOUNDCLASS_PREPEND = 13,            /// @brief Prepend
     UTF8_BOUNDCLASS_ZWJ = 14,                /// @brief Zero Width Joiner
+
+    /* the following are no longer used in Unicode 11, but we keep
+     the constants here for backward compatibility */
+    UTF8_BOUNDCLASS_E_BASE             = 15, /**< Emoji Base */
+    UTF8_BOUNDCLASS_E_MODIFIER         = 16, /**< Emoji Modifier */
+    UTF8_BOUNDCLASS_GLUE_AFTER_ZWJ     = 17, /**< Glue_After_ZWJ */
+    UTF8_BOUNDCLASS_E_BASE_GAZ         = 18, /**< E_BASE + GLUE_AFTER_ZJW */
+
+    /* the Extended_Pictographic property is used in the Unicode 11
+     grapheme-boundary rules, so we store it in the boundclass field */
+    UTF8_BOUNDCLASS_EXTENDED_PICTOGRAPHIC = 19,
+    UTF8_BOUNDCLASS_E_ZWG = 20, /* UTF8_BOUNDCLASS_EXTENDED_PICTOGRAPHIC + ZWJ */
 } utf8_boundclass_t;
 
 /// @brief Indic_Conjunct_Break property. (TR44)

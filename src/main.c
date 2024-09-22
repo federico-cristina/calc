@@ -1,4 +1,4 @@
-#include "calc/base/error.h"
+#include "calc/base/utf8.h"
 
 int handle(int value)
 {
@@ -7,10 +7,7 @@ int handle(int value)
 
 int main()
 {
-    jmp_buf buf;
-
-    if (!jmpback(buf, handle))
-        jump(32);
-
+    int i = (utf8_category(0x3042) & UTF8_CATEGORY_LO) == UTF8_CATEGORY_LO;
+    
     return 0;
 }
