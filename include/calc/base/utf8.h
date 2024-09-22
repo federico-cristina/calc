@@ -276,7 +276,7 @@ typedef int32_t (*utf8_custom_func_t)(int32_t codepoint, void *data);
 
 /// @brief Array containing the byte lengths of a UTF-8 encoded codepoint based
 ///        on the first byte.
-CALC_EXTERN const int8_t utf8_utf8class[BYTE_MAX + 1];
+CALC_EXTERN const int8_t utf8_utf8class[256];
 
 /// @brief Returns the utf8proc API version as a string MAJOR.MINOR.PATCH
 ///        (http://semver.org format), possibly with a "-dev" suffix for

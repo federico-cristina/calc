@@ -35,7 +35,7 @@ const char *utf8_errmsg(ssize_t errcode)
 
 #include "utf8-data.c"
 
-const int8_t utf8_utf8class[BYTE_MAX + 1] = {
+const int8_t utf8_utf8class[256] = {
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
