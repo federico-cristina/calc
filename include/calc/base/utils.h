@@ -45,4 +45,12 @@
 #   define max(size1, size2) (((size1) > (size2)) ? (size1) : (size2))
 #endif // max
 
+#ifndef hasflag
+/// @brief Checks if an integral value has a bit flag.
+/// @param value Value to check.
+/// @param flag Bit flag to check.
+/// @return 1 if value has the bit flag, else 0. 
+#   define hasflag(value, flag) (((value) & (flag)) == (flag))
+#endif // hasflag
+
 #endif // CALC_BASE_UTILS_H_
