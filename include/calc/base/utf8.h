@@ -31,7 +31,6 @@
 
 #include "calc/base/bits.h"
 #include "calc/base/bool.h"
-#include "calc/base/byte.h"
 #include "calc/base/error.h"
 
 CALC_C_HEADER_BEGIN
