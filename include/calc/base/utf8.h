@@ -145,124 +145,112 @@ typedef struct _utf8_property_struct
     uint32_t indic_conjunct_break : 2;
 } utf8_property_t;
 
-/// @brief Unicode categories. */
-typedef enum
+/// @brief Unicode categories.
+typedef enum _utf8_category
 {
-    UTF8_CATEGORY_CN = 0,  /// @brief< Other, not assigned */
-    UTF8_CATEGORY_LU = 1,  /// @brief< Letter, uppercase */
-    UTF8_CATEGORY_LL = 2,  /// @brief< Letter, lowercase */
-    UTF8_CATEGORY_LT = 3,  /// @brief< Letter, titlecase */
-    UTF8_CATEGORY_LM = 4,  /// @brief< Letter, modifier */
-    UTF8_CATEGORY_LO = 5,  /// @brief< Letter, other */
-    UTF8_CATEGORY_MN = 6,  /// @brief< Mark, nonspacing */
-    UTF8_CATEGORY_MC = 7,  /// @brief< Mark, spacing combining */
-    UTF8_CATEGORY_ME = 8,  /// @brief< Mark, enclosing */
-    UTF8_CATEGORY_ND = 9,  /// @brief< Number, decimal digit */
-    UTF8_CATEGORY_NL = 10, /// @brief< Number, letter */
-    UTF8_CATEGORY_NO = 11, /// @brief< Number, other */
-    UTF8_CATEGORY_PC = 12, /// @brief< Punctuation, connector */
-    UTF8_CATEGORY_PD = 13, /// @brief< Punctuation, dash */
-    UTF8_CATEGORY_PS = 14, /// @brief< Punctuation, open */
-    UTF8_CATEGORY_PE = 15, /// @brief< Punctuation, close */
-    UTF8_CATEGORY_PI = 16, /// @brief< Punctuation, initial quote */
-    UTF8_CATEGORY_PF = 17, /// @brief< Punctuation, final quote */
-    UTF8_CATEGORY_PO = 18, /// @brief< Punctuation, other */
-    UTF8_CATEGORY_SM = 19, /// @brief< Symbol, math */
-    UTF8_CATEGORY_SC = 20, /// @brief< Symbol, currency */
-    UTF8_CATEGORY_SK = 21, /// @brief< Symbol, modifier */
-    UTF8_CATEGORY_SO = 22, /// @brief< Symbol, other */
-    UTF8_CATEGORY_ZS = 23, /// @brief< Separator, space */
-    UTF8_CATEGORY_ZL = 24, /// @brief< Separator, line */
-    UTF8_CATEGORY_ZP = 25, /// @brief< Separator, paragraph */
-    UTF8_CATEGORY_CC = 26, /// @brief< Other, control */
-    UTF8_CATEGORY_CF = 27, /// @brief< Other, format */
-    UTF8_CATEGORY_CS = 28, /// @brief< Other, surrogate */
-    UTF8_CATEGORY_CO = 29, /// @brief< Other, private use */
+    UTF8_CATEGORY_CN = 0,  /// @brief Other, not assigned
+    UTF8_CATEGORY_LU = 1,  /// @brief Letter, uppercase
+    UTF8_CATEGORY_LL = 2,  /// @brief Letter, lowercase
+    UTF8_CATEGORY_LT = 3,  /// @brief Letter, titlecase
+    UTF8_CATEGORY_LM = 4,  /// @brief Letter, modifier
+    UTF8_CATEGORY_LO = 5,  /// @brief Letter, other
+    UTF8_CATEGORY_MN = 6,  /// @brief Mark, nonspacing
+    UTF8_CATEGORY_MC = 7,  /// @brief Mark, spacing combining
+    UTF8_CATEGORY_ME = 8,  /// @brief Mark, enclosing
+    UTF8_CATEGORY_ND = 9,  /// @brief Number, decimal digi
+    UTF8_CATEGORY_NL = 10, /// @brief Number, letter
+    UTF8_CATEGORY_NO = 11, /// @brief Number, other
+    UTF8_CATEGORY_PC = 12, /// @brief Punctuation, connector
+    UTF8_CATEGORY_PD = 13, /// @brief Punctuation, dash
+    UTF8_CATEGORY_PS = 14, /// @brief Punctuation, open
+    UTF8_CATEGORY_PE = 15, /// @brief Punctuation, close
+    UTF8_CATEGORY_PI = 16, /// @brief Punctuation, initial quote
+    UTF8_CATEGORY_PF = 17, /// @brief Punctuation, final quote
+    UTF8_CATEGORY_PO = 18, /// @brief Punctuation, other
+    UTF8_CATEGORY_SM = 19, /// @brief Symbol, math
+    UTF8_CATEGORY_SC = 20, /// @brief Symbol, currency
+    UTF8_CATEGORY_SK = 21, /// @brief Symbol, modifier
+    UTF8_CATEGORY_SO = 22, /// @brief Symbol, other
+    UTF8_CATEGORY_ZS = 23, /// @brief Separator, space
+    UTF8_CATEGORY_ZL = 24, /// @brief Separator, line
+    UTF8_CATEGORY_ZP = 25, /// @brief Separator, paragraph
+    UTF8_CATEGORY_CC = 26, /// @brief Other, control
+    UTF8_CATEGORY_CF = 27, /// @brief Other, format
+    UTF8_CATEGORY_CS = 28, /// @brief Other, surrogate
+    UTF8_CATEGORY_CO = 29, /// @brief Other, private use
 } utf8_category_t;
 
-/// @brief Bidirectional character classes. */
-typedef enum
+/// @brief Bidirectional character classes.
+typedef enum _utf8_bidi_class
 {
-    UTF8_BIDI_CLASS_L = 1,    /// @brief< Left-to-Right */
-    UTF8_BIDI_CLASS_LRE = 2,  /// @brief< Left-to-Right Embedding */
-    UTF8_BIDI_CLASS_LRO = 3,  /// @brief< Left-to-Right Override */
-    UTF8_BIDI_CLASS_R = 4,    /// @brief< Right-to-Left */
-    UTF8_BIDI_CLASS_AL = 5,   /// @brief< Right-to-Left Arabic */
-    UTF8_BIDI_CLASS_RLE = 6,  /// @brief< Right-to-Left Embedding */
-    UTF8_BIDI_CLASS_RLO = 7,  /// @brief< Right-to-Left Override */
-    UTF8_BIDI_CLASS_PDF = 8,  /// @brief< Pop Directional Format */
-    UTF8_BIDI_CLASS_EN = 9,   /// @brief< European Number */
-    UTF8_BIDI_CLASS_ES = 10,  /// @brief< European Separator */
-    UTF8_BIDI_CLASS_ET = 11,  /// @brief< European Number Terminator */
-    UTF8_BIDI_CLASS_AN = 12,  /// @brief< Arabic Number */
-    UTF8_BIDI_CLASS_CS = 13,  /// @brief< Common Number Separator */
-    UTF8_BIDI_CLASS_NSM = 14, /// @brief< Nonspacing Mark */
-    UTF8_BIDI_CLASS_BN = 15,  /// @brief< Boundary Neutral */
-    UTF8_BIDI_CLASS_B = 16,   /// @brief< Paragraph Separator */
-    UTF8_BIDI_CLASS_S = 17,   /// @brief< Segment Separator */
-    UTF8_BIDI_CLASS_WS = 18,  /// @brief< Whitespace */
-    UTF8_BIDI_CLASS_ON = 19,  /// @brief< Other Neutrals */
-    UTF8_BIDI_CLASS_LRI = 20, /// @brief< Left-to-Right Isolate */
-    UTF8_BIDI_CLASS_RLI = 21, /// @brief< Right-to-Left Isolate */
-    UTF8_BIDI_CLASS_FSI = 22, /// @brief< First Strong Isolate */
-    UTF8_BIDI_CLASS_PDI = 23, /// @brief< Pop Directional Isolate */
+    UTF8_BIDI_CLASS_L = 1,    /// @brief Left-to-Right
+    UTF8_BIDI_CLASS_LRE = 2,  /// @brief Left-to-Right Embedding
+    UTF8_BIDI_CLASS_LRO = 3,  /// @brief Left-to-Right Override
+    UTF8_BIDI_CLASS_R = 4,    /// @brief Right-to-Left
+    UTF8_BIDI_CLASS_AL = 5,   /// @brief Right-to-Left Arabic
+    UTF8_BIDI_CLASS_RLE = 6,  /// @brief Right-to-Left Embedding
+    UTF8_BIDI_CLASS_RLO = 7,  /// @brief Right-to-Left Override
+    UTF8_BIDI_CLASS_PDF = 8,  /// @brief Pop Directional Format
+    UTF8_BIDI_CLASS_EN = 9,   /// @brief European Number
+    UTF8_BIDI_CLASS_ES = 10,  /// @brief European Separator
+    UTF8_BIDI_CLASS_ET = 11,  /// @brief European Number Terminator
+    UTF8_BIDI_CLASS_AN = 12,  /// @brief Arabic Number
+    UTF8_BIDI_CLASS_CS = 13,  /// @brief Common Number Separator
+    UTF8_BIDI_CLASS_NSM = 14, /// @brief Nonspacing Mark
+    UTF8_BIDI_CLASS_BN = 15,  /// @brief Boundary Neutral
+    UTF8_BIDI_CLASS_B = 16,   /// @brief Paragraph Separator
+    UTF8_BIDI_CLASS_S = 17,   /// @brief Segment Separator
+    UTF8_BIDI_CLASS_WS = 18,  /// @brief Whitespace
+    UTF8_BIDI_CLASS_ON = 19,  /// @brief Other Neutrals
+    UTF8_BIDI_CLASS_LRI = 20, /// @brief Left-to-Right Isolate
+    UTF8_BIDI_CLASS_RLI = 21, /// @brief Right-to-Left Isolate
+    UTF8_BIDI_CLASS_FSI = 22, /// @brief First Strong Isolate
+    UTF8_BIDI_CLASS_PDI = 23, /// @brief Pop Directional Isolate
 } utf8_bidi_class_t;
 
-/// @brief Decomposition type. */
-typedef enum
+/// @brief Decomposition type.
+typedef enum _utf8_decomp_type
 {
-    UTF8_DECOMP_TYPE_FONT = 1,      /// @brief< Font */
-    UTF8_DECOMP_TYPE_NOBREAK = 2,   /// @brief< Nobreak */
-    UTF8_DECOMP_TYPE_INITIAL = 3,   /// @brief< Initial */
-    UTF8_DECOMP_TYPE_MEDIAL = 4,    /// @brief< Medial */
-    UTF8_DECOMP_TYPE_FINAL = 5,     /// @brief< Final */
-    UTF8_DECOMP_TYPE_ISOLATED = 6,  /// @brief< Isolated */
-    UTF8_DECOMP_TYPE_CIRCLE = 7,    /// @brief< Circle */
-    UTF8_DECOMP_TYPE_SUPER = 8,     /// @brief< Super */
-    UTF8_DECOMP_TYPE_SUB = 9,       /// @brief< Sub */
-    UTF8_DECOMP_TYPE_VERTICAL = 10, /// @brief< Vertical */
-    UTF8_DECOMP_TYPE_WIDE = 11,     /// @brief< Wide */
-    UTF8_DECOMP_TYPE_NARROW = 12,   /// @brief< Narrow */
-    UTF8_DECOMP_TYPE_SMALL = 13,    /// @brief< Small */
-    UTF8_DECOMP_TYPE_SQUARE = 14,   /// @brief< Square */
-    UTF8_DECOMP_TYPE_FRACTION = 15, /// @brief< Fraction */
-    UTF8_DECOMP_TYPE_COMPAT = 16,   /// @brief< Compat */
+    UTF8_DECOMP_TYPE_FONT = 1,      /// @brief Font
+    UTF8_DECOMP_TYPE_NOBREAK = 2,   /// @brief Nobreak
+    UTF8_DECOMP_TYPE_INITIAL = 3,   /// @brief Initial
+    UTF8_DECOMP_TYPE_MEDIAL = 4,    /// @brief Medial
+    UTF8_DECOMP_TYPE_FINAL = 5,     /// @brief Final
+    UTF8_DECOMP_TYPE_ISOLATED = 6,  /// @brief Isolated
+    UTF8_DECOMP_TYPE_CIRCLE = 7,    /// @brief Circle
+    UTF8_DECOMP_TYPE_SUPER = 8,     /// @brief Super
+    UTF8_DECOMP_TYPE_SUB = 9,       /// @brief Sub
+    UTF8_DECOMP_TYPE_VERTICAL = 10, /// @brief Vertical
+    UTF8_DECOMP_TYPE_WIDE = 11,     /// @brief Wide
+    UTF8_DECOMP_TYPE_NARROW = 12,   /// @brief Narrow
+    UTF8_DECOMP_TYPE_SMALL = 13,    /// @brief Small
+    UTF8_DECOMP_TYPE_SQUARE = 14,   /// @brief Square
+    UTF8_DECOMP_TYPE_FRACTION = 15, /// @brief Fraction
+    UTF8_DECOMP_TYPE_COMPAT = 16,   /// @brief Compat
 } utf8_decomp_type_t;
 
-/// @brief Boundclass property. (TR29) */
-typedef enum
+/// @brief Boundclass property. (TR29)
+typedef enum _utf8_boundclass
 {
-    UTF8_BOUNDCLASS_START = 0,               /// @brief< Start */
-    UTF8_BOUNDCLASS_OTHER = 1,               /// @brief< Other */
-    UTF8_BOUNDCLASS_CR = 2,                  /// @brief< Cr */
-    UTF8_BOUNDCLASS_LF = 3,                  /// @brief< Lf */
-    UTF8_BOUNDCLASS_CONTROL = 4,             /// @brief< Control */
-    UTF8_BOUNDCLASS_EXTEND = 5,              /// @brief< Extend */
-    UTF8_BOUNDCLASS_L = 6,                   /// @brief< L */
-    UTF8_BOUNDCLASS_V = 7,                   /// @brief< V */
-    UTF8_BOUNDCLASS_T = 8,                   /// @brief< T */
-    UTF8_BOUNDCLASS_LV = 9,                  /// @brief< Lv */
-    UTF8_BOUNDCLASS_LVT = 10,                /// @brief< Lvt */
-    UTF8_BOUNDCLASS_REGIONAL_INDICATOR = 11, /// @brief< Regional indicator */
-    UTF8_BOUNDCLASS_SPACINGMARK = 12,        /// @brief< Spacingmark */
-    UTF8_BOUNDCLASS_PREPEND = 13,            /// @brief< Prepend */
-    UTF8_BOUNDCLASS_ZWJ = 14,                /// @brief< Zero Width Joiner */
-
-    /* the following are no longer used in Unicode 11, but we keep
-       the constants here for backward compatibility */
-    UTF8_BOUNDCLASS_E_BASE = 15,         /// @brief< Emoji Base */
-    UTF8_BOUNDCLASS_E_MODIFIER = 16,     /// @brief< Emoji Modifier */
-    UTF8_BOUNDCLASS_GLUE_AFTER_ZWJ = 17, /// @brief< Glue_After_ZWJ */
-    UTF8_BOUNDCLASS_E_BASE_GAZ = 18,     /// @brief< E_BASE + GLUE_AFTER_ZJW */
-
-    /* the Extended_Pictographic property is used in the Unicode 11
-       grapheme-boundary rules, so we store it in the boundclass field */
-    UTF8_BOUNDCLASS_EXTENDED_PICTOGRAPHIC = 19,
-    UTF8_BOUNDCLASS_E_ZWG = 20, /* UTF8_BOUNDCLASS_EXTENDED_PICTOGRAPHIC + ZWJ */
+    UTF8_BOUNDCLASS_START = 0,               /// @brief Start
+    UTF8_BOUNDCLASS_OTHER = 1,               /// @brief Other
+    UTF8_BOUNDCLASS_CR = 2,                  /// @brief Cr
+    UTF8_BOUNDCLASS_LF = 3,                  /// @brief Lf
+    UTF8_BOUNDCLASS_CONTROL = 4,             /// @brief Control
+    UTF8_BOUNDCLASS_EXTEND = 5,              /// @brief Extend
+    UTF8_BOUNDCLASS_L = 6,                   /// @brief L
+    UTF8_BOUNDCLASS_V = 7,                   /// @brief V
+    UTF8_BOUNDCLASS_T = 8,                   /// @brief T
+    UTF8_BOUNDCLASS_LV = 9,                  /// @brief Lv
+    UTF8_BOUNDCLASS_LVT = 10,                /// @brief Lvt
+    UTF8_BOUNDCLASS_REGIONAL_INDICATOR = 11, /// @brief Regional indicator
+    UTF8_BOUNDCLASS_SPACINGMARK = 12,        /// @brief Spacingmark
+    UTF8_BOUNDCLASS_PREPEND = 13,            /// @brief Prepend
+    UTF8_BOUNDCLASS_ZWJ = 14,                /// @brief Zero Width Joiner
 } utf8_boundclass_t;
 
-/// @brief Indic_Conjunct_Break property. (TR44) */
-typedef enum
+/// @brief Indic_Conjunct_Break property. (TR44)
+typedef enum _utf8_indic_conjunct_break
 {
     UTF8_INDIC_CONJUNCT_BREAK_NONE = 0,
     UTF8_INDIC_CONJUNCT_BREAK_LINKER = 1,

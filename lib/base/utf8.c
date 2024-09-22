@@ -1,6 +1,6 @@
 #include "calc/base/utf8.h"
 
-static int CALC_STDCALL utf8_handle(int errcode)
+const char *utf8_errmsg(ssize_t errcode)
 {
     const char *message = NULL;
 
@@ -27,12 +27,10 @@ static int CALC_STDCALL utf8_handle(int errcode)
         break;
 
     default:
-        return 0;
+        return unreach();
     }
 
-    notice(message);
-
-    return 1;
+    return message;
 }
 
 #include "utf8-data.c"
