@@ -147,6 +147,12 @@ CALC_INLINE CALC_NORETURN void CALC_CDECL _fail(const char *const format, ...)
 #   endif
 #endif // fail
 
+#ifndef notice
+/// @brief Reports an error.
+/// @param message An additional message to print to explain the error.
+#   define notice(message) (warn("error: %s", (message)), NULL)
+#endif // notice
+
 #ifndef failno
 /// @brief Aborts program execution printing an error message based on
 ///        the current value of errno.
