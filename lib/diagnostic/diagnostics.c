@@ -28,7 +28,7 @@ CALC_API const char *CALC_STDCALL calcGetDiagnosticDisplayName(CalcDiagnosticCod
 #pragma pop_macro("calcDefineDiagnosticCode")
 
     default:
-        return NULL;
+        return unreach();
     }
 }
 
@@ -58,7 +58,7 @@ CALC_API const char *CALC_STDCALL calcGetDiagnosticDefaultFormat(CalcDiagnosticC
 #pragma pop_macro("calcDefineDiagnosticCode")
 
     default:
-        return NULL;
+        return unreach();
     }
 }
 
@@ -88,7 +88,7 @@ CALC_API CalcDiagnosticLevel_t CALC_STDCALL calcGetDiagnosticLevel(CalcDiagnosti
 #pragma pop_macro("calcDefineDiagnosticCode")
 
     default:
-        return CALC_DIAGNOSTIC_LEVEL_NOTE;
+        return unreach(), 0;
     }
 }
 
