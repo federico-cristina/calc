@@ -146,7 +146,7 @@ typedef struct _CalcDiagnosticLocation
 /// @param lineLength The number of characters in the line.
 /// @param lineNumber The number of the line.
 /// @return On success location is returned.
-CALC_API CalcDiagnosticLocation_t *CALC_STDCALL clacInitDiagnosticLocation(CalcDiagnosticLocation_t *const location, char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber);
+CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcInitDiagnosticLocation(CalcDiagnosticLocation_t *const location, char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber);
 /// @brief Creates a new CalcDiagnosticLocation data structure with
 ///        given informations.
 /// @param location A pointer to the structure to initialize.
@@ -159,7 +159,7 @@ CALC_API CalcDiagnosticLocation_t *CALC_STDCALL clacInitDiagnosticLocation(CalcD
 /// @param lineLength The number of characters in the line.
 /// @param lineNumber The number of the line.
 /// @return A pointer to the new CalcDiagnosticLocation data structure.
-CALC_API CalcDiagnosticLocation_t *CALC_STDCALL clacCreateDiagnosticLocation(char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber);
+CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcCreateDiagnosticLocation(char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber);
 
 #ifndef calcGetCurrentLocation
 /// @brief Creates a new diagnostic location based on the current
