@@ -1,5 +1,20 @@
 #pragma once
 
+/**
+ * @file        diagnostics.h
+ *
+ * @author      Federico Cristina <federico.cristina@outlook.it>
+ *
+ * @copyright   Copyright (c) 2024 Federico Cristina
+ *
+ *              This file is part of the calc scripting language project,
+ *              under the Apache License v2.0. See LICENSE for license
+ *              informations.
+ *
+ * @brief       In this header are defined diagnostics kinds, codes and
+ *              data structures to store them informations.
+ */
+
 #ifndef CALC_DIAGNOSTIC_DIAGNOSTICS_H_
 #define CALC_DIAGNOSTIC_DIAGNOSTICS_H_
 
