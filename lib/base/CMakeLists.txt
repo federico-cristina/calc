@@ -11,6 +11,7 @@ set(HEADERS
     "alloc.h"
     "string.h"
     "file.h"
+    "utf8.h"
 )
 
 set(SOURCES
@@ -19,6 +20,7 @@ set(SOURCES
     "dload.c"
     "string.c"
     "file.c"
+    "utf8.c"
 )
 
 calc_add_library(base
