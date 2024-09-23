@@ -120,7 +120,7 @@ CALC_API const char *CALC_STDCALL calcGetDiagnosticDisplayName(CalcDiagnosticCod
 /// @param code Diagnostic code to map.
 /// @return A constant pointer to the constant string containing
 ///         the name of the diagnostic.
-CALC_API const char *CALC_STDCALL calcGetDiagnosticDefaultFormat(CalcDiagnosticCode_t diagnosticCode);
+CALC_API const char *CALC_STDCALL calcGetDiagnosticDefaultMessage(CalcDiagnosticCode_t diagnosticCode);
 /// @brief Maps each diagnostic code to its relative level
 ///        code.
 /// @param code Diagnostic code to map.
@@ -224,7 +224,7 @@ CALC_API CalcDiagnostic_t *CALC_STDCALL calcCreateDiagnostic(CalcDiagnosticLevel
 
 #ifndef calcCreateDiagnosticFromCode
 /// @brief Creates a new diagnostic from a specific diagnostic code.
-#   define calcCreateDiagnosticFromCode(code, location, ...) calcCreateDiagnostic(calcGetDiagnosticLevel(code), (int)(code), (location), strfmt(calcGetDiagnosticDefaultFormat(code), __VA_ARGS__))
+#   define calcCreateDiagnosticFromCode(code, location, ...) calcCreateDiagnostic(calcGetDiagnosticLevel(code), (int)(code), (location), strfmt(calcGetDiagnosticDefaultMessage(code), __VA_ARGS__))
 #endif // calcCreateDiagnosticFromCode
 
 #ifndef calcCreateDiagnosticFromErrno

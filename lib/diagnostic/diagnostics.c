@@ -32,7 +32,7 @@ CALC_API const char *CALC_STDCALL calcGetDiagnosticDisplayName(CalcDiagnosticCod
     }
 }
 
-CALC_API const char *CALC_STDCALL calcGetDiagnosticDefaultFormat(CalcDiagnosticCode_t diagnosticCode)
+CALC_API const char *CALC_STDCALL calcGetDiagnosticDefaultMessage(CalcDiagnosticCode_t diagnosticCode)
 {
     switch (diagnosticCode)
     {
