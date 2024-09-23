@@ -7,7 +7,10 @@ CALC_API int CALC_STDCALL calcEmitDiagnosticLocation(CalcDiagnosticLocation_t *c
     if (useColors)
         fputs("\x1B[0;97m", stream); // color: BRIGHT WHITE
 
-    result = fprintf(stream, "%s:%u:%u:", diagnosticLocation->file, diagnosticLocation->lineNumber, diagnosticLocation->errorPosition);
+    result = fprintf(stream, "%s:%u:", diagnosticLocation->file, diagnosticLocation->lineNumber);
+
+    if (diagnosticLocation->errorPosition)
+        result += fprintf(stream, "%u:", diagnosticLocation->errorPosition);
 
     if (useColors)
         fputs("\x1B[0m", stream); // color: RESET
@@ -15,7 +18,7 @@ CALC_API int CALC_STDCALL calcEmitDiagnosticLocation(CalcDiagnosticLocation_t *c
     return result;
 }
 
-CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream, bool_t useColors)
+CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(char *const hint, CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream, bool_t useColors)
 {
     int result = 0;
 
@@ -40,32 +43,58 @@ CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(CalcDiagnosticLocation_t *cons
             if (useColors)
                 fputs("\x1B[1;32m", stream); // color: GREEN
 
+            char c;
+
             for (; i < begin; i++, result++)
             {
                 if (i == position)
-                    fputc('^', stream);
+                    c = '^';
                 else
-                    fputc(' ', stream);
+                    c = ' ';
+
+                fputc(c, stream);
             }
 
             for (; i < (begin + length); i++, result++)
             {
                 if (i == position)
-                    fputc('^', stream);
+                    c = '^';
                 else
-                    fputc('~', stream);
+                    c = '~';
+
+                fputc(c, stream);
             }
 
             for (; i < position; i++, result++)
             {
                 if (i == position)
-                    fputc('^', stream);
+                    c = '^';
                 else
-                    fputc(' ', stream);
+                    c = ' ';
+
+                fputc(c, stream);
             }
 
             if (useColors)
                 fputs("\x1B[0m", stream); // color: RESET
+
+            if (hint)
+            {
+                result += fputs("\n      | ", stream);
+
+                if (useColors)
+                    fputs("\x1B[1;32m", stream); // color: GREEN
+
+                i = 0;
+
+                while (i < position)
+                    fputc(' ', stream), ++i;
+
+                result += fputs(hint, stream);
+
+                if (useColors)
+                    fputs("\x1B[0m", stream); // color: RESET
+            }
         }
 
         fputc('\n', stream), ++result;
@@ -157,7 +186,7 @@ CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic,
     fputc('\n', stream), ++result;
 
     if (location)
-        result += calcEmitDiagnosticTrace(location, stream, useColors);
+        result += calcEmitDiagnosticTrace(diagnostic->hint, location, stream, useColors);
 
     return result;
 }
@@ -262,7 +291,7 @@ CALC_API int CALC_STDCALL calcDiagnosticEmitterEmitAll(CalcDiagnosticEmitter_t *
     int result = 0, i;
 
     for (i = 0; emitter->top; i++)
-        result += calcDiagnosticEmitterEmit(emitter), fputc('\n', emitter->stream), ++result;
+        result += calcDiagnosticEmitterEmit(emitter);
 
     return result;
 }
@@ -274,7 +303,7 @@ CALC_API int CALC_STDCALL calcDiagnosticEmitterEpilogue(CalcDiagnosticEmitter_t 
 
     calcDiagnosticEmitterEmitAll(emitter);
 
-    result += fputs("Process ", stream);
+    result += fputs("\nProcess ", stream);
 
     switch (emitter->status)
     {

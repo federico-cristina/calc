@@ -18,6 +18,8 @@
 #ifndef CALC_DIAGNOSTIC_EMITTER_H_
 #define CALC_DIAGNOSTIC_EMITTER_H_
 
+#include "calc/base/file.h"
+
 #include "calc/diagnostic/diagnostics.h"
 
 CALC_C_HEADER_BEGIN
@@ -36,12 +38,13 @@ CALC_API int CALC_STDCALL calcEmitDiagnosticLocation(CalcDiagnosticLocation_t *c
 /// @brief Emits on the selected stream a textual representation
 ///        of the specified location with the reference to the
 ///        line form which is originated the diagnostic.
+/// @param hint Diangostic hint to display with diagnostic trace.
 /// @param location A pointer to the structure containing
 ///                 location infos.
 /// @param stream The stream on which write the text.
 /// @param useColors Specifies to use or not colored output messages.
 /// @return The number of characters written.
-CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream, bool_t useColors);
+CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(char *const hint, CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream, bool_t useColors);
 
 /// @brief Emits on the selected stream a textual representation
 ///        of the specified diagnostics. This function handles
