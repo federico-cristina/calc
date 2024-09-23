@@ -215,7 +215,7 @@ typedef unsigned long long uint64_t;
 #   include <stdint.h>
 #endif
 
-#if CALC_PLATFORM_IS_WINDOWS || !defined SSIZE_T
+#if CALC_PLATFORM_IS_WINDOWS && !defined SSIZE_T
 
 #ifndef SSIZE_T
 /// @brief Signed size type macro.
