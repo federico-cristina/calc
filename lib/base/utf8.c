@@ -33,7 +33,7 @@ const char *utf8_errmsg(ssize_t errcode)
     return message;
 }
 
-#include "utf8-data.c"
+#include "utf8.inc"
 
 const int8_t utf8_utf8class[256] = {
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
