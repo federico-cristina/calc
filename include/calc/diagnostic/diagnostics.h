@@ -141,16 +141,20 @@ typedef struct _CalcDiagnosticLocation
     /// @brief A reference of the line from which is originated the
     ///        problem.
     char    *line;
-    /// @brief The length of the line from which is originated the
-    ///        problem.
-    uint32_t lineLength;
     /// @brief The number of the line from which is originated the
     ///        problem.
     uint32_t lineNumber;
+    /// @brief The number of the character where the line where begins
+    ///        the erroneous sequence.
+    uint16_t errorBegin;
+    /// @brief The length of the erroneous sequence.
+    uint16_t errorLenght;
+    /// @brief The exact position of the error in the line.
+    uint16_t errorPosition;
 } CalcDiagnosticLocation_t;
 
 /// @brief Initializes a CalcDiagnosticLocation data structure with
-///        given informations.
+///        error location informations.
 /// @param location A pointer to the structure to initialize.
 /// @param file The name of the file form which has been originated
 ///             the problem.
@@ -158,29 +162,34 @@ typedef struct _CalcDiagnosticLocation
 ///             the problem.
 /// @param line A pointer to the beginning of the line from which has
 ///             been originated the error.
-/// @param lineLength The number of characters in the line.
 /// @param lineNumber The number of the line.
+/// @param errorBegin The number of the character where begins the erroneous
+///                   sequence.
+/// @param errorLength The length of the erroneous sequence.
+/// @param errorPosition The exact position of the error in the line.
 /// @return On success location is returned.
-CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcInitDiagnosticLocation(CalcDiagnosticLocation_t *const location, char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber);
+CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcInitDiagnosticLocation(CalcDiagnosticLocation_t *const location, char *const file, char *const func, char *const line, uint32_t lineNumber, uint16_t errorBegin, uint16_t errorLength, uint16_t errorPosition);
 /// @brief Creates a new CalcDiagnosticLocation data structure with
-///        given informations.
-/// @param location A pointer to the structure to initialize.
+///        error location informations.
 /// @param file The name of the file form which has been originated
 ///             the problem.
 /// @param func The name of the function form which has been originated
 ///             the problem.
 /// @param line A pointer to the beginning of the line from which has
 ///             been originated the error.
-/// @param lineLength The number of characters in the line.
 /// @param lineNumber The number of the line.
+/// @param errorBegin The number of the character where begins the erroneous
+///                   sequence.
+/// @param errorLength The length of the erroneous sequence.
+/// @param errorPosition The exact position of the error in the line.
 /// @return A pointer to the new CalcDiagnosticLocation data structure.
-CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcCreateDiagnosticLocation(char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber);
+CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcCreateDiagnosticLocation(char *const file, char *const func, char *const line, uint32_t lineNumber, uint16_t errorBegin, uint16_t errorLength, uint16_t errorPosition);
 
 #ifndef calcGetCurrentLocation
 /// @brief Creates a new diagnostic location based on the current
 ///        location in the C/C++ source file.
 /// @return A pointer to the new allocated diagnostic location.
-#   define calcGetCurrentLocation() calcCreateDiagnosticLocation(__FILE__, __func__, NULL, 0, __LINE__)
+#   define calcGetCurrentLocation() calcCreateDiagnosticLocation(__FILE__, __func__, NULL, __LINE__, 0, 0, 0)
 #endif // calcGetCurrentLocation
 
 // Diagnostic

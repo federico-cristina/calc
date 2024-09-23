@@ -94,20 +94,22 @@ CALC_API CalcDiagnosticLevel_t CALC_STDCALL calcGetDiagnosticLevel(CalcDiagnosti
 
 // Diagnostic Location
 
-CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcInitDiagnosticLocation(CalcDiagnosticLocation_t *const location, char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber)
+CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcInitDiagnosticLocation(CalcDiagnosticLocation_t *const location, char *const file, char *const func, char *const line, uint32_t lineNumber, uint16_t errorBegin, uint16_t errorLength, uint16_t errorPosition)
 {
     location->file = file;
     location->func = func;
     location->line = line;
-    location->lineLength = lineLength;
     location->lineNumber = lineNumber;
+    location->errorBegin = errorBegin;
+    location->errorLenght = errorLength;
+    location->errorPosition = errorPosition;
 
     return location;
 }
 
-CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcCreateDiagnosticLocation(char *const file, char *const func, char *const line, uint32_t lineLength, uint32_t lineNumber)
+CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcCreateDiagnosticLocation(char *const file, char *const func, char *const line, uint32_t lineNumber, uint16_t errorBegin, uint16_t errorLength, uint16_t errorPosition)
 {
-    return calcInitDiagnosticLocation(alloc(CalcDiagnosticLocation_t), file, func, line, lineLength, lineNumber);
+    return calcInitDiagnosticLocation(alloc(CalcDiagnosticLocation_t), file, func, line, lineNumber, errorBegin, errorLength, errorPosition);
 }
 
 // Diagnostic
