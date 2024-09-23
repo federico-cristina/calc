@@ -231,6 +231,9 @@ CALC_INLINE const char **CALC_CDECL strisrt(const char **const a, size_t count)
 /// @return A pointer to the new allocated formatted string.
 CALC_INLINE char *CALC_CDECL vstrfmt(const char *const format, va_list arglist)
 {
+    if (!format)
+        return NULL;
+
     int size = vsnprintf(NULL, 0, format, arglist);
 
     if (!size)
@@ -251,6 +254,9 @@ CALC_INLINE char *CALC_CDECL vstrfmt(const char *const format, va_list arglist)
 /// @return A pointer to the new allocated formatted string.
 CALC_INLINE char *CALC_CDECL strfmt(const char *const format, ...)
 {
+    if (!format)
+        return NULL;
+
     char *result;
     va_list args;
 
