@@ -114,11 +114,14 @@ CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcCreateDiagnosticLocation(cha
 
 // Diagnostic
 
-CALC_API CalcDiagnostic_t *CALC_STDCALL calcCreateDiagnostic(CalcDiagnosticLevel_t level, int code, CalcDiagnosticLocation_t *const location, char *const message)
+CALC_API CalcDiagnostic_t *CALC_STDCALL calcCreateDiagnostic(CalcDiagnosticLevel_t level, int code, CalcDiagnosticLocation_t *const location, char *const message, bool_t cleanupMessage, char *const hint, bool_t cleanupHint)
 {
     CalcDiagnostic_t *diagnostic = alloc(CalcDiagnostic_t);
 
     diagnostic->message = message;
+    diagnostic->hint = hint;
+    diagnostic->cleanupMessage = cleanupMessage;
+    diagnostic->cleanupHint = cleanupHint;
     diagnostic->level = level;
     diagnostic->code = code;
     diagnostic->location = location;
@@ -129,7 +132,12 @@ CALC_API CalcDiagnostic_t *CALC_STDCALL calcCreateDiagnostic(CalcDiagnosticLevel
 
 CALC_API void CALC_STDCALL calcDeleteDiagnostic(CalcDiagnostic_t *const diagnostic)
 {
-    free(diagnostic->message);
+    if (diagnostic->cleanupMessage)
+        free(diagnostic->message);
+
+    if (diagnostic->cleanupHint)
+        free(diagnostic->hint);
+
     free(diagnostic->location);
     free(diagnostic);
 

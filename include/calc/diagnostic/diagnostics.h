@@ -199,6 +199,14 @@ typedef struct _CalcDiagnostic
 {
     /// @brief Diangostic message to display with diagnostic code.
     char                     *message;
+    /// @brief Diangostic hint to display with diagnostic trace.
+    char                     *hint;
+    /// @brief This flag specifies that on deletion of the diagnostic
+    ///        the message must be deleted too.
+    bool_t                    cleanupMessage;
+    /// @brief This flag specifies that on deletion of the diagnostic
+    ///        the hint must be deleted too.
+    bool_t                    cleanupHint;
     /// @brief Diagnostic level to choose what do after displayed
     ///        the message.
     CalcDiagnosticLevel_t     level;
@@ -219,17 +227,22 @@ typedef struct _CalcDiagnostic
 /// @param code Diagnostic code to display with diagnostic message.
 /// @param location Location from which the problem has been originated.
 /// @param message Diangostic message to display with diagnostic code.
+/// @param cleanupMessage Specifies that on deletion of the diagnostic
+///                       the message must be deleted too.
+/// @param hint Diangostic hint to display with diagnostic trace.
+/// @param cleanupMessage Specifies that on deletion of the diagnostic
+///                       the hint must be deleted too.
 /// @return A pointer to new allocated diagnostic informations record.
-CALC_API CalcDiagnostic_t *CALC_STDCALL calcCreateDiagnostic(CalcDiagnosticLevel_t level, int code, CalcDiagnosticLocation_t *const location, char *const message);
+CALC_API CalcDiagnostic_t *CALC_STDCALL calcCreateDiagnostic(CalcDiagnosticLevel_t level, int code, CalcDiagnosticLocation_t *const location, char *const message, bool_t cleanupMessage, char *const hint, bool_t cleanupHint);
 
 #ifndef calcCreateDiagnosticFromCode
 /// @brief Creates a new diagnostic from a specific diagnostic code.
-#   define calcCreateDiagnosticFromCode(code, location, ...) calcCreateDiagnostic(calcGetDiagnosticLevel(code), (int)(code), (location), strfmt(calcGetDiagnosticDefaultMessage(code), __VA_ARGS__))
+#   define calcCreateDiagnosticFromCode(code, location, ...) calcCreateDiagnostic(calcGetDiagnosticLevel(code), (int)(code), (location), strfmt(calcGetDiagnosticDefaultMessage(code), __VA_ARGS__), TRUE, NULL, FALSE)
 #endif // calcCreateDiagnosticFromCode
 
 #ifndef calcCreateDiagnosticFromErrno
 /// @brief Creates a new diagnostic from the value of errno.
-#   define calcCreateDiagnosticFromErrno(format, ...) calcCreateDiagnostic(CALC_DIAGNOSTIC_LEVEL_ERRNO, errno, calcGetCurrentLocation(), strfmt((format), __VA_ARGS__))
+#   define calcCreateDiagnosticFromErrno(format, ...) calcCreateDiagnostic(CALC_DIAGNOSTIC_LEVEL_ERRNO, errno, calcGetCurrentLocation(), strfmt((format), __VA_ARGS__), TRUE, NULL, FALSE)
 #endif // calcCreateDiagnosticFromErrno
 
 /// @brief Deletes a diagnostic data structure.
