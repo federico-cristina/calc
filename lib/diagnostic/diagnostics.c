@@ -6,7 +6,7 @@ CALC_API const char *CALC_STDCALL calcGetDiagnosticDisplayName(CalcDiagnosticCod
 {
     switch (diagnosticCode)
     {
-    case CALC_DIAGNOSTIC_CODE_NOERROR:
+    case CALC_DIAGNOSTIC_CODE_CE0000:
         return "NoError";
 
 #pragma push_macro("calcDefineDiagnosticCode")
@@ -36,7 +36,7 @@ CALC_API const char *CALC_STDCALL calcGetDiagnosticDefaultFormat(CalcDiagnosticC
 {
     switch (diagnosticCode)
     {
-    case CALC_DIAGNOSTIC_CODE_NOERROR:
+    case CALC_DIAGNOSTIC_CODE_CE0000:
         return "NoError";
 
 #pragma push_macro("calcDefineDiagnosticCode")
@@ -66,7 +66,7 @@ CALC_API CalcDiagnosticLevel_t CALC_STDCALL calcGetDiagnosticLevel(CalcDiagnosti
 {
     switch (diagnosticCode)
     {
-    case CALC_DIAGNOSTIC_CODE_NOERROR:
+    case CALC_DIAGNOSTIC_CODE_CE0000:
         return CALC_DIAGNOSTIC_LEVEL_ERROR;
 
 #pragma push_macro("calcDefineDiagnosticCode")

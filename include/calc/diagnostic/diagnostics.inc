@@ -28,4 +28,4 @@
 #endif // CHECK calcDefineDiagnosticCode
 
  /// @brief UnhandledError: An unhandled error has been reported.
-calcDefineDiagnosticCode(UNHANDLED, "UnhandledError", ERROR, "An unhandled error has been reported.")
+calcDefineDiagnosticCode(CE0001, "UnhandledError", ERROR, "an unhandled error has been reported")
