@@ -215,7 +215,7 @@ CALC_API CalcDiagnostic_t *CALC_STDCALL calcCreateDiagnostic(CalcDiagnosticLevel
 
 #ifndef calcCreateDiagnosticFromCode
 /// @brief Creates a new diagnostic from a specific diagnostic code.
-#   define calcCreateDiagnosticFromCode(code, location, ...) calcCreateDiagnostic(calcGetDiagnosticLevel(code), (int)(code), (location), strfmt(calcGetDiagnosticDefaultFormat(code), __VA_ARGS__)))
+#   define calcCreateDiagnosticFromCode(code, location, ...) calcCreateDiagnostic(calcGetDiagnosticLevel(code), (int)(code), (location), strfmt(calcGetDiagnosticDefaultFormat(code), __VA_ARGS__))
 #endif // calcCreateDiagnosticFromCode
 
 #ifndef calcCreateDiagnosticFromErrno
