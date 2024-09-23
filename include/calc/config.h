@@ -154,16 +154,32 @@
 #define CALC_PLATFORM_ID_LINUX 0x10
 /// @brief Mac OS X Platform.
 #define CALC_PLATFORM_ID_MACOS 0x20
+/// @brief Microsoft Windows 32-bit with WSL.
+#define CALC_PLATFORM_ID_WSL32 0x12
+/// @brief Microsoft Windows 64-bit with WSL.
+#define CALC_PLATFORM_ID_WSL64 0x14
 
 #ifndef CALC_PLATFORM_ID
 #   if   defined _WIN64
+#       ifdef   __linux__
 /// @brief This macro holds the identifier of the platform on which
 ///        this source is compiled.
-#       define CALC_PLATFORM_ID CALC_PLATFORM_ID_WIN64
+#           define CALC_PLATFORM_ID CALC_PLATFORM_ID_WSL64
+#       else
+/// @brief This macro holds the identifier of the platform on which
+///        this source is compiled.
+#           define CALC_PLATFORM_ID CALC_PLATFORM_ID_WIN64
+#       endif
 #   elif defined _WIN32
+#       ifdef   __linux__
 /// @brief This macro holds the identifier of the platform on which
 ///        this source is compiled.
-#       define CALC_PLATFORM_ID CALC_PLATFORM_ID_WIN32
+#           define CALC_PLATFORM_ID CALC_PLATFORM_ID_WSL32
+#       else
+/// @brief This macro holds the identifier of the platform on which
+///        this source is compiled.
+#           define CALC_PLATFORM_ID CALC_PLATFORM_ID_WIN32
+#       endif
 #   elif defined __linux__
 /// @brief This macro holds the identifier of the platform on which
 ///        this source is compiled.
@@ -208,6 +224,14 @@
 ///        been compiled this header.
 #       define CALC_PLATFORM_NAME "Win64"
 #   elif CALC_PLATFORM_ID == CALC_PLATFORM_ID_WIN32
+/// @brief This macro represents the name of the platform on which has
+///        been compiled this header.
+#       define CALC_PLATFORM_NAME "Win32-WSL"
+#   elif CALC_PLATFORM_ID == CALC_PLATFORM_ID_WSL64
+/// @brief This macro represents the name of the platform on which has
+///        been compiled this header.
+#       define CALC_PLATFORM_NAME "Win64-WSL"
+#   elif CALC_PLATFORM_ID == CALC_PLATFORM_ID_WSL32
 /// @brief This macro represents the name of the platform on which has
 ///        been compiled this header.
 #       define CALC_PLATFORM_NAME "Win32"
