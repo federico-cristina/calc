@@ -111,6 +111,12 @@ typedef struct _CalcDiagnosticEmitter
 /// @return A pointer to the new allocated diagnostic emitter.
 CALC_API CalcDiagnosticEmitter_t *CALC_STDCALL calcCreateDiagnosticEmitter(FILE *const errorStream, CalcDiagnosticEmitterFunc_t emitterFunction);
 
+#ifndef calcGetDefaultDiagnosticEmitter
+/// @brief Creates a diagnostic emitter with the standard error stream
+///        and the default emitter function: calcEmitDiagnostic.
+#   define calcGetDefaultDiagnosticEmitter() calcCreateDiagnosticEmitter(stderr, NULL)
+#endif // calcGetDefaultDiagnosticEmitter
+
 /// @brief Pushes a diagnostic in the specified emitter.
 /// @param emitter The emitter on which push the diagnostic.
 /// @param diagnostic The diagnostic to push.
