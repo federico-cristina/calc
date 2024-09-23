@@ -151,8 +151,10 @@ CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic,
     {
         fputc('[', stream), ++result;
 
-        if (useColors)
+#ifdef NOX_USE_YELLOW_FOR_ERRORS
+         if (useColors)
             fputs("\x1B[1;93m", stream); // color: BRIGHT YELLOW
+#endif // NOX_USE_YELLOW_FOR_ERRORS
 
         if (level == CALC_DIAGNOSTIC_LEVEL_ERRNO)
             result += fputs(errnoname(code), stream);
@@ -239,6 +241,9 @@ CALC_API CalcResult_t CALC_STDCALL calcDiagnosticEmitterPush(CalcDiagnosticEmitt
 
     switch (diagnostic->level)
     {
+    case CALC_DIAGNOSTIC_LEVEL_NOTE:
+        break;
+
     case CALC_DIAGNOSTIC_LEVEL_WARNING:
         emitter->warningCount++;
         break;
