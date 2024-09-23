@@ -142,7 +142,12 @@ CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic,
         fputs("\x1B[1;97m", stream); // color: BRIGHT WHITE
 
     if (!message)
-        message = calcGetDiagnosticDefaultMessage(code);
+    {
+        if (level == CALC_DIAGNOSTIC_LEVEL_ERRNO)
+            message = strerror(code);
+        else
+            message = calcGetDiagnosticDefaultMessage(code);
+    }
 
     result += fputs(message, stream);
 
