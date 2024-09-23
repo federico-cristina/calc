@@ -33,6 +33,16 @@ CALC_C_HEADER_BEGIN
 #   define NUL '\0'
 #endif // NUL
 
+/// @brief Checks if the given character is a line termination
+///        character.
+/// @param c Character to check.
+/// @return Non-zero value if the character is a line terminator
+///         character, 0 otherwise.
+CALC_INLINE int CALC_STDCALL isendln(int c)
+{
+    return (c == '\r') || (c == '\n') || (c == NUL);
+}
+
 #ifndef stralloc
 /// @brief Allocates an empty string of a specified number of
 ///        characters.
