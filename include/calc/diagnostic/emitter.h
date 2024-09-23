@@ -133,6 +133,23 @@ CALC_API int CALC_STDCALL calcDiagnosticEmitterEmit(CalcDiagnosticEmitter_t *con
 /// @return The number of written characters.
 CALC_API int CALC_STDCALL calcDiagnosticEmitterEmitAll(CalcDiagnosticEmitter_t *const emitter);
 
+/// @brief Reports an error to a diagnostic emitter.
+/// @param emitter The emitter form which emit.
+/// @param level Diagnostic level to choose what do after displayed
+///              the message.
+/// @param code Diagnostic code to display with diagnostic message.
+/// @param location Location from which the problem has been originated.
+/// @param message Diangostic message to display with diagnostic code.
+/// @param cleanupMessage Specifies that on deletion of the diagnostic
+///                       the message must be deleted too.
+/// @param hint Diangostic hint to display with diagnostic trace.
+/// @param cleanupMessage Specifies that on deletion of the diagnostic
+///                       the hint must be deleted too.
+CALC_API_INLINE CalcResult_t calcDiagnosticEmitterReport(CalcDiagnosticEmitter_t *const emitter, CalcDiagnosticLevel_t level, CalcDiagnosticCode_t code, CalcDiagnosticLocation_t *const location, char *const message, bool_t cleanupMessage, char *const hint, bool_t cleanupHint)
+{
+    return calcDiagnosticEmitterPush(emitter, calcCreateDiagnostic(level, code, location, message, cleanupMessage, hint, cleanupHint));
+}
+
 /// @brief Emits and disposes each diagnostic pushed in the emitter,
 ///        prints the count of notes, warnings and errors and deletes
 ///        the emitter with all its content.
