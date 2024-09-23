@@ -23,23 +23,25 @@
 CALC_C_HEADER_BEGIN
 
 /// @brief Function type for diagnostics emitter function.
-typedef int (*CalcDiagnosticEmitterFunc_t)(CalcDiagnostic_t *const, FILE *const);
+typedef int (*CalcDiagnosticEmitterFunc_t)(CalcDiagnostic_t *const, FILE *const, bool_t);
 
 /// @brief Emits on the selected stream a textual representation
 ///        of the specified location.
 /// @param location A pointer to the structure containing
 ///                 location infos.
 /// @param stream The stream on which write the text.
+/// @param useColors Specifies to use or not colored output messages.
 /// @return The number of characters written.
-CALC_API int CALC_STDCALL calcEmitDiagnosticLocation(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream);
+CALC_API int CALC_STDCALL calcEmitDiagnosticLocation(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream, bool_t useColors);
 /// @brief Emits on the selected stream a textual representation
 ///        of the specified location with the reference to the
 ///        line form which is originated the diagnostic.
 /// @param location A pointer to the structure containing
 ///                 location infos.
 /// @param stream The stream on which write the text.
+/// @param useColors Specifies to use or not colored output messages.
 /// @return The number of characters written.
-CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream);
+CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream, bool_t useColors);
 
 /// @brief Emits on the selected stream a textual representation
 ///        of the specified diagnostics. This function handles
@@ -47,8 +49,9 @@ CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(CalcDiagnosticLocation_t *cons
 /// @param diagnostic A pointer tot he structure containing the
 ///                   diagnostic infos.
 /// @param stream The stream on which write the text.
+/// @param useColors Specifies to use or not colored output messages.
 /// @return The number of characters written.
-CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic, FILE *const stream);
+CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic, FILE *const stream, bool_t useColors);
 
 // Diagnostics Emitter
 
@@ -94,12 +97,12 @@ typedef struct _CalcDiagnosticEmitter
     CalcDiagnostic_t             *top;
     /// @brief The current status of the emitter.
     CalcDiagnosticEmitterStatus_t status;
-    /// @brief The number of notes.
-    uint32_t                      noteCount;
     /// @brief The number of warnings.
-    uint32_t                      warningCount;
+    uint16_t                      warningCount;
     /// @brief The number of errors (with fatals and errnos).
-    uint32_t                      errorCount;
+    uint16_t                      errorCount;
+    /// @brief Specifies to use or not colored output messages.
+    bool_t                        useColors;
 } CalcDiagnosticEmitter_t;
 
 /// @brief Creates a new diagnostic emitter specifing the stream
@@ -110,17 +113,14 @@ typedef struct _CalcDiagnosticEmitter
 ///                        are emitted diagnostics on the stream.
 /// @return A pointer to the new allocated diagnostic emitter.
 CALC_API CalcDiagnosticEmitter_t *CALC_STDCALL calcCreateDiagnosticEmitter(FILE *const errorStream, CalcDiagnosticEmitterFunc_t emitterFunction);
-
-#ifndef calcGetDefaultDiagnosticEmitter
 /// @brief Creates a diagnostic emitter with the standard error stream
 ///        and the default emitter function: calcEmitDiagnostic.
-#   define calcGetDefaultDiagnosticEmitter() calcCreateDiagnosticEmitter(stderr, NULL)
-#endif // calcGetDefaultDiagnosticEmitter
+CALC_API CalcDiagnosticEmitter_t *CALC_STDCALL calcGetDefaultDiagnosticEmitter(void);
 
 /// @brief Pushes a diagnostic in the specified emitter.
 /// @param emitter The emitter on which push the diagnostic.
 /// @param diagnostic The diagnostic to push.
-CALC_API void CALC_STDCALL calcDiagnosticEmitterPush(CalcDiagnosticEmitter_t *const emitter, CalcDiagnostic_t *const diagnostic);
+CALC_API CalcResult_t CALC_STDCALL calcDiagnosticEmitterPush(CalcDiagnosticEmitter_t *const emitter, CalcDiagnostic_t *const diagnostic);
 /// @brief Emits and disposes the top diagnostic.
 /// @param emitter The emitter form which emit.
 /// @return The number of written characters.

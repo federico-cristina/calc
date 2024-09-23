@@ -1,130 +1,160 @@
 #include "calc/diagnostic/emitter.h"
 
-CALC_API int CALC_STDCALL calcEmitDiagnosticLocation(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream)
+CALC_API int CALC_STDCALL calcEmitDiagnosticLocation(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream, bool_t useColors)
 {
-    return fprintf(stream, "at %s in %s:%lu\n", diagnosticLocation->func, diagnosticLocation->file, diagnosticLocation->lineNumber);
+    int result;
+
+    if (useColors)
+        fputs("\x1B[0;97m", stream); // color: BRIGHT WHITE
+
+    result = fprintf(stream, "%s:%u:%u:", diagnosticLocation->file, diagnosticLocation->lineNumber, diagnosticLocation->errorPosition);
+
+    if (useColors)
+        fputs("\x1B[0m", stream); // color: RESET
+
+    return result;
 }
 
-static inline bool_t CALC_STDCALL calc_IsLineTerminator(int c)
-{
-    return (c != '\r') && (c != '\n') && (c != '\0');
-}
-
-CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream)
+CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream, bool_t useColors)
 {
     int result = 0;
 
-    result += fputs(CALC_ERROR_TRACE_SPACES, stream);
-    result += calcEmitDiagnosticLocation(diagnosticLocation, stream);
-
-    char *line = diagnosticLocation->line;
-
-    if (line)
+    if (diagnosticLocation->line)
     {
-        uint32_t i = 0, length = diagnosticLocation->lineLength, l = diagnosticLocation->lineNumber;
+        char *line = diagnosticLocation->line;
+
+        result += fprintf(stream, " %4u | ", diagnosticLocation->lineNumber);
 
         do
+            fputc(*(line++), stream);
+        while (!isendln(*line));
+
+        result += (int)(line - diagnosticLocation->line);
+
+        if (diagnosticLocation->errorBegin)
         {
-            result += fprintf(stream, " %d | ", l++);
+            uint16_t begin = diagnosticLocation->errorBegin, length = diagnosticLocation->errorLenght, position = diagnosticLocation->errorPosition, i = 0;
 
-            while ((i < length) && calc_IsLineTerminator(line[i]))
-                fputc(line[i++], stream);
+            result += fputs("\n      | ", stream);
 
-            while ((i < length) && (line[i] == '\r'))
-                ++i;
+            if (useColors)
+                fputs("\x1B[1;32m", stream); // color: GREEN
 
-            fputc(line[i++], stream);
-        } while (i < length);
+            for (; i < begin; i++, result++)
+            {
+                if (i == position)
+                    fputc('^', stream);
+                else
+                    fputc(' ', stream);
+            }
 
-        result += length;
+            for (; i < (begin + length); i++, result++)
+            {
+                if (i == position)
+                    fputc('^', stream);
+                else
+                    fputc('~', stream);
+            }
 
-        fputc('\n', stream);
+            for (; i < position; i++, result++)
+            {
+                if (i == position)
+                    fputc('^', stream);
+                else
+                    fputc(' ', stream);
+            }
+
+            if (useColors)
+                fputs("\x1B[0m", stream); // color: RESET
+        }
+
+        fputc('\n', stream), ++result;
     }
 
     return result;
 }
 
-CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic, FILE *const stream)
+CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic, FILE *const stream, bool_t useColors)
 {
-    int result = 0, level = diagnostic->level, code = diagnostic->code;
+    int result = 0, code = diagnostic->code;
 
-    if (level != CALC_DIAGNOSTIC_LEVEL_ERRNO)
+    CalcDiagnosticLevel_t level = diagnostic->level;
+    CalcDiagnosticLocation_t *location = diagnostic->location;
+
+    const char *message = (const char *)diagnostic->message, *color;
+
+    if (location)
+        result += calcEmitDiagnosticLocation(location, stream, useColors);
+
+    fputc(' ', stream), ++result;
+
+    if (useColors)
     {
-        const char *name;
-
-        if (code)
+        switch (level)
         {
-            switch (level)
-            {
-            case CALC_DIAGNOSTIC_LEVEL_NOTE:
-                name = calcGetDiagnosticDisplayName(code);
-                break;
+        case CALC_DIAGNOSTIC_LEVEL_ERRNO:
+            color = "\x1B[1;31m"; // color: RED
+            break;
 
-            case CALC_DIAGNOSTIC_LEVEL_WARNING:
-                name = calcGetDiagnosticDisplayName(code);
-                break;
+        case CALC_DIAGNOSTIC_LEVEL_NOTE:
+            color = "\x1B[1;96m"; // color: BRIGHT CYAN
+            break;
 
-            case CALC_DIAGNOSTIC_LEVEL_ERROR:
-            case CALC_DIAGNOSTIC_LEVEL_FATAL:
-                name = calcGetDiagnosticDisplayName(code);
-                break;
+        case CALC_DIAGNOSTIC_LEVEL_WARNING:
+            color = "\x1B[1;95m"; // color: BRIGHT MAGENTA
+            break;
 
-            default:
-                return (int)unreach();
-            }
-        }
-        else
-        {
-            name = calcGetDiagnosticLevel(level);
+        case CALC_DIAGNOSTIC_LEVEL_ERROR:
+        case CALC_DIAGNOSTIC_LEVEL_FATAL:
+            color = "\x1B[1;91m"; // color: BRIGHT RED
+            break;
+
+        default:
+            return unreach(), 0;
         }
 
-        result += fprintf(stream, "%s: ", name);
-
-        if (diagnostic->message)
-        {
-            result += fprintf(stream, "%s", diagnostic->message);
-        }
-        else
-        {
-            switch (level)
-            {
-            case CALC_DIAGNOSTIC_LEVEL_NOTE:
-                result += fputs("something has been noted, but not specified", stream);
-                break;
-
-            case CALC_DIAGNOSTIC_LEVEL_WARNING:
-                result += fputs("something that could potentially be an error has been reported, but I forgot what...", stream);
-                break;
-
-            case CALC_DIAGNOSTIC_LEVEL_ERROR:
-                result += fputs("an error has been reported... but which??!", stream);
-                break;
-
-            case CALC_DIAGNOSTIC_LEVEL_FATAL:
-                result += fputs("something killed the process, I wonder that was something very ugly!", stream);
-                break;
-
-            default:
-                return unreach(), 0;
-            }
-        }
-    }
-    else
-    {
-        result += fprintf(stream, "errno %d (%s): ", code, errnoname(code));
-
-        if (diagnostic->message)
-            result += fprintf(stream, "%s (%s)", diagnostic->message, strerror(code));
-        else
-            result += fprintf(stream, "%s", strerror(code));
+        fputs(color, stream);
     }
 
-    if (diagnostic->location)
-        result += calcEmitDiagnosticTrace(diagnostic->location, stream);
-    else
-        fputc('\n', stream);
+    result += fputs(calcGetDiagnosticLevelName(level), stream);
 
-    return result + 1;
+    if (code)
+    {
+        fputc('[', stream), ++result;
+
+        if (useColors)
+            fputs("\x1B[1;93m", stream); // color: BRIGHT YELLOW
+
+        if (level == CALC_DIAGNOSTIC_LEVEL_ERRNO)
+            result += fputs(errnoname(code), stream);
+        else
+            result += fprintf(stream, "CE%04d", code);
+
+        if (useColors)
+            fputs(color, stream);
+
+        fputc(']', stream), ++result;
+    }
+
+    result += fputs(": ", stream);
+
+    if (useColors)
+        fputs("\x1B[1;97m", stream); // color: BRIGHT WHITE
+
+    if (!message)
+        message = calcGetDiagnosticDefaultMessage(code);
+
+    result += fputs(message, stream);
+
+    if (useColors)
+        fputs("\x1B[0m", stream); // color: RESET
+
+    fputc('\n', stream), ++result;
+
+    if (location)
+        result += calcEmitDiagnosticTrace(location, stream, useColors);
+
+    return result;
 }
 
 // Diagnostics Emitter
@@ -137,9 +167,19 @@ CALC_API CalcDiagnosticEmitter_t *CALC_STDCALL calcCreateDiagnosticEmitter(FILE 
     emitter->emitter = emitterFunction ? emitterFunction : calcEmitDiagnostic;
     emitter->top = NULL;
     emitter->status = CALC_DIAGNOSTIC_EMITTER_STATUS_SUCCESS;
-    emitter->noteCount = 0;
     emitter->warningCount = 0;
     emitter->errorCount = 0;
+    emitter->useColors = FALSE;
+
+    return emitter;
+}
+
+CALC_API CalcDiagnosticEmitter_t *CALC_STDCALL calcGetDefaultDiagnosticEmitter(void)
+{
+    static CalcDiagnosticEmitter_t *emitter = NULL;
+
+    if (!emitter)
+        emitter = calcCreateDiagnosticEmitter(stderr, NULL), emitter->useColors = TRUE;
 
     return emitter;
 }
@@ -154,41 +194,41 @@ static inline CalcDiagnostic_t *CALC_STDCALL calc_DiagnosticEmitterGetBottom(Cal
     return bottom;
 }
 
-CALC_API void CALC_STDCALL calcDiagnosticEmitterPush(CalcDiagnosticEmitter_t *const emitter, CalcDiagnostic_t *const diagnostic)
+CALC_API CalcResult_t CALC_STDCALL calcDiagnosticEmitterPush(CalcDiagnosticEmitter_t *const emitter, CalcDiagnostic_t *const diagnostic)
 {
     if (emitter->top)
         calc_DiagnosticEmitterGetBottom(emitter)->next = diagnostic;
     else
         emitter->top = diagnostic;
 
+    CalcResult_t result = CALC_SUCCESS;
+
     switch (diagnostic->level)
     {
-    case CALC_DIAGNOSTIC_LEVEL_NOTE:
-        ++emitter->noteCount;
-        break;
-
     case CALC_DIAGNOSTIC_LEVEL_WARNING:
-        ++emitter->warningCount;
+        emitter->warningCount++;
         break;
 
     case CALC_DIAGNOSTIC_LEVEL_ERROR:
     case CALC_DIAGNOSTIC_LEVEL_ERRNO:
-        ++emitter->errorCount;
+        emitter->errorCount++;
         emitter->status = CALC_DIAGNOSTIC_EMITTER_STATUS_FAILURE;
         break;
 
     case CALC_DIAGNOSTIC_LEVEL_FATAL:
-        ++emitter->errorCount;
+        emitter->errorCount++;
         emitter->status = CALC_DIAGNOSTIC_EMITTER_STATUS_ABORTED;
 
-        abort();
+        result = CALC_FAILURE;
+
+        break;
 
     default:
         unreach();
-        return;
+        break;
     }
 
-    return;
+    return result;
 }
 
 CALC_API int CALC_STDCALL calcDiagnosticEmitterEmit(CalcDiagnosticEmitter_t *const emitter)
@@ -200,7 +240,7 @@ CALC_API int CALC_STDCALL calcDiagnosticEmitterEmit(CalcDiagnosticEmitter_t *con
         CalcDiagnostic_t *top = emitter->top;
 
         emitter->top = top->next;
-        result = emitter->emitter(top, emitter->stream);
+        result = emitter->emitter(top, emitter->stream, emitter->useColors);
 
         calcDeleteDiagnostic(top);
     }
@@ -247,10 +287,42 @@ CALC_API int CALC_STDCALL calcDiagnosticEmitterEpilogue(CalcDiagnosticEmitter_t 
 
     default:
         unreach();
-        return;
+        break;
     }
 
-    result += fprintf(stream, " with %u notes, %u warnings and %d errors.\n", emitter->noteCount, emitter->warningCount, emitter->errorCount);
+    uint16_t warnings = emitter->warningCount, errors = emitter->errorCount;
+
+    result += fputs(" with ", stream);
+
+    switch (warnings)
+    {
+    case 0:
+        break;
+
+    case 1:
+        fprintf(stream, "%u warning and ", warnings);
+        break;
+
+    default:
+        fprintf(stream, "%u warnings and ", warnings);
+        break;
+    }
+
+    switch (errors)
+    {
+    case 0:
+        break;
+
+    case 1:
+        fprintf(stream, "%u error", errors);
+        break;
+
+    default:
+        fprintf(stream, "%u errors", errors);
+        break;
+    }
+
+    result += fputs(".\n", stream);
 
     calcDeleteDiagnosticEmitter(emitter);
 
