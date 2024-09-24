@@ -49,7 +49,7 @@ CALC_INLINE int CALC_STDCALL isendln(int c)
 /// @param length The number of characters of the string.
 /// @return A pointer to the first character of the new allocated
 ///         string.
-#   define stralloc(length) (strset(dim(char, (length) + 1), NUL))
+#   define stralloc(length) (strset((char *)dim(char, (length) + 1), NUL))
 #endif // stralloc
 
 // String manipulation functions
