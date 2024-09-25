@@ -19,6 +19,10 @@
 #ifndef CALC_BASE_BITS_H_
 #define CALC_BASE_BITS_H_
 
+#ifndef _BITS_STDINT_INTN_H
+#   define _BITS_STDINT_INTN_H 1
+#endif
+
 #include "calc/base/defs.h"
 
 #include <float.h>
@@ -85,9 +89,13 @@
 
 CALC_C_HEADER_BEGIN
 
-#if !defined CALC_USE_STDINT
+#if CALC_C_STANDARD >= 99
+#   include <stdint.h>
+#else
 
 // Signed integers
+
+#if !defined INT8_MIN || !defined INT8_MAX
 
 /// @brief Signed 8-bit integer datatype.
 typedef signed char int8_t;
@@ -104,6 +112,10 @@ typedef signed char int8_t;
 #   define INT8_MAX ((int8_t)(+0x7F))
 #endif // INT8_MAX
 
+#endif
+
+#if !defined INT16_MIN || !defined INT16_MAX
+
 /// @brief Signed 16-bit integer datatype.
 typedef short int16_t;
 
@@ -118,6 +130,10 @@ typedef short int16_t;
 ///        with an 16-bit signed integer.
 #   define INT16_MAX ((int16_t)(+0x7FFF))
 #endif // INT16_MAX
+
+#endif
+
+#if !defined INT32_MIN || !defined INT32_MAX
 
 /// @brief Signed 32-bit integer datatype.
 typedef int int32_t;
@@ -134,6 +150,10 @@ typedef int int32_t;
 #   define INT32_MAX ((int32_t)(+0x7FFFFFFF))
 #endif // INT32_MAX
 
+#endif
+
+#if !defined INT64_MIN || !defined INT64_MAX
+
 /// @brief Signed 64-bit integer datatype.
 typedef long long int64_t;
 
@@ -149,7 +169,11 @@ typedef long long int64_t;
 #   define INT64_MAX ((int64_t)(+0x7FFFFFFFFFFFFFFF))
 #endif // INT64_MAX
 
+#endif
+
 // Unsigned integers
+
+#if !defined UINT8_MIN || !defined UINT8_MAX
 
 /// @brief Unsigned 8-bit integer datatype.
 typedef unsigned char uint8_t;
@@ -166,6 +190,10 @@ typedef unsigned char uint8_t;
 #   define UINT8_MAX ((uint8_t)(0xFFU))
 #endif // UINT8_MAX
 
+#endif
+
+#if !defined UINT16_MIN || !defined UINT16_MAX
+
 /// @brief Unsigned 16-bit integer datatype.
 typedef unsigned short uint16_t;
 
@@ -180,6 +208,10 @@ typedef unsigned short uint16_t;
 ///        with an 16-bit unsigned integer.
 #   define UINT16_MAX ((uint16_t)(0xFFFFU))
 #endif // UINT16_MAX
+
+#endif
+
+#if !defined UINT32_MIN || !defined UINT32_MAX
 
 /// @brief Unsigned 32-bit integer datatype.
 typedef unsigned int uint32_t;
@@ -196,6 +228,10 @@ typedef unsigned int uint32_t;
 #   define UINT32_MAX ((uint32_t)(0xFFFFFFFFU))
 #endif // UINT32_MAX
 
+#endif
+
+#if !defined UINT64_MIN || !defined UINT64_MAX
+
 /// @brief Unsigned 64-bit integer datatype.
 typedef unsigned long long uint64_t;
 
@@ -211,8 +247,8 @@ typedef unsigned long long uint64_t;
 #   define UINT64_MAX ((uint64_t)(0xFFFFFFFFFFFFFFFFU))
 #endif // UINT64_MAX
 
-#else
-#   include <stdint.h>
+#endif
+
 #endif
 
 #if CALC_PLATFORM_IS_WINDOWS && !defined SSIZE_T
