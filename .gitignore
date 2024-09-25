@@ -5,6 +5,3 @@ $*/
 # CMake Output Directories
 out/
 build/
-
-# Python Cache Directories
-# __pycache__/
