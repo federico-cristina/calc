@@ -1,5 +1,13 @@
 # The calc Programming Language
 
+<!--
+Copyright (c) 2024 Federico Cristina
+
+This file is part of the calc scripting language project,
+under the Apache License v2.0. See LICENSE for license
+informations.
+-->
+
 > WARNING: **calc** is an experimental programming language in development stage,
 > **nothing** is decided and everything can change.
 
