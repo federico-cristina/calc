@@ -1,0 +1,2 @@
+fn fibonacci(index : int) -> int
+    = index < 2 ? 1 : fibonacci(index - 1) + fibonacci(index - 2);
