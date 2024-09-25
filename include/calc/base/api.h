@@ -56,7 +56,7 @@
 #ifndef CALC_API_INLINE
 /// @brief This macro marks a function as an API
 ///        function that can be inlined.
-#   define CALC_API_INLINE CALC_API_PUB inline
+#   define CALC_API_INLINE CALC_API_PUB CALC_INLINE
 #endif // CALC_API_INLINE
 
 #endif // CALC_BASE_API_H_
