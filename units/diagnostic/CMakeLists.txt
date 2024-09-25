@@ -1,3 +1,4 @@
 calc_add_unit_test(diagnostic
-    SOURCES "test.c"
+    SOURCES "test_diagnostics.c"
+    DEPENDS diagnostic
 )
