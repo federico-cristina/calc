@@ -75,6 +75,11 @@
 #   define CALC_VERSION_ID 0x0${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}
 #endif // CALC_VERSION_ID
 
+#ifndef CALC_C_STANDARD
+/// @brief C standatd code. (90 = C89)
+#   define CALC_C_STANDARD ${CMAKE_C_STANDARD}
+#endif // CALC_C_STANDARD
+
 // Compiler Infos
 
 /// @brief Unrecognized Compiler.

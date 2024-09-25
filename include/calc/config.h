@@ -75,6 +75,11 @@
 #   define CALC_VERSION_ID 0x0010
 #endif // CALC_VERSION_ID
 
+#ifndef CALC_C_STANDARD
+/// @brief C standatd code. (90 = C89)
+#   define CALC_C_STANDARD 90
+#endif // CALC_C_STANDARD
+
 // Compiler Infos
 
 /// @brief Unrecognized Compiler.
