@@ -24,9 +24,7 @@ function(calc_add_unit_test TARGET)
         add_executable(${_ARG_NAME} "${_ARG_SOURCES}")
 
         if(_ARG_DEPENDS)
-            target_link_libraries(${_ARG_NAME} "${TARGET};${_ARG_DEPENDS}")
-        else()
-            target_link_libraries(${_ARG_NAME} "${TARGET}")
+            target_link_libraries(${_ARG_NAME} "${_ARG_DEPENDS}")
         endif()
 
         if(_ARG_INSTALL)
@@ -36,7 +34,5 @@ function(calc_add_unit_test TARGET)
                 install(TARGETS ${_ARG_NAME} ${_ARG_DEPENDS})
             endif()
         endif()
-
-        message(NOTICE "${CALC_LOG_PREFIX}: added unit test for target ${TARGET}")
     endif()
 endfunction()
