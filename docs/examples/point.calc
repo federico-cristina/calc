@@ -1,0 +1,23 @@
+use std::io;
+use std::math;
+
+type Point = struct {
+    x : real,
+    y : real
+};
+
+impl fn Distance(&this : Point, &that : Point) -> Point for Point
+    = sqrt(sqre(that.x - this.x) + sqre(that.y - this.y));
+
+impl fn Print(&this : Point, name : char *) -> int for Point
+    = printfn("{0} = ({1}, {2})", name, this.x, this.y);
+
+fn main() {
+    let p1 = Point(3, 2),
+        p2 = Point(2, 4);
+
+    p1.Print("P1");
+    p2.Print("P2");
+
+    p1.Distance(p2).Print("P3");
+}
