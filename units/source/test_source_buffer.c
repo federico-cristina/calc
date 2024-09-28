@@ -2,5 +2,9 @@
 
 int main()
 {
+    CalcSourceBuffer_t *s = calcCreateSourceBufferFromStdin();
+
+    calcDumpSourceBuffer(s, stderr);
+
     return 0;
 }
