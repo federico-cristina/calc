@@ -71,7 +71,7 @@ CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStdin(void);
 ///        is NULL the default choice is stderr stream.
 /// @param stream The stream on which dump the content of the source buffer.
 /// @return The number of written characters.
-CALC_API int CALC_STDCALL calcDumpSourceBuffer(CalcSourceBuffer_t *const sourceBuffer, FILE *const stream);
+CALC_API int CALC_STDCALL calcDumpSourceBuffer(const CalcSourceBuffer_t *const sourceBuffer, FILE *const stream);
 
 /// @brief Deletes the specified source buffer releasing each used resource.
 /// @param sourceBuffer A pointer to the source buffer to delete.
