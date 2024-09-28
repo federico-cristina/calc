@@ -13,7 +13,7 @@ informations.
 > WARNING: **calc** is an experimental programming language in development stage,
 > **nothing** is decided and everything can change.
 
-This is the main repository for the **calc** programming language and its tools,
+This is the main repository of the **calc** programming language and its tools,
 documentation and standard library.
 
 ## Goals and Principles
