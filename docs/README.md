@@ -17,5 +17,6 @@ for implementation.
 
 ## Examples
 
-In the ./examples folder there are examples of programs and modules written in **calc**,
-they're not yet been tested, they're actually only examples of how **calc** syntax is.
+In the [`./examples`](./examples/) folder there are examples of programs and modules
+written in **calc**, they're not yet been tested, they're actually only examples of
+how **calc** syntax is.
