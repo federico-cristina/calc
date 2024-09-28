@@ -81,7 +81,7 @@ CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStdin(void)
 
 CALC_API int CALC_STDCALL calcDumpSourceBuffer(CalcSourceBuffer_t *const sourceBuffer, FILE *const stream)
 {
-    return fputs((const char *)sourceBuffer->data, !stream ? stdin : stream);
+    return fputs((const char *)sourceBuffer->data, !stream ? stderr : stream);
 }
 
 CALC_API void CALC_STDCALL calcDeleteSourceBuffer(CalcSourceBuffer_t *const sourceBuffer)
