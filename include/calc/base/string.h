@@ -44,12 +44,21 @@ CALC_INLINE int CALC_STDCALL isendln(int c)
 }
 
 #ifndef stralloc
+#   if CALC_PLATFORM_IS_WINDOWS
 /// @brief Allocates an empty string of a specified number of
 ///        characters.
 /// @param length The number of characters of the string.
 /// @return A pointer to the first character of the new allocated
 ///         string.
-#   define stralloc(length) (strset((char *)dim(char, (length) + 1), NUL))
+#       define stralloc(length) (strset((char *)dim(char, (length) + 1), NUL))
+#   else
+/// @brief Allocates an empty string of a specified number of
+///        characters.
+/// @param length The number of characters of the string.
+/// @return A pointer to the first character of the new allocated
+///         string.
+#       define stralloc(length) (memset((char *)dim(char, (length) + 1), NUL, (length) + 1))
+#   endif
 #endif // stralloc
 
 // String manipulation functions
