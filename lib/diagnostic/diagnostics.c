@@ -101,7 +101,7 @@ CALC_API CalcDiagnosticLocation_t *CALC_STDCALL calcInitDiagnosticLocation(CalcD
     location->line = line;
     location->lineNumber = lineNumber;
     location->errorBegin = errorBegin;
-    location->errorLenght = errorLength;
+    location->errorLength = errorLength;
     location->errorPosition = errorPosition;
 
     return location;

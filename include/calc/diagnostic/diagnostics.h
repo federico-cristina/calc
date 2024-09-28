@@ -148,7 +148,7 @@ typedef struct _CalcDiagnosticLocation
     ///        the erroneous sequence.
     uint16_t errorBegin;
     /// @brief The length of the erroneous sequence.
-    uint16_t errorLenght;
+    uint16_t errorLength;
     /// @brief The exact position of the error in the line.
     uint16_t errorPosition;
 } CalcDiagnosticLocation_t;

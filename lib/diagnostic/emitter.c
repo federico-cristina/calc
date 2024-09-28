@@ -36,7 +36,7 @@ CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(char *const hint, CalcDiagnost
 
         if (diagnosticLocation->errorBegin)
         {
-            uint16_t begin = diagnosticLocation->errorBegin, length = diagnosticLocation->errorLenght, position = diagnosticLocation->errorPosition, i = 0;
+            uint16_t begin = diagnosticLocation->errorBegin, length = diagnosticLocation->errorLength, position = diagnosticLocation->errorPosition, i = 0;
 
             result += fputs("\n      | ", stream);
 
