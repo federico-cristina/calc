@@ -230,7 +230,7 @@
 #endif // CALC_REGISTER
 
 #ifndef CALC_INLINE
-#   if CALC_COMPILER_ID == CALC_COMPILER_ID_GNUC
+#   if (CALC_COMPILER_ID == CALC_COMPILER_ID_GNUC) || CALC_PLATFORM_IS_UNIX
 /// @brief Inline function specifier for inline functions
 ///        declared in the header file.
 #       define CALC_INLINE static inline
