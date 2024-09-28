@@ -1,5 +1,6 @@
 set(HEADERS
     "source_buffer.h"
+    "source_location.h"
 )
 
 set(SOURCES
