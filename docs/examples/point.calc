@@ -6,7 +6,7 @@ type Point = struct {
     y : real
 };
 
-impl fn Distance(&this : Point, &that : Point) -> Point for Point
+impl fn Distance(&this : Point, &that : Point) -> real for Point
     = sqrt(sqre(that.x - this.x) + sqre(that.y - this.y));
 
 impl fn Print(&this : Point, name : char *) -> int for Point
@@ -19,5 +19,6 @@ fn main() {
     p1.Print("P1");
     p2.Print("P2");
 
-    p1.Distance(p2).Print("P3");
+    println();
+    printfn("Distance between P1 and P2 is of {0} units.", p1.Distance(p2));
 }
