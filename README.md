@@ -8,6 +8,8 @@ under the Apache License v2.0. See LICENSE for license
 informations.
 -->
 
+[![CMake Build Status](https://github.com/federico-cristina/calc/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/federico-cristina/calc/actions/workflows/cmake-multi-platform.yml)
+
 > WARNING: **calc** is an experimental programming language in development stage,
 > **nothing** is decided and everything can change.
 
