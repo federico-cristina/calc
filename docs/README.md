@@ -14,3 +14,9 @@ for implementation.
 
 > WARNING: **calc** is an experimental programming language in development stage,
 > this documentation is **not** definitive **nor** yet implemented.
+
+## Examples
+
+In the [`./examples`](./examples/) folder there are examples of programs and modules
+written in **calc**, they're not yet been tested, they're actually only examples of
+how **calc** syntax is.
