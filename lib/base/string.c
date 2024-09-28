@@ -34,7 +34,7 @@ char *CALC_CDECL strnmov(char *const dest, const char *const src, size_t count)
 char *CALC_CDECL strnlow(char *const dest, const char *const src, size_t count)
 {
     char *result = strnmov(dest, src, count);
-    
+
     if (!result)
         return NULL;
 

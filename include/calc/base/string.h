@@ -2,15 +2,15 @@
 
 /**
  * @file        string.h
- * 
+ *
  * @author      Federico Cristina <federico.cristina@outlook.it>
- * 
+ *
  * @copyright   Copyright (c) 2024 Federico Cristina
- *              
+ *
  *              This file is part of the calc scripting language project,
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
- * 
+ *
  * @brief       In this header are defined macros, constants and functions
  *              to allocate, manipulate and operate with strings and
  *              characters.

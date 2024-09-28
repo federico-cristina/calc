@@ -2,15 +2,15 @@
 
 /**
  * @file        errno.h
- * 
+ *
  * @author      Federico Cristina <federico.cristina@outlook.it>
- * 
+ *
  * @copyright   Copyright (c) 2024 Federico Cristina
- *              
+ *
  *              This file is part of the calc scripting language project,
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
- * 
+ *
  * @brief       In this header are defined functions to print on the
  *              standard error stream and functions to handle errno
  *              names and messages.
@@ -105,12 +105,12 @@ CALC_INLINE int CALC_CDECL eprintfn(const char *const format, ...)
 
 /// @brief This function provides maps each errno code to its name (or
 ///        associated macro name).
-/// 
+///
 ///        The source code of this function has been imported from an
 ///        external source. Repository address:
-/// 
+///
 ///        https://github.com/mentalisttraceur/errnoname.git
-/// 
+///
 /// @param no Errno code.
 /// @return A pointer to the constant string containing the name of the
 ///         errno.

@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * 
+ *
  */
 
 #ifndef CALC_BASE_DLOAD_H_

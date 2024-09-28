@@ -27,7 +27,7 @@ static inline jmpstack_t *CALC_STDCALL _get_jmpstack(void)
 
     if (!stack)
         stack = (jmpstack_t)_new_jmpframe(NULL, NULL);
-    
+
     return &stack;
 }
 
@@ -61,7 +61,7 @@ CALC_NORETURN void CALC_STDCALL jump(int value)
 
     if (!stack->jump)
         fail("error %d: an unhandled error signal has been raised.", value);
-    
+
     jmp_buf *buf = stack->jump;
 
     jmppop();

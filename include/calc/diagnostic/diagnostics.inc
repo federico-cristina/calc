@@ -12,12 +12,12 @@
  * @brief       This file is an x-macro header file, designed to be
  *              included more than once. Its use can change depending
  *              how is defined the corresponed x-macro.
- * 
+ *
  *              To use this header is necessary to define the following
  *              macro:
- * 
+ *
  *              - calcDefineDiagnosticCode(name, displayName, level, defaultFormat)
- * 
+ *
  *                Defines a sepcific kind of diagnostics specifing its enum
  *                name, display name, error level (NOTE, WARNING, ERROR or
  *                FATAL) and the default format in printf style.

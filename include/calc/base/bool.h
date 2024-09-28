@@ -2,15 +2,15 @@
 
 /**
  * @file        bool.h
- * 
+ *
  * @author      Federico Cristina <federico.cristina@outlook.it>
- * 
+ *
  * @copyright   Copyright (c) 2024 Federico Cristina
- *              
+ *
  *              This file is part of the calc scripting language project,
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
- * 
+ *
  * @brief       In this header is defined onld-style boolean datatype
  *              with TRUE/FALSE constants.
  */

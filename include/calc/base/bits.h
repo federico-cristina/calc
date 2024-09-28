@@ -2,15 +2,15 @@
 
 /**
  * @file        bits.h
- * 
+ *
  * @author      Federico Cristina <federico.cristina@outlook.it>
- * 
+ *
  * @copyright   Copyright (c) 2024 Federico Cristina
- *              
+ *
  *              This file is part of the calc scripting language project,
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
- * 
+ *
  * @brief       In this header are defined utility macros and constants
  *              to work with type sizes. In this header are also defined
  *              fixed bit width datatypes.
@@ -31,11 +31,11 @@
 #ifndef countof
 /// @brief Computes the number of elements in a specified
 ///        array.
-/// 
+///
 ///        NOTE: This macro works only if used with arrays
 ///        and NOT with pointer NOR pointers to an array.
-/// 
-/// @param array The array which is requested the length. 
+///
+/// @param array The array which is requested the length.
 /// @returns The number of elements in the array.
 #   define countof(array) (sizeof(array) / sizeof(*array))
 #endif // countof

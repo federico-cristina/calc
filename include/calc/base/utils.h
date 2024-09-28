@@ -2,15 +2,15 @@
 
 /**
  * @file        utils.h
- * 
+ *
  * @author      Federico Cristina <federico.cristina@outlook.it>
- * 
+ *
  * @copyright   Copyright (c) 2024 Federico Cristina
- *              
+ *
  *              This file is part of the calc scripting language project,
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
- * 
+ *
  * @brief       In this header are defined utility macros to compare two
  *              numeric values, find the minimum value and find the maximum
  *              value.
@@ -49,7 +49,7 @@
 /// @brief Checks if an integral value has a bit flag.
 /// @param value Value to check.
 /// @param flag Bit flag to check.
-/// @return 1 if value has the bit flag, else 0. 
+/// @return 1 if value has the bit flag, else 0.
 #   define hasflag(value, flag) (((value) & (flag)) == (flag))
 #endif // hasflag
 

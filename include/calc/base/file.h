@@ -2,15 +2,15 @@
 
 /**
  * @file        file.h
- * 
+ *
  * @author      Federico Cristina <federico.cristina@outlook.it>
- * 
+ *
  * @copyright   Copyright (c) 2024 Federico Cristina
- *              
+ *
  *              This file is part of the calc scripting language project,
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
- * 
+ *
  * @brief       In this header are defined macros, constants and functions
  *              to manipulate files and paths.
  */
@@ -164,11 +164,11 @@ CALC_EXTERN char *CALC_STDCALL fgetbase(char *const dest, const char *const path
 
 #ifndef EOF
 /// @brief This macro represents the end of file character.
-///        
+///
 ///        NOTE: Normally this macro should be defined in stdio.h,
 ///        if is redefined here, maybe there's something that don't
 ///        work...
-/// 
+///
 #   define EOF (-1)
 #endif // EOF
 

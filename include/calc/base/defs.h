@@ -2,15 +2,15 @@
 
 /**
  * @file        defs.h
- * 
+ *
  * @author      Federico Cristina <federico.cristina@outlook.it>
- * 
+ *
  * @copyright   Copyright (c) 2024 Federico Cristina
- *              
+ *
  *              This file is part of the calc scripting language project,
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
- * 
+ *
  * @brief       In this header are defined common macros and constants
  *              expecially the ones used to mark C++ files as extern "C",
  *              to control the right use of inline functions, of the
@@ -211,7 +211,7 @@
 ///        store that variable in a processor register instead
 ///        of memory. The compiler may or may not follow this
 ///        hint.
-/// 
+///
 ///        In C++17 the register keyword is deprecated and out
 ///        of support. So since that version is not useful
 ///        specify it.
@@ -221,7 +221,7 @@
 ///        store that variable in a processor register instead
 ///        of memory. The compiler may or may not follow this
 ///        hint.
-/// 
+///
 ///        In C++17 the register keyword is deprecated and out
 ///        of support. So since that version is not useful
 ///        specify it.
