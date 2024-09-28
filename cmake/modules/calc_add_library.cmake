@@ -56,5 +56,5 @@ function(calc_add_library TARGET)
     set_property(GLOBAL APPEND PROPERTY CALC_TARGETS "${TARGET}")
     set_property(GLOBAL APPEND PROPERTY CALC_LIBRARY "${_LIB_NAME}")
 
-    message(NOTICE "${CALC_LOG_PREFIX}: added ${_LIB_NAME}")
+    calc_log("add library ${_LIB_NAME}")
 endfunction()

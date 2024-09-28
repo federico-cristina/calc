@@ -10,8 +10,6 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     set(CMAKE_C_STANDARD_REQUIRED TRUE)
 endif()
 
-set(CALC_LOG_PREFIX "calc")
-
 option(CALC_BUILD_SHARED_LIBRARIES "Build shared libaries." OFF)
 option(CALC_ENABLE_UNIT_TESTS "Enables unit tests targets." ON)
 
@@ -30,10 +28,10 @@ list(APPEND CMAKE_MODULE_PATH "${CALC_MODULES_DIR}")
 
 set(CALC_CONFIG_PATH "${CALC_INCLUDE_DIR}/calc/config.h")
 
-configure_file("${CALC_CONFIG_PATH}.in" "${CALC_CONFIG_PATH}")
-message(NOTICE "${CALC_LOG_PREFIX}: config file ${CALC_CONFIG_PATH}")
-
 include(calc)
+
+configure_file("${CALC_CONFIG_PATH}.in" "${CALC_CONFIG_PATH}")
+calc_log("config file ${CALC_CONFIG_PATH}")
 
 include_directories("${CALC_INCLUDE_DIR}")
 

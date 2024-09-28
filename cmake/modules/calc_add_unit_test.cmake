@@ -34,5 +34,7 @@ function(calc_add_unit_test TARGET)
                 install(TARGETS ${_ARG_NAME} ${_ARG_DEPENDS})
             endif()
         endif()
+
+        calc_log("add unit-test ${_ARG_NAME}")
     endif()
 endfunction()
