@@ -58,17 +58,19 @@ CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromText(const c
 /// @return A pointer to the new source buffer.
 CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromFile(const char *const path);
 
-/// @brief 
-/// @param stream 
-/// @return 
+/// @brief Creates a new source buffer loading the content of a file stream,
+///        do not use this function to load a source buffer form stdin.
+/// @param stream A source file stream.
+/// @return A pointer to the new source buffer.
 CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStream(FILE *const stream);
-/// @brief 
-/// @return 
+/// @brief Creates a new source buffer loading the next line of the stdin.
+/// @return A pointer to the new source buffer.
 CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStdin(void);
 
-/// @brief 
-/// @param stream 
-/// @return 
+/// @brief Dumps the content of a source buffer on a stream. When stream parameter
+///        is NULL the default choice is stderr stream.
+/// @param stream The stream on which dump the content of the source buffer.
+/// @return The number of written characters.
 CALC_API int CALC_STDCALL calcDumpSourceBuffer(CalcSourceBuffer_t *const sourceBuffer, FILE *const stream);
 
 /// @brief Deletes the specified source buffer releasing each used resource.
