@@ -255,6 +255,14 @@
 #   endif
 #endif // CALC_PLATFORM_NAME
 
+// Compilation Infos
+
+#ifndef CALC_CURRENT_PATH
+/// @brief This macro represents the current project's path to use in
+///        tests to localize files.
+#   define CALC_CURRENT_PATH "${CALC_DIR}"
+#endif // CALC_CURRENT_PATH
+
 // Other
 
 #ifndef CALC_MAGICNUM
