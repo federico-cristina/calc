@@ -83,7 +83,7 @@ CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStdin(void);
 /// @param outOffset A pointer to a variable in which store the character's
 ///                  width in bytes.
 /// @return The character in the specified position.
-CALC_API int32_t CALC_STDCALL calcSourceBufferGetChar(CalcSourceBuffer_t *const sourceBuffer, CalcSourceEncoding_t encoding, uint64_t position, uint32_t *const outOffset);
+CALC_API int32_t CALC_STDCALL calcSourceBufferGetChar(CalcSourceBuffer_t *const sourceBuffer, CalcSourceEncoding_t encoding, uint64_t position, ssize_t *const outOffset);
 
 /// @brief Dumps the content of a source buffer on a stream. When stream parameter
 ///        is NULL the default choice is stderr stream.
