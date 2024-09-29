@@ -23,7 +23,7 @@ static inline CalcSourceStream_t *CALC_STDCALL calc_CreateSourceStream(const cha
 {
     CalcSourceStream_t *sourceStream = alloc(CalcSourceStream_t);
 
-    sourceStream->path = path;
+    sourceStream->path = (char *)path;
     sourceStream->stream = stream;
 
     sourceStream->isStdin = isStdin;
