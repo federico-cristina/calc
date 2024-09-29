@@ -82,7 +82,7 @@ CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStdin(void)
     return sourceBuffer;
 }
 
-CALC_API int32_t CALC_STDCALL calcSourceBufferGetChar(CalcSourceBuffer_t *const sourceBuffer, CalcSourceEncoding_t encoding, uint32_t position, uint32_t *const outOffset)
+CALC_API int32_t CALC_STDCALL calcSourceBufferGetChar(CalcSourceBuffer_t *const sourceBuffer, CalcSourceEncoding_t encoding, uint64_t position, uint32_t *const outOffset)
 {
     int32_t result;
     ssize_t offset;
