@@ -26,6 +26,15 @@
 
 CALC_C_HEADER_BEGIN
 
+/// @brief Enumeration of supported encodings.
+typedef enum _CalcSourceEncoding
+{
+    /// @brief ASCII encoding.
+    CALC_SOURCE_ENCODING_ASCII,
+    /// @brief UTF-8 encoding.
+    CALC_SOURCE_ENCODING_UTF_8,
+} CalcSourceEncoding_t;
+
 /// @brief Source buffer data structure.
 typedef struct _CalcSourceBuffer
 {
@@ -66,6 +75,15 @@ CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStream(FILE 
 /// @brief Creates a new source buffer loading the next line of the stdin.
 /// @return A pointer to the new source buffer.
 CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStdin(void);
+
+/// @brief Gets thecharacter in the position specified by position parameter.
+/// @param sourceBuffer A pointer to the source buffer from which read.
+/// @param encoding The encoding of the character to read.
+/// @param position The position of the character to read.
+/// @param outOffset A pointer to a variable in which store the character's
+///                  width in bytes.
+/// @return The character in the specified position.
+CALC_API int32_t CALC_STDCALL calcSourceBufferGetChar(CalcSourceBuffer_t *const sourceBuffer, CalcSourceEncoding_t encoding, uint32_t position, uint32_t *const outOffset);
 
 /// @brief Dumps the content of a source buffer on a stream. When stream parameter
 ///        is NULL the default choice is stderr stream.

@@ -82,6 +82,39 @@ CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStdin(void)
     return sourceBuffer;
 }
 
+CALC_API int32_t CALC_STDCALL calcSourceBufferGetChar(CalcSourceBuffer_t *const sourceBuffer, CalcSourceEncoding_t encoding, uint32_t position, uint32_t *const outOffset)
+{
+    int32_t result;
+    ssize_t offset;
+
+    if (position < sourceBuffer->size)
+    {
+        switch (encoding)
+        {
+        case CALC_SOURCE_ENCODING_ASCII:
+            result = sourceBuffer->data[position];
+            offset = 1;
+            break;
+
+        case CALC_SOURCE_ENCODING_UTF_8:
+            offset = utf8_iterate((const uint8_t *)(sourceBuffer->data + position), (ssize_t)(sourceBuffer->size - position), &result);
+            break;
+
+        default:
+            return unreach(), EOF;
+        }
+    }
+    else
+    {
+        result = EOF;
+    }
+
+    if (outOffset && *outOffset)
+        *outOffset = offset;
+
+    return result;
+}
+
 CALC_API int CALC_STDCALL calcDumpSourceBuffer(const CalcSourceBuffer_t *const sourceBuffer, FILE *const stream)
 {
     return fputs((const char *)sourceBuffer->data, !stream ? stderr : stream);
