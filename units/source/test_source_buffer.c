@@ -6,5 +6,7 @@ int main()
 
     calcDumpSourceBuffer(s, stderr);
 
+    calcDeleteSourceBuffer(s);
+
     return 0;
 }
