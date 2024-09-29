@@ -9,7 +9,7 @@ enable_testing()
 function(calc_add_unit_test TARGET)
     get_property(_LIBS GLOBAL PROPERTY CALC_TARGETS)
 
-    set(_OPTIONS INSTALL)
+    set(_OPTIONS INSTALL TEST)
     set(_ONE_VAL DESTINATION)
     set(_MUL_VAL SOURCES DEPENDS)
 
@@ -36,7 +36,9 @@ function(calc_add_unit_test TARGET)
         endif()
     endif()
 
-    add_test(NAME ${_ARG_NAME} COMMAND ${_ARG_NAME})
+    if(_ARG_TEST)
+        add_test(NAME ${_ARG_NAME} COMMAND ${_ARG_NAME})
+    endif()
 
     calc_log("add unit-test ${_ARG_NAME}")
 endfunction()
