@@ -30,9 +30,9 @@ CALC_C_HEADER_BEGIN
 typedef enum _CalcSourceEncoding
 {
     /// @brief ASCII encoding.
-    CALC_SOURCE_ENCODING_ASCII,
+    CALC_SOURCE_ENCODING_ASCII = 0x10,
     /// @brief UTF-8 encoding.
-    CALC_SOURCE_ENCODING_UTF_8,
+    CALC_SOURCE_ENCODING_UTF_8 = 0x20,
 } CalcSourceEncoding_t;
 
 /// @brief Source buffer data structure.
