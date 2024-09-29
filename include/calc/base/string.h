@@ -43,6 +43,16 @@ CALC_INLINE int CALC_STDCALL isendln(int c)
     return (c == '\r') || (c == '\n') || (c == NUL);
 }
 
+/// @brief Checks if the given character is a termination
+///        character.
+/// @param c Character to check.
+/// @return Non-zero value if the character is a line terminator
+///         character, 0 otherwise.
+CALC_INLINE int CALC_STDCALL istermn(int c)
+{
+    return (c == NUL) || (c == EOF);
+}
+
 #ifndef stralloc
 #   if CALC_PLATFORM_IS_WINDOWS
 /// @brief Allocates an empty string of a specified number of
