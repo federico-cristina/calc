@@ -1,0 +1,6 @@
+/* This file is the most basical example of calc code
+ * meant to be used in initial compilation tests.
+ */
+
+f(x) : int -> int
+    = x + 1;
