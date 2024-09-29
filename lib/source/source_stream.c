@@ -113,14 +113,30 @@ static inline bool_t CALC_STDCALL calc_SourceStreamRefill(CalcSourceStream_t *co
         fgets((char *)(data + begin), count, stream);
 
     if (!sourceStream->isInitialized)
+    {
         sourceStream->isInitialized = TRUE;
+    }
+    else
+    {
+        CalcSourceLocation_t *beginLoc = &sourceStream->beginLocation, *forwardLoc = &sourceStream->forwardLocation;
+
+        if (begin)
+            calcSetSourceLocation(forwardLoc, forwardLoc->ch - beginLoc->ch, forwardLoc->co - beginLoc->co, forwardLoc->ln - beginLoc->ln);
+        else
+            calcResetSourceLocation(forwardLoc);
+
+        calcResetSourceLocation(beginLoc);
+    }
 
     return TRUE;
 }
 
 CALC_API int32_t CALC_STDCALL calcSourceStreamPeek(CalcSourceStream_t *const sourceStream)
 {
-    return calcSourceBufferGetChar(sourceStream->buffer, sourceStream->encoding, sourceStream->forwardLocation.ch, NULL);
+    if (calc_SourceStreamNeedsARefill(sourceStream, 0) && !calc_SourceStreamRefill(sourceStream))
+        return EOF;
+    else
+        return calcSourceBufferGetChar(sourceStream->buffer, sourceStream->encoding, sourceStream->forwardLocation.ch, NULL);
 }
 
 static inline int32_t CALC_STDCALL calc_SourceStreamRead(CalcSourceStream_t *const sourceStream, ssize_t *const outOffset)
@@ -140,15 +156,19 @@ static inline int32_t CALC_STDCALL calc_SourceStreamRead(CalcSourceStream_t *con
         break;
 
     case EOL:
+        sourceStream->streamLocation.co = 0;
+        sourceStream->streamLocation.ln++;
         sourceStream->forwardLocation.co = 0;
         sourceStream->forwardLocation.ln++;
         break;
 
     default:
+        sourceStream->streamLocation.co += offset;
         sourceStream->forwardLocation.co += offset;
         break;
     }
 
+    sourceStream->streamLocation.ch += offset;
     sourceStream->forwardLocation.ch += offset;
 
     if (outOffset && *outOffset)
@@ -172,7 +192,7 @@ CALC_API int32_t CALC_STDCALL calcSourceStreamReadOffset(CalcSourceStream_t *con
     if (calc_SourceStreamNeedsARefill(sourceStream, offset) && !calc_SourceStreamRefill(sourceStream))
         return EOF;
 
-    int32_t result;
+    int32_t result = EOF;
     uint32_t i;
 
     for (i = 0; i < offset; i++)
