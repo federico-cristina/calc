@@ -5,3 +5,6 @@ $*/
 # CMake Output Directories
 out/
 build/
+
+# Configuration File
+config.h
