@@ -73,6 +73,11 @@ CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStdin(void);
 /// @return The number of written characters.
 CALC_API int CALC_STDCALL calcDumpSourceBuffer(const CalcSourceBuffer_t *const sourceBuffer, FILE *const stream);
 
+/// @brief Clears the content of the source buffer.
+/// @param sourceBuffer A pointer to the source buffer to clear.
+/// @return TRUE when the buffer is cleared succefully, FALSE in the other cases.
+CALC_API bool_t CALC_STDCALL calcClearSourceBuffer(CalcSourceBuffer_t *const sourceBuffer);
+
 /// @brief Deletes the specified source buffer releasing each used resource.
 /// @param sourceBuffer A pointer to the source buffer to delete.
 CALC_API void CALC_STDCALL calcDeleteSourceBuffer(CalcSourceBuffer_t *const sourceBuffer);
