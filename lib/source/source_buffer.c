@@ -31,11 +31,14 @@ CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromFile(const c
     assert(path != NULL);
 
     FILE *stream = fopen(path, CALC_LOADMOD);
+    CalcSourceBuffer_t *sourceBuffer;
 
     if (!stream)
-        return NULL;
+        sourceBuffer = NULL;
     else
-        return calcCreateSourceBufferFromStream(stream);
+        sourceBuffer = calcCreateSourceBufferFromStream(stream), fclose(stream);
+
+    return sourceBuffer;
 }
 
 CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBufferFromStream(FILE *const stream)
