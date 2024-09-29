@@ -53,6 +53,14 @@ CALC_API_INLINE CalcSourceLocation_t *CALC_STDCALL calcSetSourceLocation(CalcSou
     return sourceLocation;
 }
 
+/// @brief Resets to the zero value the position pointed by a source location.
+/// @param sourceLocation A pointer to the source location to reset.
+/// @return This function returns the sourceLocation parameter.
+CALC_API_INLINE CalcSourceLocation_t *CALC_STDCALL calcResetSourceLocation(CalcSourceLocation_t *const sourceLocation)
+{
+    return calcSetSourceLocation(sourceLocation, 0, 0, 0);
+}
+
 CALC_C_HEADER_END
 
 #endif // CALC_SOURCE_SOURCE_LOCATION_H_
