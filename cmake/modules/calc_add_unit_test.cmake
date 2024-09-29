@@ -1,3 +1,5 @@
+enable_testing()
+
 # Usage:
 #
 #   calc_add_unit_test(<TARGET>)
@@ -33,6 +35,8 @@ function(calc_add_unit_test TARGET)
             install(TARGETS ${_ARG_NAME} ${_ARG_DEPENDS})
         endif()
     endif()
+
+    add_test(NAME ${_ARG_NAME} COMMAND ${_ARG_NAME})
 
     calc_log("add unit-test ${_ARG_NAME}")
 endfunction()
