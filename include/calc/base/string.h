@@ -22,7 +22,6 @@
 #include "calc/base/bool.h"
 #include "calc/base/alloc.h"
 
-#include <ctype.h>
 #include <string.h>
 
 CALC_C_HEADER_BEGIN
