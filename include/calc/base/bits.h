@@ -23,7 +23,7 @@
 #   define _BITS_STDINT_INTN_H 1
 #endif
 
-#include "calc/base/defs.h"
+#include "calc/base/bool.h"
 
 #include <float.h>
 #include <limits.h>
@@ -172,6 +172,25 @@ typedef long long int64_t;
 #endif
 
 // Unsigned integers
+
+#if !defined UINT1_MIN || !defined UINT1_MAX
+
+/// @brief Unsigned 1-bit integer datatype.
+typedef bool_t uint1_t;
+
+#ifndef INT1_MIN
+/// @brief This macro represents the minimum value representable
+///        with an 1-bit unsigned integer.
+#   define INT1_MIN ((uint1_t)(FALSE))
+#endif // INT1_MIN
+
+#ifndef INT1_MAX
+/// @brief This macro represents the maximum value representable
+///        with an 8-bit unsigned integer.
+#   define INT1_MAX ((uint1_t)(TRUE))
+#endif // INT1_MAX
+
+#endif
 
 #if !defined UINT8_MIN || !defined UINT8_MAX
 
