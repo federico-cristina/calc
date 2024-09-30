@@ -54,9 +54,15 @@
 #endif // CALC_API
 
 #ifndef CALC_API_INLINE
+#   if CALC_COMPILER_HAS_DECLSPEC
 /// @brief This macro marks a function as an API
 ///        function that can be inlined.
-#   define CALC_API_INLINE CALC_API_PUB CALC_INLINE
+#       define CALC_API_INLINE CALC_API_PUB CALC_INLINE
+#   else
+/// @brief This macro marks a function as an API
+///        function that can be inlined.
+#       define CALC_API_INLINE CALC_INLINE
+#   endif
 #endif // CALC_API_INLINE
 
 #endif // CALC_BASE_API_H_
