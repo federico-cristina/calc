@@ -19,9 +19,9 @@
 #ifndef CALC_BASE_BITS_H_
 #define CALC_BASE_BITS_H_
 
-#ifndef _BITS_STDINT_INTN_H
-#   define _BITS_STDINT_INTN_H 1
-#endif
+//#ifndef _BITS_STDINT_INTN_H
+//#   define _BITS_STDINT_INTN_H 1
+//#endif
 
 #include "calc/base/bool.h"
 
@@ -152,7 +152,7 @@ typedef int int32_t;
 
 #endif
 
-#if !defined INT64_MIN || !defined INT64_MAX
+#if (!defined INT64_MIN || !defined INT64_MAX) && CALC_PLATFORM_IS_WINDOWS
 
 /// @brief Signed 64-bit integer datatype.
 typedef long long int64_t;

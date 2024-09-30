@@ -6,7 +6,7 @@ static size_t CALC_STDCALL _path_getlastsep(const char *const path, size_t *cons
     char *p;
     size_t i, lastSep = 0;
 
-    for (p = (char *)path, i = 0; *p; p++, i++)
+    for (p = (char *)path, i = 0; (*p && (*p != CALC_PATHSEP)); p++, i++)
     {
         if (calcIsDirSep(*p))
             lastSep = i + 1;
@@ -46,7 +46,7 @@ char *CALC_STDCALL path_getextn(char *const dest, const char *const path)
     char *p, *result;
     size_t i, lastDot = 0, size;
 
-    for (p = (char *)path, i = 0; *p; p++, i++)
+    for (p = (char *)path, i = 0; (*p && (*p != CALC_PATHSEP)); p++, i++)
     {
         if (calcIsExtSep(*p))
             lastDot = i;
@@ -66,7 +66,7 @@ char *CALC_STDCALL path_getbase(char *const dest, const char *const path)
     char *p, *result;
     size_t i, lastSep = 0, lastDot = 0, size;
 
-    for (p = (char *)path, i = 0; *p; p++, i++)
+    for (p = (char *)path, i = 0; (*p && (*p != CALC_PATHSEP)); p++, i++)
     {
         if (calcIsDirSep(*p))
             lastSep = i + 1;
