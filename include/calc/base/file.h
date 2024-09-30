@@ -18,7 +18,6 @@
 #ifndef CALC_BASE_FILE_H_
 #define CALC_BASE_FILE_H_
 
-#include "calc/base/bits.h"
 #include "calc/base/string.h"
 
 #if CALC_PLATFORM_IS_WINDOWS
