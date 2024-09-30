@@ -12,16 +12,17 @@
  *              informations.
  *
  * @brief       In this header are defined macros, constants and functions
- *              to manipulate files and paths.
+ *              to manipulate files.
  */
 
 #ifndef CALC_BASE_FILE_H_
 #define CALC_BASE_FILE_H_
 
-#include "calc/base/string.h"
+#include "calc/base/bool.h"
+
+#include <stdio.h>
 
 #if CALC_PLATFORM_IS_WINDOWS
-#   include <direct.h> /* _getcwd, _chdir, ... */
 #   include <io.h>     /* open, creat, remove, ... */
 #   include <fcntl.h>
 
@@ -61,88 +62,8 @@ CALC_C_HEADER_END
 ///         and shall return 0; otherwise, -1 shall be returned
 ///         and errno shall be set to indicate the error.
 #   define access(path, mode)  _access((path), (mode))
-/// @brief The getcwd() function shall place an absolute pathname
-///        of the current working directory in the array pointed
-///        to by dest, and return dest. The pathname copied to the
-///        array shall contain no components that are symbolic links.
-/// @param dest Destination buffer on which copy the current working
-///             directory.
-/// @param size Is the size in bytes of the character array pointed
-///             to by the dest argument. If dest is a null pointer,
-///             the behavior of getcwd() is unspecified.
-/// @return Upon successful completion, getcwd() shall return the
-///         dest argument. Otherwise, getcwd() shall return a NULL
-///         pointer and set errno to indicate the error. The contents
-///         of the array pointed to by buf are then undefined.
-#   define getcwd(dest, size)  _getcwd((dest), (size))
-
-#   ifndef calcIsDirSep
-/// @brief Checks if a character is a directory separator.
-/// @param c The character to check.
-/// @return If c is a directory separator then TRUE, else FALSE.
-#       define calcIsDirSep(c)  (c == '/' || c == '\\')
-#   endif // calcIsDirSep
-
-#   ifndef calcIsExtSep
-/// @brief Checks if a character is an extension separator.
-/// @param c The character to check.
-/// @return If c is an extension separator then TRUE, else FALSE.
-#       define calcIsExtSep(c)  (c == '.')
-#   endif // calcIsExtSep
-
-#   ifndef calcIsAbsPath
-/// @brief Checks if a string represents an absolute path.
-/// @param s The string to check.
-/// @return If s is an absolute path then TRUE, else FALSE.
-#       define calcIsAbsPath(s) (calcIsDirSep(*s) || (*s && *(s + 1) == ':' && calcIsDirSep(*(s + 2))))
-#   endif // calcIsAbsPath
-
-#   ifndef CALC_PATHCMP
-/// @brief This macro contains the name of the path comparator
-///        function.
-#       define CALC_PATHCMP     !stricmp
-#   endif // CALC_PATHCMP
-
-#   ifndef CALC_PATHSEP
-/// @brief This macro contains the path separator character in a
-///        path list.
-#       define CALC_PATHSEP     ';'
-#   endif // CALC_PATHSEP
 #else
 #   include <unistd.h>
-
-#   ifndef calcIsDirSep
-/// @brief Checks if a character is a directory separator.
-/// @param c The character to check.
-/// @return If c is a directory separator then TRUE, else FALSE.
-#       define calcIsDirSep(c)  (c == '/')
-#   endif // calcIsDirSep
-
-#   ifndef calcIsExtSep
-/// @brief Checks if a character is an extension separator.
-/// @param c The character to check.
-/// @return If c is an extension separator then TRUE, else FALSE.
-#       define calcIsExtSep(c)  (c == '.')
-#   endif // calcIsExtSep
-
-#   ifndef calcIsAbsPath
-/// @brief Checks if a string represents an absolute path.
-/// @param s The string to check.
-/// @return If s is an absolute path then TRUE, else FALSE.
-#       define calcIsAbsPath(s) calcIsDirSep(*s)
-#   endif // calcIsAbsPath
-
-#   ifndef CALC_PATHCMP
-/// @brief This macro contains the name of the path comparator
-///        function.
-#       define CALC_PATHCMP     !strcmp
-#   endif // CALC_PATHCMP
-
-#   ifndef CALC_PATHSEP
-/// @brief This macro contains the path separator character in a
-///        path list.
-#       define CALC_PATHSEP     ':'
-#   endif // CALC_PATHSEP
 #endif
 
 CALC_C_HEADER_BEGIN
