@@ -1,5 +1,7 @@
 #include "calc/base/string.h"
 
+#include <ctype.h>
+
 char *CALC_STDCALL strnget(const char *const str, size_t count)
 {
     char *result = stralloc(count);

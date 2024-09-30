@@ -1,3 +1,4 @@
+#include "calc/base/error.h"
 #include "calc/base/file.h"
 
 size_t CALC_STDCALL fgetsiz(FILE *const stream)
