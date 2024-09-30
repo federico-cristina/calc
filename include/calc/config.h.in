@@ -219,6 +219,12 @@
                                       || (CALC_PLATFORM_ID == CALC_PLATFORM_ID_MACOS))
 #endif // CALC_PLATFORM_IS_UNIX
 
+#ifndef CALC_PLATFORM_IS_MACOS
+/// @brief This macro can be used to check if the current platform is
+///        macOS.
+#   define CALC_PLATFORM_IS_MACOS        (CALC_PLATFORM_ID == CALC_PLATFORM_ID_MACOS)
+#endif // CALC_PLATFORM_IS_MACOS
+
 #ifndef CALC_PLATFORM_NAME
 #   if   CALC_PLATFORM_ID == CALC_PLATFORM_ID_NONE
 /// @brief This macro represents the name of the platform on which has
