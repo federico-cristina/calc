@@ -20,8 +20,8 @@
 
 #include "calc/base/errno.h"
 
+#include <stdlib.h>
 #include <setjmp.h>
-#include <signal.h>
 
 CALC_C_HEADER_BEGIN
 
