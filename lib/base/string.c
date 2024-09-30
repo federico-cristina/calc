@@ -1,6 +1,6 @@
 #include "calc/base/string.h"
 
-char *CALC_CDECL strnget(const char *const str, size_t count)
+char *CALC_STDCALL strnget(const char *const str, size_t count)
 {
     char *result = stralloc(count);
 
@@ -16,7 +16,7 @@ char *CALC_CDECL strnget(const char *const str, size_t count)
     return result;
 }
 
-char *CALC_CDECL strnmov(char *const dest, const char *const src, size_t count)
+char *CALC_STDCALL strnmov(char *const dest, const char *const src, size_t count)
 {
     if (!src || !count)
         return NULL;
@@ -31,7 +31,7 @@ char *CALC_CDECL strnmov(char *const dest, const char *const src, size_t count)
     return result;
 }
 
-char *CALC_CDECL strnlow(char *const dest, const char *const src, size_t count)
+char *CALC_STDCALL strnlow(char *const dest, const char *const src, size_t count)
 {
     char *result = strnmov(dest, src, count);
 
@@ -46,7 +46,7 @@ char *CALC_CDECL strnlow(char *const dest, const char *const src, size_t count)
     return result;
 }
 
-char *CALC_CDECL strnupp(char *const dest, const char *const src, size_t count)
+char *CALC_STDCALL strnupp(char *const dest, const char *const src, size_t count)
 {
     char *result = strnmov(dest, src, count);
 
@@ -61,7 +61,7 @@ char *CALC_CDECL strnupp(char *const dest, const char *const src, size_t count)
     return result;
 }
 
-bool_t CALC_CDECL streq(const char *const str1, const char *const str2)
+bool_t CALC_STDCALL streq(const char *const str1, const char *const str2)
 {
     if (str1 == str2)
         return TRUE;
@@ -87,7 +87,7 @@ bool_t CALC_CDECL streq(const char *const str1, const char *const str2)
     return TRUE;
 }
 
-bool_t CALC_CDECL striq(const char *const str1, const char *const str2)
+bool_t CALC_STDCALL striq(const char *const str1, const char *const str2)
 {
     if (str1 == str2)
         return TRUE;
