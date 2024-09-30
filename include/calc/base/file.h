@@ -155,12 +155,6 @@ CALC_INLINE bool_t CALC_STDCALL fexists(const char *const path)
     return (bool_t)!access(path, F_OK);
 }
 
-/// @brief Gets the base name without an extension of a file.
-/// @param path Path from which scan the name.
-/// @param dest Buffer on which write the name.
-/// @return On success a pointer to dest, else NULL.
-CALC_EXTERN char *CALC_STDCALL fgetbase(char *const dest, const char *const path);
-
 #ifndef EOF
 /// @brief This macro represents the end of file character.
 ///
