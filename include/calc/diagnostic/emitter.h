@@ -18,8 +18,6 @@
 #ifndef CALC_DIAGNOSTIC_EMITTER_H_
 #define CALC_DIAGNOSTIC_EMITTER_H_
 
-#include "calc/base/file.h"
-
 #include "calc/diagnostic/diagnostics.h"
 
 CALC_C_HEADER_BEGIN

@@ -20,6 +20,7 @@
 
 #include "calc/base/api.h"
 #include "calc/base/bits.h"
+#include "calc/base/file.h"
 #include "calc/base/string.h"
 
 CALC_C_HEADER_BEGIN

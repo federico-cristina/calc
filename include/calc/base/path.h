@@ -18,7 +18,7 @@
 #ifndef CALC_BASE_PATH_H_
 #define CALC_BASE_PATH_H_
 
-#include "calc/base/string.h"
+#include "calc/base/defs.h"
 
 #if CALC_PLATFORM_IS_WINDOWS
 #   include <direct.h> /* _getcwd, _chdir, ... */

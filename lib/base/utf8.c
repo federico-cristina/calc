@@ -1,3 +1,4 @@
+#include "calc/base/error.h"
 #include "calc/base/utf8.h"
 
 const char *utf8_errmsg(ssize_t errcode)

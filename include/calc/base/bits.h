@@ -277,7 +277,7 @@ typedef unsigned long long uint64_t;
 #   define SSIZE_T long long
 #endif // SSIZE_T
 
-/// @brief Signed sise datatype.
+/// @brief Signed size datatype.
 typedef SSIZE_T ssize_t;
 
 #ifndef SSIZE_MIN
