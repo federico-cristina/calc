@@ -189,7 +189,7 @@
 /// @brief This macro holds the identifier of the platform on which
 ///        this source is compiled.
 #       define CALC_PLATFORM_ID CALC_PLATFORM_ID_LINUX
-#   elif defined __mach__
+#   elif defined __mach__ || defined __APPLE__
 /// @brief This macro holds the identifier of the platform on which
 ///        this source is compiled.
 #       define CALC_PLATFORM_ID CALC_PLATFORM_ID_MACOS
