@@ -72,7 +72,7 @@ CALC_INLINE int CALC_STDCALL istermn(int c)
 
 // String manipulation functions
 
-#if CALC_PLATFORM_ID == CALC_PLATFORM_ID_MACOS
+#if CALC_PLATFORM_IS_MACOS
 /// @brief Performs a case-insensitive comparison of strings.
 #   define stricmp(str1, str2) strcasecmp((str1), (str2))
 #endif
