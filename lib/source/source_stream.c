@@ -1,3 +1,5 @@
+#include "calc/base/alloc.h"
+
 #include "calc/source/source_stream.h"
 
 static inline CalcSourceStream_t *CALC_STDCALL calc_InitializeSourceStream(CalcSourceStream_t *const sourceStream)

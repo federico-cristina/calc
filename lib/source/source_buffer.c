@@ -1,3 +1,6 @@
+#include "calc/base/string.h"
+#include "calc/base/utf8.h"
+
 #include "calc/source/source_buffer.h"
 
 CALC_API CalcSourceBuffer_t *CALC_STDCALL calcCreateSourceBuffer(size_t size, byte_t *const content, size_t count)

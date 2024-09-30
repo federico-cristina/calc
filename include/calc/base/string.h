@@ -19,7 +19,7 @@
 #ifndef CALC_BASE_STRING_H_
 #define CALC_BASE_STRING_H_
 
-#include "calc/base/bits.h"
+#include "calc/base/bool.h"
 #include "calc/base/alloc.h"
 
 #include <string.h>
