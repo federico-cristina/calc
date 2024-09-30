@@ -11,6 +11,7 @@ set(HEADERS
     "alloc.h"
     "string.h"
     "file.h"
+    "path.h"
     "utf8.h"
 )
 
@@ -20,6 +21,7 @@ set(SOURCES
     "dload.c"
     "string.c"
     "file.c"
+    "path.c"
     "utf8.c"
 )
 
