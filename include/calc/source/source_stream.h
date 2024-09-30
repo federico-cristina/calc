@@ -18,6 +18,9 @@
 #ifndef CALC_SOURCE_SOURCE_STREAM_H_
 #define CALC_SOURCE_SOURCE_STREAM_H_
 
+#include "calc/base/file.h"
+#include "calc/base/string.h"
+
 #include "calc/source/source_buffer.h"
 #include "calc/source/source_location.h"
 
