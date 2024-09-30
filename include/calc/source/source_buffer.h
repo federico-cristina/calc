@@ -19,6 +19,7 @@
 #define CALC_SOURCE_SOURCE_BUFFER_H_
 
 #include "calc/base/api.h"
+#include "calc/base/alloc.h"
 #include "calc/base/bool.h"
 #include "calc/base/byte.h"
 #include "calc/base/file.h"
