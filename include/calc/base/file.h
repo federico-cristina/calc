@@ -19,6 +19,7 @@
 #define CALC_BASE_FILE_H_
 
 #include "calc/base/bool.h"
+#include "calc/base/error.h"
 
 #include <stdio.h>
 

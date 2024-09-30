@@ -19,10 +19,10 @@
 #define CALC_SOURCE_SOURCE_BUFFER_H_
 
 #include "calc/base/api.h"
-#include "calc/base/alloc.h"
 #include "calc/base/bool.h"
 #include "calc/base/byte.h"
 #include "calc/base/file.h"
+#include "calc/base/string.h"
 #include "calc/base/utf8.h"
 
 CALC_C_HEADER_BEGIN
