@@ -11,7 +11,7 @@
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
  *
- * @brief       In this header are defined hashing types
+ *              This file (and its .c implementation) is partially derived
  */
 
 #ifndef CALC_CORE_HASH_H_
@@ -92,19 +92,19 @@ CALC_API CalcSha256Context_t *CALC_STDCALL calcSha256ContextInit(CalcSha256Conte
 /// @return A pointer to the new SHA-256 context.
 CALC_API CalcSha256Context_t *CALC_STDCALL calcCreateSha256Context(void);
 
-/// @brief 
-/// @param ctx 
-/// @param data 
-/// @param count 
-/// @return 
+/// @brief Updates the content of the SHA-256 context.
+/// @param ctx A pointer to the SHA-256 to update.
+/// @param data A pointer to the buffer to use to fill
+///             the context's data.
+/// @param count The number of bytes in data buffer.
 CALC_API CalcSha256Context_t *CALC_STDCALL calcSha256Update(CalcSha256Context_t *const ctx, const byte_t *const data, size_t count);
-/// @brief 
-/// @param ctx 
-/// @param outHash 
-/// @return 
+/// @brief Computes the hash code block.
+/// @param ctx A pointer to the SHA-256 context.
+/// @param outHash The buffer in which write the output
+///                hash bytes.
 CALC_API CalcSha256Context_t *CALC_STDCALL calcSha256Final(CalcSha256Context_t *const ctx, byte_t *const outHash);
 
-/// @brief Computes the kay's hash code using SHA-256
+/// @brief Computes the key's hash code using SHA-256
 ///        hashing algorithm and packing it into a 32-bit
 ///        integer.
 /// @param key The key to hash.

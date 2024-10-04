@@ -14,9 +14,7 @@ CALC_API CalcHashCode_t CALC_STDCALL calcGetSimpleHashCode(const byte_t *const k
 
 // Base64 Conversion Functions
 
-#ifndef NEWLINE_INVL
-#   define NEWLINE_INVL 76
-#endif // NEWLINE_INVL
+#define NEWLINE_INVL 76
 
 static byte_t CALC_STDCALL calc_revchar(char ch)
 {
@@ -163,9 +161,9 @@ CALC_API size_t CALC_STDCALL calcBase64Decode(const byte_t *const b64, byte_t *c
     return idx;
 }
 
-#ifdef NEWLINE_INVL
-#   undef NEWLINE_INVL
-#endif // UNDEF NEWLINE_INVL
+CALC_API CalcHashCode_t CALC_STDCALL calcGetBase64HashCode(const byte_t *const key)
+{
+    size_t i, count, length;
 
 // SHA-256 Hashing Function
 
