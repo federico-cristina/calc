@@ -35,6 +35,21 @@
 #   define calcConcatMacro(x, y) calcExpandMacro(x) ## calcExpandMacro(y)
 #endif // calcConcatMacro
 
+#ifndef calc_MacroToString
+/// @brief This macro gets a string version of the parameter
+///        token. THIS IS ONLY AN HELPER MACRO DON'T USE IT
+///        DIRECTLY.
+#   define calc_MacroToString(x) #x
+#endif // calc_MacroToString
+
+#ifndef calcMacroToString
+/// @brief This macro gets a string version of the parameter
+///        token.
+/// @param x Token to stringify.
+/// @return A string version of the parameter.
+#   define calcMacroToString(x) calc_MacroToString(x)
+#endif // calcMacroToString
+
 // Versioning Infos
 
 #ifndef CALC_VERSION_MAJOR
