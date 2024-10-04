@@ -3,3 +3,9 @@ calc_add_unit_test(sha256
     DEPENDS core
     TEST
 )
+
+calc_add_unit_test(base64
+    SOURCES "test_base64.c"
+    DEPENDS core
+    TEST
+)
