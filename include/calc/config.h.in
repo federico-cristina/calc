@@ -273,12 +273,12 @@
 
 #ifndef CALC_MAGICNUM
 /// @brief CALC magic number...
-#    define CALC_MAGICNUM 0x43414C43
+#   define CALC_MAGICNUM 0x43414C43
 #endif // CALC_MAGICNUM
 
 #ifndef CALC_MAGICSTR
 /// @brief CALC magic number...
-#    define CALC_MAGICSTR "\x43\x41\x4C\x43"
+#   define CALC_MAGICSTR "\x43\x41\x4C\x43"
 #endif // CALC_MAGICSTR
 
 #endif // CALC_CONFIG_H_
