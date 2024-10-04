@@ -164,6 +164,24 @@ CALC_API size_t CALC_STDCALL calcBase64Decode(const byte_t *const b64, byte_t *c
 CALC_API CalcHashCode_t CALC_STDCALL calcGetBase64HashCode(const byte_t *const key)
 {
     size_t i, count, length;
+    byte_t *outBuffer;
+    CalcHashCode_t hashCode = 0;
+
+    length = buflen(key);
+    count = calcBase64Encode(key, NULL, length, FALSE);
+    outBuffer = stackdim(byte_t, count);
+
+    calcBase64Encode(key, outBuffer, length, FALSE);
+
+    for (i = 0; i < count; i++)
+        hashCode += outBuffer[i];
+
+    freea(outBuffer);
+
+    return hashCode;
+}
+
+#undef NEWLINE_INVL
 
 // SHA-256 Hashing Function
 

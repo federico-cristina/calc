@@ -12,6 +12,31 @@
  *              informations.
  *
  *              This file (and its .c implementation) is partially derived
+ *              from files in the following repository:
+ *
+ *              https://github.com/B-Con/crypto-algorithms.git
+ *
+ * @brief       In this header are defined hashing types and functions to
+ *              deal with them.
+ *
+ *              Supported hash functions:
+ *
+ *              - Simple
+ *
+ *              Sums the bytes of the key and returns that value. Is very
+ *              fast and can be used easily with identifiers, but is not so
+ *              great as hashing function.
+ *
+ *              - SHA-256
+ *
+ *              Hashes a sequence of bytes with a SHA-256 algorithm and sums
+ *              the 32-bytes of the hash block produced by the SHA-256
+ *              function.
+ * 
+ *              - Base64
+ *
+ *              Converts a sequence of bytes to its base64 representation
+ *              and sums the produced output bytes.
  */
 
 #ifndef CALC_CORE_HASH_H_
@@ -61,6 +86,12 @@ CALC_API size_t CALC_STDCALL calcBase64Encode(const byte_t *const key, byte_t *c
 /// @return The length of the output byte sequence.
 CALC_API size_t CALC_STDCALL calcBase64Decode(const byte_t *const b64, byte_t *const out, size_t count);
 
+/// @brief Computes the key's hash code using base64 key's
+///        representation.
+/// @param key The key to hash.
+/// @return The corresponding hash code.
+CALC_API CalcHashCode_t CALC_STDCALL calcGetBase64HashCode(const byte_t *const key);
+
 // SHA-256 Hashing Function
 
 #ifndef CALC_SHA256_BLOCK_SIZE
@@ -97,11 +128,13 @@ CALC_API CalcSha256Context_t *CALC_STDCALL calcCreateSha256Context(void);
 /// @param data A pointer to the buffer to use to fill
 ///             the context's data.
 /// @param count The number of bytes in data buffer.
+/// @return ctx parameter.
 CALC_API CalcSha256Context_t *CALC_STDCALL calcSha256Update(CalcSha256Context_t *const ctx, const byte_t *const data, size_t count);
 /// @brief Computes the hash code block.
 /// @param ctx A pointer to the SHA-256 context.
 /// @param outHash The buffer in which write the output
 ///                hash bytes.
+/// @return ctx parameter.
 CALC_API CalcSha256Context_t *CALC_STDCALL calcSha256Final(CalcSha256Context_t *const ctx, byte_t *const outHash);
 
 /// @brief Computes the key's hash code using SHA-256
