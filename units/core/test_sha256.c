@@ -9,4 +9,6 @@ int main()
     CalcHashCode_t hash = calcGetSha256HashCode((const byte_t *)text);
 
     printf("%s -> %u\n", text, hash);
+
+    return 0;
 }
