@@ -34,13 +34,13 @@ typedef unsigned char byte_t;
 #ifndef BYTE_MIN
 /// @brief This macro represents the minimum value that a
 ///        variable of type byte_t can store.
-#	define BYTE_MIN ((byte_t)0x00)
+#   define BYTE_MIN ((byte_t)0x00)
 #endif // BYTE_MIN
 
 #ifndef BYTE_MAX
 /// @brief This macro represents the maximum value that a
 ///        variable of type byte_t can store.
-#	define BYTE_MAX ((byte_t)0xFF)
+#   define BYTE_MAX ((byte_t)0xFF)
 #endif // BYTE_MAX
 
 // Buffer Manipulation Functions
@@ -54,17 +54,17 @@ typedef unsigned char byte_t;
 ///         to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL bufset(byte_t *const dest, byte_t value, size_t count)
 {
-	if (!count)
-		return dest;
+    if (!count)
+        return dest;
 
-	assert(dest != NULL);
+    assert(dest != NULL);
 
-	CALC_REGISTER size_t i;
+    CALC_REGISTER size_t i;
 
-	for (i = 0; i < count; i++)
-		dest[i] = value;
+    for (i = 0; i < count; i++)
+        dest[i] = value;
 
-	return dest;
+    return dest;
 }
 
 /// @brief Sets all bytes of a destination buffer to the minimun
@@ -75,7 +75,7 @@ CALC_INLINE byte_t *CALC_STDCALL bufset(byte_t *const dest, byte_t value, size_t
 ///         to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL bufclr(byte_t *const dest, size_t count)
 {
-	return bufset(dest, BYTE_MIN, count);
+    return bufset(dest, BYTE_MIN, count);
 }
 
 /// @brief Copies the content from a source constant buffer
@@ -87,14 +87,14 @@ CALC_INLINE byte_t *CALC_STDCALL bufclr(byte_t *const dest, size_t count)
 ///         to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL bufcpy(byte_t *const dest, const byte_t *const source, size_t count)
 {
-	assert((dest != NULL) && (source != NULL));
+    assert((dest != NULL) && (source != NULL));
 
-	CALC_REGISTER size_t i;
+    CALC_REGISTER size_t i;
 
-	for (i = 0; i < count; i++)
-		dest[i] = source[i];
+    for (i = 0; i < count; i++)
+        dest[i] = source[i];
 
-	return dest;
+    return dest;
 }
 
 /// @brief Moves the content from a source constant buffer
@@ -106,14 +106,14 @@ CALC_INLINE byte_t *CALC_STDCALL bufcpy(byte_t *const dest, const byte_t *const 
 ///         to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL bufmov(byte_t *const dest, byte_t *const source, size_t count)
 {
-	assert((dest != NULL) && (source != NULL));
+    assert((dest != NULL) && (source != NULL));
 
-	CALC_REGISTER size_t i;
+    CALC_REGISTER size_t i;
 
-	for (i = 0; i < count; i++)
-		dest[i] = source[i], source[i] = BYTE_MIN;
+    for (i = 0; i < count; i++)
+        dest[i] = source[i], source[i] = BYTE_MIN;
 
-	return dest;
+    return dest;
 }
 
 /// @brief Swaps the content of two buffers.
@@ -123,19 +123,19 @@ CALC_INLINE byte_t *CALC_STDCALL bufmov(byte_t *const dest, byte_t *const source
 /// @return On success returns b1.
 CALC_INLINE byte_t *CALC_STDCALL bufswp(byte_t *const b1, byte_t *const b2, size_t count)
 {
-	assert((b1 != NULL) && (b2 != NULL));
+    assert((b1 != NULL) && (b2 != NULL));
 
-	CALC_REGISTER size_t i;
-	CALC_REGISTER byte_t bTemp;
+    CALC_REGISTER size_t i;
+    CALC_REGISTER byte_t bTemp;
 
-	for (i = 0; i < count; i++)
-	{
-		bTemp = b1[i];
-		b1[i] = b2[i];
-		b2[i] = bTemp;
-	}
+    for (i = 0; i < count; i++)
+    {
+        bTemp = b1[i];
+        b1[i] = b2[i];
+        b2[i] = bTemp;
+    }
 
-	return b1;
+    return b1;
 }
 
 // Buffer Checking Functions
@@ -148,15 +148,15 @@ CALC_INLINE byte_t *CALC_STDCALL bufswp(byte_t *const b1, byte_t *const b2, size
 /// @return TRUE on success, else FALSE.
 CALC_INLINE bool_t CALC_STDCALL bufcmp(const byte_t *const b1, const byte_t *const b2, size_t count)
 {
-	assert((b1 != NULL) && (b2 != NULL));
+    assert((b1 != NULL) && (b2 != NULL));
 
-	CALC_REGISTER size_t i;
-	CALC_REGISTER bool_t r = TRUE;
+    CALC_REGISTER size_t i;
+    CALC_REGISTER bool_t r = TRUE;
 
-	for (i = 0; r && (i < count); i++)
-		r = (b1[i] == b2[i]);
+    for (i = 0; r && (i < count); i++)
+        r = (b1[i] == b2[i]);
 
-	return r;
+    return r;
 }
 
 /// @brief Checks if a portion of a given buffer content has
@@ -166,15 +166,15 @@ CALC_INLINE bool_t CALC_STDCALL bufcmp(const byte_t *const b1, const byte_t *con
 /// @return TRUE on success, else FALSE.
 CALC_INLINE bool_t CALC_STDCALL bufnil(const byte_t *const b, size_t count)
 {
-	assert(b != NULL);
+    assert(b != NULL);
 
-	CALC_REGISTER size_t i;
-	CALC_REGISTER bool_t r = TRUE;
+    CALC_REGISTER size_t i;
+    CALC_REGISTER bool_t r = TRUE;
 
-	for (i = 0; r && (i < count); i++)
-		r = !((int)b[i]);
+    for (i = 0; r && (i < count); i++)
+        r = !((int)b[i]);
 
-	return r;
+    return r;
 }
 
 /// @brief Counts the number of bytes before the terminator
@@ -183,14 +183,14 @@ CALC_INLINE bool_t CALC_STDCALL bufnil(const byte_t *const b, size_t count)
 /// @return The number of bytes before the terminator character.
 CALC_INLINE size_t CALC_STDCALL buflen(const byte_t *const b)
 {
-	assert(b != NULL);
+    assert(b != NULL);
 
-	CALC_REGISTER size_t i = 0;
+    CALC_REGISTER size_t i = 0;
 
-	while (b[i])
-		++i;
+    while (b[i])
+        ++i;
 
-	return i;
+    return i;
 }
 
 // Buffer Conversion Function
@@ -214,7 +214,7 @@ CALC_INLINE size_t CALC_STDCALL buflen(const byte_t *const b)
 /// @return On success returns a pointer to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL utobuf(byte_t *const dest, unsigned int val, size_t count)
 {
-	return tobuf(dest, val, count);
+    return tobuf(dest, val, count);
 }
 
 /// @brief Converts a number to its buffer representation. Unsigned
@@ -226,7 +226,7 @@ CALC_INLINE byte_t *CALC_STDCALL utobuf(byte_t *const dest, unsigned int val, si
 /// @return On success returns a pointer to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL ultobuf(byte_t *const dest, unsigned long val, size_t count)
 {
-	return tobuf(dest, val, count);
+    return tobuf(dest, val, count);
 }
 
 /// @brief Converts a number to its buffer representation. Unsigned
@@ -238,7 +238,7 @@ CALC_INLINE byte_t *CALC_STDCALL ultobuf(byte_t *const dest, unsigned long val, 
 /// @return On success returns a pointer to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL ulltobuf(byte_t *const dest, unsigned long long val, size_t count)
 {
-	return tobuf(dest, val, count);
+    return tobuf(dest, val, count);
 }
 
 /// @brief Converts a number to its buffer representation. Signed
@@ -250,7 +250,7 @@ CALC_INLINE byte_t *CALC_STDCALL ulltobuf(byte_t *const dest, unsigned long long
 /// @return On success returns a pointer to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL itobuf(byte_t *const dest, int val, size_t count)
 {
-	return tobuf(dest, val, count);
+    return tobuf(dest, val, count);
 }
 
 /// @brief Converts a number to its buffer representation. Signed
@@ -262,7 +262,7 @@ CALC_INLINE byte_t *CALC_STDCALL itobuf(byte_t *const dest, int val, size_t coun
 /// @return On success returns a pointer to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL ltobuf(byte_t *const dest, long val, size_t count)
 {
-	return tobuf(dest, val, count);
+    return tobuf(dest, val, count);
 }
 
 /// @brief Converts a number to its buffer representation. Signed
@@ -274,7 +274,7 @@ CALC_INLINE byte_t *CALC_STDCALL ltobuf(byte_t *const dest, long val, size_t cou
 /// @return On success returns a pointer to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL lltobuf(byte_t *const dest, long long val, size_t count)
 {
-	return tobuf(dest, val, count);
+    return tobuf(dest, val, count);
 }
 
 /// @brief Converts a number to its buffer representation. Float
@@ -286,7 +286,7 @@ CALC_INLINE byte_t *CALC_STDCALL lltobuf(byte_t *const dest, long long val, size
 /// @return On success returns a pointer to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL ftobuf(byte_t *const dest, float val, size_t count)
 {
-	return tobuf(dest, val, count);
+    return tobuf(dest, val, count);
 }
 
 /// @brief Converts a number to its buffer representation. Double
@@ -298,7 +298,7 @@ CALC_INLINE byte_t *CALC_STDCALL ftobuf(byte_t *const dest, float val, size_t co
 /// @return On success returns a pointer to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL dtobuf(byte_t *const dest, double val, size_t count)
 {
-	return tobuf(dest, val, count);
+    return tobuf(dest, val, count);
 }
 
 /// @brief Converts a number to its buffer representation. Long
@@ -310,7 +310,7 @@ CALC_INLINE byte_t *CALC_STDCALL dtobuf(byte_t *const dest, double val, size_t c
 /// @return On success returns a pointer to the destination buffer.
 CALC_INLINE byte_t *CALC_STDCALL ldtobuf(byte_t *const dest, long double val, size_t count)
 {
-	return tobuf(dest, val, count);
+    return tobuf(dest, val, count);
 }
 
 #ifndef bufto
@@ -328,9 +328,9 @@ CALC_INLINE byte_t *CALC_STDCALL ldtobuf(byte_t *const dest, long double val, si
 /// @return The numeric value.
 CALC_INLINE unsigned int CALC_CDECL buftou(const byte_t *const buf, size_t count)
 {
-	unsigned int tmp = 0;
-	bufto(tmp, buf, count);
-	return tmp;
+    unsigned int tmp = 0;
+    bufto(tmp, buf, count);
+    return tmp;
 }
 
 /// @brief Converts a buffer into its numeric representation. Unsigned
@@ -340,9 +340,9 @@ CALC_INLINE unsigned int CALC_CDECL buftou(const byte_t *const buf, size_t count
 /// @return The numeric value.
 CALC_INLINE unsigned long CALC_CDECL buftoul(const byte_t *const buf, size_t count)
 {
-	unsigned long tmp = 0;
-	bufto(tmp, buf, count);
-	return tmp;
+    unsigned long tmp = 0;
+    bufto(tmp, buf, count);
+    return tmp;
 }
 
 /// @brief Converts a buffer into its numeric representation. Unsigned
@@ -352,9 +352,9 @@ CALC_INLINE unsigned long CALC_CDECL buftoul(const byte_t *const buf, size_t cou
 /// @return The numeric value.
 CALC_INLINE unsigned long long CALC_CDECL buftoull(const byte_t *const buf, size_t count)
 {
-	unsigned long long tmp = 0;
-	bufto(tmp, buf, count);
-	return tmp;
+    unsigned long long tmp = 0;
+    bufto(tmp, buf, count);
+    return tmp;
 }
 
 /// @brief Converts a buffer into its numeric representation.
@@ -364,9 +364,9 @@ CALC_INLINE unsigned long long CALC_CDECL buftoull(const byte_t *const buf, size
 /// @return The numeric value.
 CALC_INLINE int CALC_CDECL buftoi(const byte_t *const buf, size_t count)
 {
-	int tmp = 0;
-	bufto(tmp, buf, count);
-	return tmp;
+    int tmp = 0;
+    bufto(tmp, buf, count);
+    return tmp;
 }
 
 /// @brief Converts a buffer into its numeric representation.
@@ -376,9 +376,9 @@ CALC_INLINE int CALC_CDECL buftoi(const byte_t *const buf, size_t count)
 /// @return The numeric value.
 CALC_INLINE long CALC_CDECL buftol(const byte_t *const buf, size_t count)
 {
-	long tmp = 0;
-	bufto(tmp, buf, count);
-	return tmp;
+    long tmp = 0;
+    bufto(tmp, buf, count);
+    return tmp;
 }
 
 /// @brief Converts a buffer into its numeric representation.
@@ -388,9 +388,9 @@ CALC_INLINE long CALC_CDECL buftol(const byte_t *const buf, size_t count)
 /// @return The numeric value.
 CALC_INLINE long long CALC_CDECL buftoll(const byte_t *const buf, size_t count)
 {
-	long long tmp = 0;
-	bufto(tmp, buf, count);
-	return tmp;
+    long long tmp = 0;
+    bufto(tmp, buf, count);
+    return tmp;
 }
 
 /// @brief Converts a buffer into its numeric representation.
@@ -400,9 +400,9 @@ CALC_INLINE long long CALC_CDECL buftoll(const byte_t *const buf, size_t count)
 /// @return The numeric value.
 CALC_INLINE float CALC_CDECL buftof(const byte_t *const buf, size_t count)
 {
-	float tmp = 0;
-	bufto(tmp, buf, count);
-	return tmp;
+    float tmp = 0;
+    bufto(tmp, buf, count);
+    return tmp;
 }
 
 /// @brief Converts a buffer into its numeric representation.
@@ -412,9 +412,9 @@ CALC_INLINE float CALC_CDECL buftof(const byte_t *const buf, size_t count)
 /// @return The numeric value.
 CALC_INLINE double CALC_CDECL buftod(const byte_t *const buf, size_t count)
 {
-	double tmp = 0;
-	bufto(tmp, buf, count);
-	return tmp;
+    double tmp = 0;
+    bufto(tmp, buf, count);
+    return tmp;
 }
 
 /// @brief Converts a buffer into its numeric representation.
@@ -424,9 +424,9 @@ CALC_INLINE double CALC_CDECL buftod(const byte_t *const buf, size_t count)
 /// @return The numeric value.
 CALC_INLINE long double CALC_CDECL buftold(const byte_t *const buf, size_t count)
 {
-	long double tmp = 0;
-	bufto(tmp, buf, count);
-	return tmp;
+    long double tmp = 0;
+    bufto(tmp, buf, count);
+    return tmp;
 }
 
 CALC_C_HEADER_END
