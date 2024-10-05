@@ -409,28 +409,28 @@ calcDefineLiteralToken(CALC_TOKEN_LITERAL_STRING)
 // Bracket Punctuators
 
 /// @brief '()' bracket punctuator token code.
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ROUND,   "()")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ROUND,            "()")
 
 /// @brief '(' bracket punctuator token code.
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ROUND_L, "(")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ROUND_L,          "(")
 /// @brief ')' bracket punctuator token code.
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ROUND_R, ")")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ROUND_R,          ")")
 
 /// @brief '[]' bracket punctuator token code.
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SQUAR,   "[]")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SQUAR,            "[]")
 
 /// @brief '[' bracket punctuator token code.
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SQUAR_L, "[")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SQUAR_L,          "[")
 /// @brief ']' bracket punctuator token code.
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SQUAR_R, "]")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SQUAR_R,          "]")
 
 /// @brief '{}' bracket punctuator token code.
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CURLY,   "{}")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CURLY,            "{}")
 
 /// @brief '{' bracket punctuator token code.
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CURLY_L, "{")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CURLY_L,          "{")
 /// @brief '}' bracket punctuator token code.
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CURLY_R, "}")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CURLY_R,          "}")
 
 #ifndef noxTokenCodeIsBrackPunct
 /// @brief Checks if token t is a bracket token.
@@ -440,135 +440,135 @@ calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CURLY_R, "}")
 // Stray punctuators
 
 /// @brief '~' stray punctuator token code. (tilde)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_TILDE, "~")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_TILDE,            "~")
 
 /// @brief '?' stray punctuator token code. (question mark)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_QUEST, "?")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_QUEST,            "?")
 /// @brief '!' stray punctuator token code. (exclamation mark)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EXCLM, "!")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EXCLM,            "!")
 /// @brief '&' stray punctuator token code. (ampersand)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_AMPER, "&")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_AMPER,            "&")
 /// @brief '|' stray punctuator token code. (pipe)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PIPEE, "|")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PIPEE,            "|")
 /// @brief '^' stray punctuator token code. (caret)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CARET, "^")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CARET,            "^")
 
 /// @brief '<' stray punctuator token code. (less than)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_LESST, "<")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_LESST,            "<")
 /// @brief '>' stray punctuator token code. (greater than)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_GREAT, ">")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_GREAT,            ">")
 /// @brief '=' stray punctuator token code. (equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EQUAL, "=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EQUAL,            "=")
 
 /// @brief '+' stray punctuator token code. (plus)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PLUSS, "+")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PLUSS,            "+")
 /// @brief '-' stray punctuator token code. (minus)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_MINUS, "-")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_MINUS,            "-")
 /// @brief '*' stray punctuator token code. (asterisk)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_STARR, "*")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_STARR,            "*")
 /// @brief '/' stray punctuator token code. (slash)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SLASH, "/")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SLASH,            "/")
 /// @brief '%' stray punctuator token code. (percent)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PERCN, "%")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PERCN,            "%")
 
 /// @brief '#' stray punctuator token code. (hash)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SHARP, "#")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SHARP,            "#")
 /// @brief '@' stray punctuator token code. (at)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ATSIG, "@")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ATSIG,            "@")
 
 /// @brief ',' stray punctuator token code. (comma)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_COMMA, ",")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_COMMA,            ",")
 /// @brief '.' stray punctuator token code. (dot)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_POINT, ".")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_POINT,            ".")
 /// @brief ':' stray punctuator token code. (colon)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_COLON, ":")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_COLON,            ":")
 /// @brief ';' stray punctuator token code. (semicolon)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SEMIC, ";")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SEMIC,            ";")
 
 /// @brief '\' stray punctuator token code. (backslash)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_BACKS, "\\")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_BACKS,            "\\")
 /// @brief '`' stray punctuator token code. (backtick)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_BACKT, "`")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_BACKT,            "`")
 
 // Compound punctuators -- Doubled
 
 /// @brief '??' compound punctuator token code. (double question mark)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_QUEST_QUEST, "??")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_QUEST_QUEST,      "??")
 /// @brief '!!' compound punctuator token code. (double exclamation mark)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EXCLM_EXCLM, "!!")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EXCLM_EXCLM,      "!!")
 /// @brief '&&' compound punctuator token code. (double ampersand)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_AMPER_AMPER, "&&")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_AMPER_AMPER,      "&&")
 /// @brief '||' compound punctuator token code. (double pipe)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PIPEE_PIPEE, "||")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PIPEE_PIPEE,      "||")
 
 /// @brief '<<' compound punctuator token code. (left double arrow)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_LESST_LESST, "<<")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_LESST_LESST,      "<<")
 /// @brief '>>' compound punctuator token code. (right double arrow)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_GREAT_GREAT, ">>")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_GREAT_GREAT,      ">>")
 /// @brief '==' compound punctuator token code. (double equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EQUAL_EQUAL, "==")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EQUAL_EQUAL,      "==")
 
 /// @brief '++' compound punctuator token code. (increment)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PLUSS_PLUSS, "++")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PLUSS_PLUSS,      "++")
 /// @brief '--' compound punctuator token code. (decrement)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_MINUS_MINUS, "--")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_MINUS_MINUS,      "--")
 
 /// @brief '..' compound punctuator token code. (double dot)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_POINT_POINT, "..")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_POINT_POINT,      "..")
 /// @brief '::' compound punctuator token code. (double colon)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_COLON_COLON, "::")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_COLON_COLON,      "::")
 
 // Compound punctuators -- Equal
 
 /// @brief '?=' compound punctuator token code. (question equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_QUEST_EQUAL, "?=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_QUEST_EQUAL,      "?=")
 /// @brief '!=' compound punctuator token code. (exclamation equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EXCLM_EQUAL, "!=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_EXCLM_EQUAL,      "!=")
 /// @brief '&=' compound punctuator token code. (ampersand equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_AMPER_EQUAL, "&=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_AMPER_EQUAL,      "&=")
 /// @brief '|=' compound punctuator token code. (pipe equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PIPEE_EQUAL, "|=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PIPEE_EQUAL,      "|=")
 /// @brief '^=' compound punctuator token code. (caret equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CARET_EQUAL, "^=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_CARET_EQUAL,      "^=")
 
 /// @brief '<=' compound punctuator token code. (less equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_LESST_EQUAL, "<=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_LESST_EQUAL,      "<=")
 /// @brief '>=' compound punctuator token code. (greater equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_GREAT_EQUAL, ">=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_GREAT_EQUAL,      ">=")
 
 /// @brief '+=' compound punctuator token code. (plus equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PLUSS_EQUAL, "+=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PLUSS_EQUAL,      "+=")
 /// @brief '-=' compound punctuator token code. (minus equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_MINUS_EQUAL, "-=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_MINUS_EQUAL,      "-=")
 /// @brief '*=' compound punctuator token code. (asterisk equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_STARR_EQUAL, "*=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_STARR_EQUAL,      "*=")
 /// @brief '/=' compound punctuator token code. (slash equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SLASH_EQUAL, "/=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SLASH_EQUAL,      "/=")
 /// @brief '%=' compound punctuator token code. (percent equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PERCN_EQUAL, "%=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_PERCN_EQUAL,      "%=")
 
 /// @brief ':=' compound punctuator token code. (colon equal)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_COLON_EQUAL, ":=")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_COLON_EQUAL,      ":=")
 
 // Compound punctuators -- Other
 
 /// @brief '?.' compound punctuator token code. (optional dot)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_QUEST_POINT, "?.")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_QUEST_POINT,      "?.")
 
 /// @brief '<>' compound punctuator token code. (logical biconditional)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_LESST_GREAT, "<>")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_LESST_GREAT,      "<>")
 /// @brief '=>' compound punctuator token code. (big arrow)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ARROW_LARGE, "=>")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ARROW_LARGE,      "=>")
 /// @brief '->' compound punctuator token code. (right arrow)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ARROW_RIGHT, "->")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ARROW_RIGHT,      "->")
 /// @brief '<-' compound punctuator token code. (left arrow)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ARROW_LEFTT, "<-")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ARROW_LEFTT,      "<-")
 
 /// @brief '#!' compound punctuator token code. (hashbang)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SHARP_EXCLM, "#!")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_SHARP_EXCLM,      "#!")
 
 /// @brief '...' compound punctuator token code. (ellipsis)
-calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ELLIP,      "...")
+calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ELLIP,            "...")
 
 #ifdef calcDefinePunctorToken
 #   undef calcDefinePunctorToken
