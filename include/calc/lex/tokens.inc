@@ -32,7 +32,13 @@
 #   define calcDefineToken(name)
 #endif // calcDefineToken
 
- /* =---- Trivial Tokens ----------------------------------------= */
+#ifndef calcDefineTokenWithLexeme
+/// @brief This is a placeholder macro for an external definition,
+///        actually this is empty.
+#   define calcDefineTokenWithLexeme(name, lexeme) calcDefineToken(name)
+#endif // calcDefineTokenWithLexeme
+
+/* =---- Trivial Tokens ----------------------------------------= */
 
 #ifndef calcDefineTrivialToken
 /// @brief This macro defines a trivial token code, a token without a
@@ -66,12 +72,10 @@ calcDefineTrivialToken(CALC_TOKEN_TRIVIAL_REMLN)
 
 /* =---- Keyword Tokens ----------------------------------------= */
 
-// Global-Context Keyword Tokens
-
 #ifndef calcDefineKeywordToken
 /// @brief This macro defines a keyword token code, a token with a specific
 ///        lexeme that is reserved and is used to build statements.
-#   define calcDefineKeywordToken(name, lexeme) calcDefineToken(name)
+#   define calcDefineKeywordToken(name, lexeme) calcDefineTokenWithLexeme(name, lexeme)
 #endif // calcDefineKeywordToken
 
 /* NOTE: Keep the number of keywords between 48 and 56. Context-specific
@@ -80,118 +84,126 @@ calcDefineTrivialToken(CALC_TOKEN_TRIVIAL_REMLN)
  *       the parser.
  */
 
+// Global-Context Keyword Tokens
+
+#ifndef calcDefineGlobalKeywordToken
+/// @brief This macro defines a keyword token code, a token with a specific
+///        lexeme that is reserved and is used to build statements.
+#   define calcDefineGlobalKeywordToken(name, lexeme) calcDefineKeywordToken(name, lexeme)
+#endif // calcDefineGlobalKeywordToken
+
 /// @brief 'async' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_ASYNC,            "async")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_ASYNC,      "async")
 /// @brief 'auto' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_AUTO,             "auto")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_AUTO,       "auto")
 /// @brief 'await' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_AWAIT,            "await")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_AWAIT,      "await")
 /// @brief 'bool' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_BOOLEAN,          "bool")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_BOOLEAN,    "bool")
 /// @brief 'break' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_BREAK,            "break")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_BREAK,      "break")
 /// @brief 'case' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_CASE,             "case")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_CASE,       "case")
 /// @brief 'catch' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_CATCH,            "catch")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_CATCH,      "catch")
 /// @brief 'char' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_CHAR,             "char")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_CHAR,       "char")
 /// @brief 'const' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_CONSTANT,         "const")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_CONSTANT,   "const")
 /// @brief 'continue' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_CONTINUE,         "continue")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_CONTINUE,   "continue")
 /// @brief 'default' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_DEFAULT,          "default")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_DEFAULT,    "default")
 /// @brief 'do' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_DO,               "do")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_DO,         "do")
 /// @brief 'else' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_ELSE,             "else")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_ELSE,       "else")
 /// @brief 'extern' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_EXTERN,           "extern")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_EXTERN,     "extern")
 /// @brief 'enum' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_ENUM,             "enum")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_ENUM,       "enum")
 /// @brief 'false' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_FALSE,            "false")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_FALSE,      "false")
 /// @brief 'float' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_FLOAT,            "float")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_FLOAT,      "float")
 /// @brief 'fn' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_FUNCTION,         "fn")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_FUNCTION,   "fn")
 /// @brief 'for' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_FOR,              "for")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_FOR,        "for")
 /// @brief 'goto' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_GOTO,             "goto")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_GOTO,       "goto")
 /// @brief 'if' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_IF,               "if")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_IF,         "if")
 /// @brief 'int' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_INT,              "int")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_INT,        "int")
 /// @brief 'impl' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_IMPLEMENT,        "impl")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_IMPLEMENT,  "impl")
 /// @brief 'let' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_LET,              "let")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_LET,        "let")
 /// @brief 'macro' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_MACRO,            "macro")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_MACRO,      "macro")
 /// @brief 'match' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_MATCH,            "match")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_MATCH,      "match")
 /// @brief 'model' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_MODEL,            "model")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_MODEL,      "model")
 /// @brief 'module' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_MODULE,           "module")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_MODULE,     "module")
 /// @brief 'nameof' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_NAMEOF,           "nameof")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_NAMEOF,     "nameof")
 /// @brief 'object' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_OBJECT,           "object")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_OBJECT,     "object")
 /// @brief 'pub' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_PUBLIC,           "pub")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_PUBLIC,     "pub")
 /// @brief 'return' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_RETURN,           "return")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_RETURN,     "return")
 /// @brief 'sizeof' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_SIZEOF,           "sizeof")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_SIZEOF,     "sizeof")
 /// @brief 'static' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_STATIC,           "static")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_STATIC,     "static")
 /// @brief 'struct' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_STRUCT,           "struct")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_STRUCT,     "struct")
 /// @brief 'switch' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_SWITCH,           "switch")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_SWITCH,     "switch")
 /// @brief 'templ' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_TEMPLATE,         "templ")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_TEMPLATE,   "templ")
 /// @brief 'throw' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_THROW,            "throw")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_THROW,      "throw")
 /// @brief 'true' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_TRUE,             "true")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_TRUE,       "true")
 /// @brief 'try' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_TRY,              "try")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_TRY,        "try")
 /// @brief 'typeof' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_TYPEOF,           "typeof")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_TYPEOF,     "typeof")
 /// @brief 'unsigned' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_UNION,            "union")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_UNION,      "union")
 /// @brief 'use' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_UNSIGNED,         "unsigned")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_UNSIGNED,   "unsigned")
 /// @brief 'use' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_USE,              "use")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_USE,        "use")
 /// @brief 'var' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_VARIABLE,         "var")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_VARIABLE,   "var")
 /// @brief 'var' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_VOID,             "void")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_VOID,       "void")
 /// @brief 'while' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_WHILE,            "while")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_WHILE,      "while")
 /// @brief 'yield' keyword token code.
-calcDefineKeywordToken(CALC_TOKEN_KEYWORD_YIELD,            "yield")
+calcDefineGlobalKeywordToken(CALC_TOKEN_KEYWORD_YIELD,      "yield")
 
-#ifndef CALC_TOKEN_COUNT_OF_KEYWORDS
-/// @brief Specifies if keywords are alphabetically sorted.
-#   define CALC_TOKEN_COUNT_OF_KEYWORDS (CALC_TOKEN_KEYWORD_YIELD - CALC_TOKEN_KEYWORD_ASYNC + 1)
-#endif // CALC_TOKEN_COUNT_OF_KEYWORDS
+#ifndef CALC_TOKEN_COUNT_OF_GLOBAL_KEYWORDS
+/// @brief Represents the number of keywords in the current context.
+#   define CALC_TOKEN_COUNT_OF_GLOBAL_KEYWORDS (CALC_TOKEN_KEYWORD_YIELD - CALC_TOKEN_KEYWORD_ASYNC + 1)
+#endif // CALC_TOKEN_COUNT_OF_GLOBAL_KEYWORDS
 
-#ifdef calcDefineKeywordToken
-#   undef calcDefineKeywordToken
-#endif // UNDEF calcDefineKeywordToken
+#ifdef calcDefineGlobalKeywordToken
+#   undef calcDefineGlobalKeywordToken
+#endif // UNDEF calcDefineGlobalKeywordToken
 
 // Object-Context Keyword Tokens
 
 #ifndef calcDefineObjectKeywordToken
 /// @brief This macro defines a keyword token code that will be used
 ///        only in the object (class) context.
-#   define calcDefineObjectKeywordToken(name, lexeme) calcDefineToken(name)
+#   define calcDefineObjectKeywordToken(name, lexeme) calcDefineKeywordToken(name, lexeme)
 #endif // calcDefineObjectKeywordToken
 
 /// @brief 'abstract' keyword token code.
@@ -205,7 +217,7 @@ calcDefineObjectKeywordToken(CALC_TOKEN_KEYWORD_METHOD,     "method")
 /// @brief 'op' keyword token code.
 calcDefineObjectKeywordToken(CALC_TOKEN_KEYWORD_OPERATOR,   "op")
 /// @brief 'override' keyword token code.
-calcDefineObjectKeywordToken(CALC_TOKEN_KEYWORD_OPERATOR,   "override")
+calcDefineObjectKeywordToken(CALC_TOKEN_KEYWORD_OVERRIDE,   "override")
 /// @brief 'priv' keyword token code.
 calcDefineObjectKeywordToken(CALC_TOKEN_KEYWORD_PRIVATE,    "priv")
 /// @brief 'prop' keyword token code.
@@ -218,7 +230,7 @@ calcDefineObjectKeywordToken(CALC_TOKEN_KEYWORD_THIS,       "this")
 calcDefineObjectKeywordToken(CALC_TOKEN_KEYWORD_VIRTUAL,    "virtual")
 
 #ifndef CALC_TOKEN_COUNT_OF_OBJECT_KEYWORDS
-/// @brief Specifies if keywords are alphabetically sorted.
+/// @brief Represents the number of keywords in the current context.
 #   define CALC_TOKEN_COUNT_OF_OBJECT_KEYWORDS (CALC_TOKEN_KEYWORD_VIRTUAL - CALC_TOKEN_KEYWORD_ABSTRACT + 1)
 #endif // CALC_TOKEN_COUNT_OF_OBJECT_KEYWORDS
 
@@ -231,7 +243,7 @@ calcDefineObjectKeywordToken(CALC_TOKEN_KEYWORD_VIRTUAL,    "virtual")
 #ifndef calcDefinePropertyKeywordToken
 /// @brief This macro defines a keyword token code that will be used
 ///        only in the object's property context.
-#   define calcDefinePropertyKeywordToken(name, lexeme) calcDefineToken(name)
+#   define calcDefinePropertyKeywordToken(name, lexeme) calcDefineKeywordToken(name, lexeme)
 #endif // calcDefinePropertyKeywordToken
 
 /// @brief 'get' property keyword token code.
@@ -242,7 +254,7 @@ calcDefinePropertyKeywordToken(CALC_TOKEN_KEYWORD_INIT,     "init")
 calcDefinePropertyKeywordToken(CALC_TOKEN_KEYWORD_SET,      "set")
 
 #ifndef CALC_TOKEN_COUNT_OF_PROPERTY_KEYWORDS
-/// @brief Specifies if keywords are alphabetically sorted.
+/// @brief Represents the number of keywords in the current context.
 #   define CALC_TOKEN_COUNT_OF_PROPERTY_KEYWORDS (CALC_TOKEN_KEYWORD_SET - CALC_TOKEN_KEYWORD_GET + 1)
 #endif // CALC_TOKEN_COUNT_OF_PROPERTY_KEYWORDS
 
@@ -255,7 +267,7 @@ calcDefinePropertyKeywordToken(CALC_TOKEN_KEYWORD_SET,      "set")
 #ifndef calcDefineDirectiveKeywordToken
 /// @brief This macro defines a keyword token code that will be used
 ///        only in the object (class) context.
-#   define calcDefineDirectiveKeywordToken(name, lexeme) calcDefineToken(name)
+#   define calcDefineDirectiveKeywordToken(name, lexeme) calcDefineKeywordToken(name, lexeme)
 #endif // calcDefineDirectiveKeywordToken
 
 /// @brief 'get' property keyword token code.
@@ -264,7 +276,7 @@ calcDefineDirectiveKeywordToken(CALC_TOKEN_KEYWORD_DEFINED, "defined")
 calcDefineDirectiveKeywordToken(CALC_TOKEN_KEYWORD_EXISTS,  "exists")
 
 #ifndef CALC_TOKEN_COUNT_OF_DIRECTIVE_KEYWORDS
-/// @brief Specifies if keywords are alphabetically sorted.
+/// @brief Represents the number of keywords in the current context.
 #   define CALC_TOKEN_COUNT_OF_DIRECTIVE_KEYWORDS (CALC_TOKEN_KEYWORD_EXISTS - CALC_TOKEN_KEYWORD_DEFINED + 1)
 #endif // CALC_TOKEN_COUNT_OF_DIRECTIVE_KEYWORDS
 
@@ -272,11 +284,15 @@ calcDefineDirectiveKeywordToken(CALC_TOKEN_KEYWORD_EXISTS,  "exists")
 #   undef calcDefineDirectiveKeywordToken
 #endif // UNDEF calcDefineDirectiveKeywordToken
 
+#ifdef calcDefineKeywordToken
+#   undef calcDefineKeywordToken
+#endif // UNDEF calcDefineKeywordToken
+
 /* =---- Directive Tokens --------------------------------------= */
 
 #ifndef calcDefineDirectiveToken
 /// @brief This macro defines a directive token code.
-#   define calcDefineDirectiveToken(name, lexeme) calcDefineToken(name)
+#   define calcDefineDirectiveToken(name, lexeme) calcDefineTokenWithLexeme(name, lexeme)
 #endif // calcDefineDirectiveToken
 
 /// @brief 'case' directive token code.
@@ -317,7 +333,7 @@ calcDefineDirectiveToken(CALC_TOKEN_DIRECTIVE_SWITCH,       "switch")
 calcDefineDirectiveToken(CALC_TOKEN_DIRECTIVE_UNDEF,        "undef")
 
 #ifndef CALC_TOKEN_COUNT_OF_DIRECTIVES
-/// @brief Specifies if keywords are alphabetically sorted.
+/// @brief Represents the number of directives.
 #   define CALC_TOKEN_COUNT_OF_DIRECTIVES (CALC_TOKEN_DIRECTIVE_UNDEF - CALC_TOKEN_DIRECTIVE_CASE + 1)
 #endif // CALC_TOKEN_COUNT_OF_DIRECTIVES
 
@@ -401,7 +417,7 @@ calcDefineLiteralToken(CALC_TOKEN_LITERAL_STRING)
 
 #ifndef calcDefinePunctorToken
 /// @brief This macro defines a punctuator token code.
-#   define calcDefinePunctorToken(name, lexeme) calcDefineToken(name)
+#   define calcDefinePunctorToken(name, lexeme) calcDefineTokenWithLexeme(name, lexeme)
 #endif // calcDefinePunctorToken
 
 // Bracket Punctuators
