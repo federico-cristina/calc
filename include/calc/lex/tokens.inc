@@ -32,15 +32,13 @@
 #   define calcDefineToken(name, lexeme)
 #endif // calcDefineToken
 
-#include "calc/config.h"
-
  /* =---- Trivial Tokens ----------------------------------------= */
 
 #ifndef calcDefineTrivialToken
 /// @brief This macro defines a trivial token code, a token without a
 ///        specified lexeme that will be treated as information about
 ///        the source stream.
-#   define calcDefineTrivialToken(name) calcDefineToken(name, calcMacroToString(name))
+#   define calcDefineTrivialToken(name) calcDefineToken(name, CALC_EMPTY_LEXEME)
 #endif // calcDefineTrivialToken
 
 // Positional Tokens
