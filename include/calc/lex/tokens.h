@@ -50,6 +50,13 @@ typedef enum _CalcTokenCode
 #pragma pop_macro("calcDefineToken")
 } CalcTokenCode_t;
 
+/// @brief Gets a string representig the lexeme of the specified token
+///        code.
+/// @param token The code of the token. 
+/// @return A pointer to a constant string representing the lexeme
+///         associated to the specified token.
+CALC_API const char *CALC_STDCALL calcGetTokenLexeme(CalcTokenCode_t token);
+
 CALC_C_HEADER_END
 
 #endif // CALC_LEX_TOKENS_H_

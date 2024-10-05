@@ -589,3 +589,7 @@ calcDefinePunctorToken(CALC_TOKEN_PUNCTOR_ELLIP,            "...")
 #endif // UNDEF calcDefinePunctorToken
 
 /* =------------------------------------------------------------= */
+
+#ifdef calcDefineTokenWithLexeme
+#   undef calcDefineTokenWithLexeme
+#endif // UNDEF calcDefineTokenWithLexeme
