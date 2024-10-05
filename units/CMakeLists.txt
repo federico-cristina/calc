@@ -1,3 +1,4 @@
 add_subdirectory(core)
 add_subdirectory(diagnostic)
 add_subdirectory(source)
+add_subdirectory(lex)
