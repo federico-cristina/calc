@@ -350,9 +350,9 @@ calcDefineDirectiveToken(CALC_TOKEN_DIRECTIVE_UNDEF,        "undef")
 #endif // calcDefineLiteralToken
 
 /// @brief Literal identifier token code.
-calcDefineLiteralToken(TOK_IDENT)
+calcDefineLiteralToken(CALC_TOKEN_IDENT)
 /// @brief Literal identifier or keyword token code.
-calcDefineLiteralToken(TOK_IDENT_OR_KWORD)
+calcDefineLiteralToken(CALC_TOKEN_IDENT_OR_KWORD)
 
 // Numeric Literals
 
