@@ -38,7 +38,7 @@ typedef enum _CalcTokenCode
 #ifndef calcDefineToken
     /// @brief Defines a token code using name parameter prefixed with
     ///        CALC_TOKEN_.
-#   define calcDefineToken(name, lexeme) name,
+#   define calcDefineToken(name) name,
 #endif // calcDefineToken
 
 #include CALC_LEX_TOKENS_INC_

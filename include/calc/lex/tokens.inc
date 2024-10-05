@@ -29,7 +29,7 @@
 #ifndef calcDefineToken
 /// @brief This is a placeholder macro for an external definition,
 ///        actually this is empty.
-#   define calcDefineToken(name, lexeme)
+#   define calcDefineToken(name)
 #endif // calcDefineToken
 
  /* =---- Trivial Tokens ----------------------------------------= */
@@ -38,7 +38,7 @@
 /// @brief This macro defines a trivial token code, a token without a
 ///        specified lexeme that will be treated as information about
 ///        the source stream.
-#   define calcDefineTrivialToken(name) calcDefineToken(name, CALC_EMPTY_LEXEME)
+#   define calcDefineTrivialToken(name) calcDefineToken(name)
 #endif // calcDefineTrivialToken
 
 // Positional Tokens
@@ -71,7 +71,7 @@ calcDefineTrivialToken(CALC_TOKEN_TRIVIAL_REMLN)
 #ifndef calcDefineKeywordToken
 /// @brief This macro defines a keyword token code, a token with a specific
 ///        lexeme that is reserved and is used to build statements.
-#   define calcDefineKeywordToken(name, lexeme) calcDefineToken(name, lexeme)
+#   define calcDefineKeywordToken(name, lexeme) calcDefineToken(name)
 #endif // calcDefineKeywordToken
 
 /* NOTE: Keep the number of keywords between 48 and 56. Context-specific
@@ -191,7 +191,7 @@ calcDefineKeywordToken(CALC_TOKEN_KEYWORD_YIELD,            "yield")
 #ifndef calcDefineObjectKeywordToken
 /// @brief This macro defines a keyword token code that will be used
 ///        only in the object (class) context.
-#   define calcDefineObjectKeywordToken(name, lexeme) calcDefineToken(name, lexeme)
+#   define calcDefineObjectKeywordToken(name, lexeme) calcDefineToken(name)
 #endif // calcDefineObjectKeywordToken
 
 /// @brief 'abstract' keyword token code.
@@ -231,7 +231,7 @@ calcDefineObjectKeywordToken(CALC_TOKEN_KEYWORD_VIRTUAL,    "virtual")
 #ifndef calcDefinePropertyKeywordToken
 /// @brief This macro defines a keyword token code that will be used
 ///        only in the object's property context.
-#   define calcDefinePropertyKeywordToken(name, lexeme) calcDefineToken(name, lexeme)
+#   define calcDefinePropertyKeywordToken(name, lexeme) calcDefineToken(name)
 #endif // calcDefinePropertyKeywordToken
 
 /// @brief 'get' property keyword token code.
@@ -255,7 +255,7 @@ calcDefinePropertyKeywordToken(CALC_TOKEN_KEYWORD_SET,      "set")
 #ifndef calcDefineDirectiveKeywordToken
 /// @brief This macro defines a keyword token code that will be used
 ///        only in the object (class) context.
-#   define calcDefineDirectiveKeywordToken(name, lexeme) calcDefineToken(name, lexeme)
+#   define calcDefineDirectiveKeywordToken(name, lexeme) calcDefineToken(name)
 #endif // calcDefineDirectiveKeywordToken
 
 /// @brief 'get' property keyword token code.
@@ -276,7 +276,7 @@ calcDefineDirectiveKeywordToken(CALC_TOKEN_KEYWORD_EXISTS,  "exists")
 
 #ifndef calcDefineDirectiveToken
 /// @brief This macro defines a directive token code.
-#   define calcDefineDirectiveToken(name, lexeme) calcDefineToken(name, lexeme)
+#   define calcDefineDirectiveToken(name, lexeme) calcDefineToken(name)
 #endif // calcDefineDirectiveToken
 
 /// @brief 'case' directive token code.
@@ -330,7 +330,7 @@ calcDefineDirectiveToken(CALC_TOKEN_DIRECTIVE_UNDEF,        "undef")
 #ifndef calcDefineLiteralToken
 /// @brief This macro defines a literal contant token code that will be
 ///        used to represents value lexemes.
-#   define calcDefineLiteralToken(name) calcDefineToken(name, CALC_EMPTY_LEXEME)
+#   define calcDefineLiteralToken(name) calcDefineToken(name)
 #endif // calcDefineLiteralToken
 
 /// @brief Literal identifier token code.
@@ -401,7 +401,7 @@ calcDefineLiteralToken(CALC_TOKEN_LITERAL_STRING)
 
 #ifndef calcDefinePunctorToken
 /// @brief This macro defines a punctuator token code.
-#   define calcDefinePunctorToken(name, lexeme) calcDefineToken(name, lexeme)
+#   define calcDefinePunctorToken(name, lexeme) calcDefineToken(name)
 #endif // calcDefinePunctorToken
 
 // Bracket Punctuators
