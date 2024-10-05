@@ -27,7 +27,7 @@ CALC_C_HEADER_BEGIN
 #   define CALC_LEX_TOKENS_INC_ "calc/lex/tokens.inc"
 #endif // CALC_LEX_TOKENS_INC_
 
-/// @brief 
+/// @brief Enumerates token codes.
 typedef enum _CalcTokenCode
 {
     /// @brief Erroneous token code.
