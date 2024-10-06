@@ -1,3 +1,14 @@
+/**
+ * This file is part of the calc scripting language project,
+ * under the Apache License v2.0. See LICENSE for license
+ * informations.
+ * 
+ * This fileis partially derived from files in the following
+ * repository:
+ *
+ * https://github.com/B-Con/crypto-algorithms.git
+ */
+
 #include "calc/core/base64.h"
 
 #define NEWLINE_INVL 76

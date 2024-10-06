@@ -11,7 +11,7 @@
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
  *
- *              This file (and its .c implementation) is partially derived
+ *              This file (like its .c implementation) is partially derived
  *              from files in the following repository:
  *
  *              https://github.com/B-Con/crypto-algorithms.git
