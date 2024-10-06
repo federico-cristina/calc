@@ -104,12 +104,6 @@ CALC_INLINE int CALC_CDECL eprintfn(const char *const format, ...)
 
 /// @brief This function provides maps each errno code to its name (or
 ///        associated macro name).
-///
-///        The source code of this function has been imported from an
-///        external source. Repository address:
-///
-///        https://github.com/mentalisttraceur/errnoname.git
-///
 /// @param no Errno code.
 /// @return A pointer to the constant string containing the name of the
 ///         errno.
