@@ -1,3 +1,9 @@
+/**
+ * This file is part of the calc scripting language project,
+ * under the Apache License v2.0. See LICENSE for license
+ * informations.
+ */
+
 #include "calc/diagnostic/diagnostics.h"
 
 // Diagnostic Code

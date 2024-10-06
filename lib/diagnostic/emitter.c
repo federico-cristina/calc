@@ -1,3 +1,9 @@
+/**
+ * This file is part of the calc scripting language project,
+ * under the Apache License v2.0. See LICENSE for license
+ * informations.
+ */
+
 #include "calc/diagnostic/emitter.h"
 
 CALC_API int CALC_STDCALL calcEmitDiagnosticLocation(CalcDiagnosticLocation_t *const diagnosticLocation, FILE *const stream, bool_t useColors)
