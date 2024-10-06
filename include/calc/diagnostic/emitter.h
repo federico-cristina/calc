@@ -104,6 +104,10 @@ typedef struct _CalcDiagnosticEmitter
     uint16_t                      errorCount;
     /// @brief Specifies to use or not colored output messages.
     bool_t                        useColors;
+    /// @brief Specifies if emit suppressed diagnostics.
+    bool_t                        emitSuppressedDiagnostics;
+    /// @brief Specifies to treat warnings as errors.
+    bool_t                        warningsAsErrors;
 } CalcDiagnosticEmitter_t;
 
 /// @brief Creates a new diagnostic emitter specifing the stream
@@ -143,9 +147,9 @@ CALC_API int CALC_STDCALL calcDiagnosticEmitterEmitAll(CalcDiagnosticEmitter_t *
 /// @param hint Diangostic hint to display with diagnostic trace.
 /// @param cleanupMessage Specifies that on deletion of the diagnostic
 ///                       the hint must be deleted too.
-CALC_API_INLINE CalcResult_t calcDiagnosticEmitterReport(CalcDiagnosticEmitter_t *const emitter, CalcDiagnosticLevel_t level, CalcDiagnosticCode_t code, CalcDiagnosticLocation_t *const location, char *const message, bool_t cleanupMessage, char *const hint, bool_t cleanupHint)
+CALC_API_INLINE CalcResult_t calcDiagnosticEmitterReport(CalcDiagnosticEmitter_t *const emitter, CalcDiagnosticCode_t code, CalcDiagnosticLocation_t *const location, char *const message, bool_t cleanupMessage, char *const hint, bool_t cleanupHint)
 {
-    return calcDiagnosticEmitterPush(emitter, calcCreateDiagnostic(level, code, location, message, cleanupMessage, hint, cleanupHint));
+    return calcDiagnosticEmitterPush(emitter, calcCreateDiagnostic(calcGetDiagnosticLevel(code), code, location, message, cleanupMessage, hint, cleanupHint));
 }
 
 /// @brief Emits and disposes each diagnostic pushed in the emitter,

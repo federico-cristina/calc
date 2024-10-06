@@ -2,11 +2,41 @@
 
 // Diagnostic Code
 
+CALC_API const char *CALC_STDCALL calcGetDiagnosticName(CalcDiagnosticCode_t diagnosticCode)
+{
+    switch (diagnosticCode)
+    {
+    case CALC_DIAGNOSTIC_CODE_E0000:
+        return "E0000";
+
+#pragma push_macro("calcDefineDiagnosticCode")
+
+#ifndef calcDefineDiagnosticCode
+        /// @brief Defines a diagnostic code using name parameter
+        ///        prefixed with CALC_DIAGNOSTIC_CODE_.
+#   define calcDefineDiagnosticCode(name, displayName, level, defaultFormat) \
+    case CALC_DIAGNOSTIC_CODE_ ## name:                                      \
+        return calcMacroToString(name);
+#endif // calcDefineDiagnosticCode
+
+#include CALC_DIAGNOSTIC_CODE_INC_
+
+#ifdef calcDefineDiagnosticCode
+#   undef calcDefineDiagnosticCode
+#endif // UNDEF calcDefineDiagnosticCode
+
+#pragma pop_macro("calcDefineDiagnosticCode")
+
+    default:
+        return unreach();
+    }
+}
+
 CALC_API const char *CALC_STDCALL calcGetDiagnosticDisplayName(CalcDiagnosticCode_t diagnosticCode)
 {
     switch (diagnosticCode)
     {
-    case CALC_DIAGNOSTIC_CODE_CE0000:
+    case CALC_DIAGNOSTIC_CODE_E0000:
         return "NoError";
 
 #pragma push_macro("calcDefineDiagnosticCode")
@@ -36,8 +66,8 @@ CALC_API const char *CALC_STDCALL calcGetDiagnosticDefaultMessage(CalcDiagnostic
 {
     switch (diagnosticCode)
     {
-    case CALC_DIAGNOSTIC_CODE_CE0000:
-        return "NoError";
+    case CALC_DIAGNOSTIC_CODE_E0000:
+        return "no error has been reported.";
 
 #pragma push_macro("calcDefineDiagnosticCode")
 
@@ -62,34 +92,58 @@ CALC_API const char *CALC_STDCALL calcGetDiagnosticDefaultMessage(CalcDiagnostic
     }
 }
 
-CALC_API CalcDiagnosticLevel_t CALC_STDCALL calcGetDiagnosticLevel(CalcDiagnosticCode_t diagnosticCode)
-{
-    switch (diagnosticCode)
-    {
-    case CALC_DIAGNOSTIC_CODE_CE0000:
-        return CALC_DIAGNOSTIC_LEVEL_ERROR;
+static CalcDiagnosticLevel_t calc_DiagnosticLevelsTable[] = {
+#if CALC_C_STANDARD >= CALC_C_STANDARD_C99
+    [CALC_DIAGNOSTIC_CODE_E0000] = CALC_DIAGNOSTIC_LEVEL_NONE,
 
-#pragma push_macro("calcDefineDiagnosticCode")
+#   pragma push_macro("calcDefineDiagnosticCode")
 
-#ifndef calcDefineDiagnosticCode
+#   ifndef calcDefineDiagnosticCode
+    /// @brief Defines a diagnostic code using name parameter
+    ///        prefixed with CALC_DIAGNOSTIC_CODE_.
+#      define calcDefineDiagnosticCode(name, displayName, level, defaultFormat) \
+    [CALC_DIAGNOSTIC_CODE_ ## name] = CALC_DIAGNOSTIC_LEVEL_ ## level,
+#   endif // calcDefineDiagnosticCode
+
+#   include CALC_DIAGNOSTIC_CODE_INC_
+
+#   ifdef calcDefineDiagnosticCode
+#      undef calcDefineDiagnosticCode
+#   endif // UNDEF calcDefineDiagnosticCode
+
+#   pragma pop_macro("calcDefineDiagnosticCode")
+#else
+    CALC_DIAGNOSTIC_LEVEL_NONE,
+
+#   pragma push_macro("calcDefineDiagnosticCode")
+
+#   ifndef calcDefineDiagnosticCode
         /// @brief Defines a diagnostic code using name parameter
         ///        prefixed with CALC_DIAGNOSTIC_CODE_.
-#   define calcDefineDiagnosticCode(name, displayName, level, defaultFormat) \
-    case CALC_DIAGNOSTIC_CODE_ ## name:                                      \
-        return CALC_DIAGNOSTIC_LEVEL_ ## level;
-#endif // calcDefineDiagnosticCode
+#       define calcDefineDiagnosticCode(name, displayName, level, defaultFormat) \
+    CALC_DIAGNOSTIC_LEVEL_ ## level,
+#   endif // calcDefineDiagnosticCode
 
-#include CALC_DIAGNOSTIC_CODE_INC_
+#   include CALC_DIAGNOSTIC_CODE_INC_
 
-#ifdef calcDefineDiagnosticCode
-#   undef calcDefineDiagnosticCode
-#endif // UNDEF calcDefineDiagnosticCode
+#   ifdef calcDefineDiagnosticCode
+#       undef calcDefineDiagnosticCode
+#   endif // UNDEF calcDefineDiagnosticCode
 
-#pragma pop_macro("calcDefineDiagnosticCode")
+#   pragma pop_macro("calcDefineDiagnosticCode")
+#endif
+};
 
-    default:
-        return unreach(), 0;
-    }
+CALC_API CalcDiagnosticLevel_t CALC_STDCALL calcGetDiagnosticLevel(CalcDiagnosticCode_t diagnosticCode)
+{
+    return calc_DiagnosticLevelsTable[diagnosticCode];
+}
+
+CALC_API void CALC_STDCALL calcSetDiagnosticLevel(CalcDiagnosticCode_t diagnosticCode, CalcDiagnosticLevel_t diagnosticLevel)
+{
+    calc_DiagnosticLevelsTable[diagnosticCode] = diagnosticLevel;
+
+    return;
 }
 
 // Diagnostic Location

@@ -121,6 +121,11 @@ CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic,
     {
         switch (level)
         {
+        case CALC_DIAGNOSTIC_LEVEL_SUPPRESSED:
+        case CALC_DIAGNOSTIC_LEVEL_NONE:
+            color = "\x1B[1;90m"; // color: BRIGHT BLACK (GRAY)
+            break;
+
         case CALC_DIAGNOSTIC_LEVEL_ERRNO:
             color = "\x1B[1;31m"; // color: RED
             break;
@@ -159,7 +164,7 @@ CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic,
         if (level == CALC_DIAGNOSTIC_LEVEL_ERRNO)
             result += fputs(errnoname(code), stream);
         else
-            result += fprintf(stream, "CE%04d", code);
+            result += fprintf(stream, "%s", calcGetDiagnosticName(code));
 
         if (useColors)
             fputs(color, stream);
@@ -206,6 +211,8 @@ CALC_API CalcDiagnosticEmitter_t *CALC_STDCALL calcCreateDiagnosticEmitter(FILE 
     emitter->warningCount = 0;
     emitter->errorCount = 0;
     emitter->useColors = FALSE;
+    emitter->emitSuppressedDiagnostics = FALSE;
+    emitter->warningsAsErrors = FALSE;
 
     return emitter;
 }
@@ -241,11 +248,17 @@ CALC_API CalcResult_t CALC_STDCALL calcDiagnosticEmitterPush(CalcDiagnosticEmitt
 
     switch (diagnostic->level)
     {
+    case CALC_DIAGNOSTIC_LEVEL_SUPPRESSED:
+    case CALC_DIAGNOSTIC_LEVEL_NONE:
     case CALC_DIAGNOSTIC_LEVEL_NOTE:
         break;
 
     case CALC_DIAGNOSTIC_LEVEL_WARNING:
         emitter->warningCount++;
+
+        if (emitter->warningsAsErrors)
+            emitter->status = CALC_DIAGNOSTIC_EMITTER_STATUS_FAILURE;
+
         break;
 
     case CALC_DIAGNOSTIC_LEVEL_ERROR:
@@ -279,7 +292,11 @@ CALC_API int CALC_STDCALL calcDiagnosticEmitterEmit(CalcDiagnosticEmitter_t *con
         CalcDiagnostic_t *top = emitter->top;
 
         emitter->top = top->next;
-        result = emitter->emitter(top, emitter->stream, emitter->useColors);
+
+        if ((top->level == CALC_DIAGNOSTIC_LEVEL_SUPPRESSED) && !emitter->emitSuppressedDiagnostics)
+            result = 0;
+        else
+            result = emitter->emitter(top, emitter->stream, emitter->useColors);
 
         calcDeleteDiagnostic(top);
     }
@@ -306,9 +323,10 @@ CALC_API int CALC_STDCALL calcDiagnosticEmitterEpilogue(CalcDiagnosticEmitter_t 
     int result = 0;
     FILE *stream = emitter->stream;
 
-    calcDiagnosticEmitterEmitAll(emitter);
+    if (calcDiagnosticEmitterEmitAll(emitter) > 0)
+        fputc('\n', stream), ++result;
 
-    result += fputs("\nProcess ", stream);
+    result += fputs("Process ", stream);
 
     switch (emitter->status)
     {
@@ -331,34 +349,41 @@ CALC_API int CALC_STDCALL calcDiagnosticEmitterEpilogue(CalcDiagnosticEmitter_t 
 
     uint16_t warnings = emitter->warningCount, errors = emitter->errorCount;
 
-    result += fputs(" with ", stream);
-
-    switch (warnings)
+    if (warnings || errors)
     {
-    case 0:
-        break;
+        result += fputs(" with ", stream);
 
-    case 1:
-        fprintf(stream, "%u warning and ", warnings);
-        break;
+        switch (warnings)
+        {
+        case 0:
+            break;
 
-    default:
-        fprintf(stream, "%u warnings and ", warnings);
-        break;
+        case 1:
+            fprintf(stream, "%u warning and ", warnings);
+            break;
+
+        default:
+            fprintf(stream, "%u warnings and ", warnings);
+            break;
+        }
+
+        switch (errors)
+        {
+        case 0:
+            break;
+
+        case 1:
+            fprintf(stream, "%u error", errors);
+            break;
+
+        default:
+            fprintf(stream, "%u errors", errors);
+            break;
+        }
     }
-
-    switch (errors)
+    else
     {
-    case 0:
-        break;
-
-    case 1:
-        fprintf(stream, "%u error", errors);
-        break;
-
-    default:
-        fprintf(stream, "%u errors", errors);
-        break;
+        result += fputs(" without any errors", stream);
     }
 
     result += fputs(".\n", stream);

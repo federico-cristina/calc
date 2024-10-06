@@ -29,9 +29,16 @@ CALC_C_HEADER_BEGIN
 /// @brief Diagnostic levels enumeration.
 typedef enum _CalcDiagnosticLevel
 {
+    /// @brief A suppressed diagnostic represents something
+    ///        that was an error or a warning, but the user
+    ///        suppressed it.
+    CALC_DIAGNOSTIC_LEVEL_SUPPRESSED = -2,
     /// @brief An errno diagnostic represents an internal C
     ///        diagnostic base on errno value.
-    CALC_DIAGNOSTIC_LEVEL_ERRNO = -1,
+    CALC_DIAGNOSTIC_LEVEL_ERRNO,
+    /// @brief A diagnostic without any error level, it won't
+    ///        be emitted.
+    CALC_DIAGNOSTIC_LEVEL_NONE,
     /// @brief A note diagnostic represents something that's
     ///        not an error, but is better to notice.
     CALC_DIAGNOSTIC_LEVEL_NOTE,
@@ -58,8 +65,14 @@ CALC_API_INLINE const char *CALC_STDCALL calcGetDiagnosticLevelName(CalcDiagnost
 {
     switch (level)
     {
+    case CALC_DIAGNOSTIC_LEVEL_SUPPRESSED:
+        return "suppressed";
+
     case CALC_DIAGNOSTIC_LEVEL_ERRNO:
         return "errno";
+
+    case CALC_DIAGNOSTIC_LEVEL_NONE:
+        return "none";
 
     case CALC_DIAGNOSTIC_LEVEL_NOTE:
         return "note";
@@ -109,11 +122,16 @@ typedef enum _CalcDiagnosticCode
 #pragma pop_macro("calcDefineDiagnosticCode")
 } CalcDiagnosticCode_t;
 
+/// @brief Maps each diagnostic code to its relative name.
+/// @param code Diagnostic code to map.
+/// @return A constant pointer to the constant string containing
+///         the name of the diagnostic.
+CALC_API const char *CALC_STDCALL calcGetDiagnosticName(CalcDiagnosticCode_t diagnosticCode);
 /// @brief Maps each diagnostic code to its relative display
 ///        name.
 /// @param code Diagnostic code to map.
 /// @return A constant pointer to the constant string containing
-///         the name of the diagnostic.
+///         the display name of the diagnostic.
 CALC_API const char *CALC_STDCALL calcGetDiagnosticDisplayName(CalcDiagnosticCode_t diagnosticCode);
 /// @brief Maps each diagnostic code to its relative default
 ///        format string.
@@ -127,6 +145,11 @@ CALC_API const char *CALC_STDCALL calcGetDiagnosticDefaultMessage(CalcDiagnostic
 /// @return A constant pointer to the constant string containing
 ///         the name of the diagnostic.
 CALC_API CalcDiagnosticLevel_t CALC_STDCALL calcGetDiagnosticLevel(CalcDiagnosticCode_t diagnosticCode);
+
+/// @brief Sets the level of an diagnostic code.
+/// @param diagnosticCode Diagnostic code to set.
+/// @param diagnosticLevel New error level.
+CALC_API void CALC_STDCALL calcSetDiagnosticLevel(CalcDiagnosticCode_t diagnosticCode, CalcDiagnosticLevel_t diagnosticLevel);
 
 // Diagnostic Location
 
@@ -234,6 +257,15 @@ typedef struct _CalcDiagnostic
 ///                       the hint must be deleted too.
 /// @return A pointer to new allocated diagnostic informations record.
 CALC_API CalcDiagnostic_t *CALC_STDCALL calcCreateDiagnostic(CalcDiagnosticLevel_t level, int code, CalcDiagnosticLocation_t *const location, char *const message, bool_t cleanupMessage, char *const hint, bool_t cleanupHint);
+
+/// @brief Suppress a diagnostic.
+/// @param code Diagnostic code to suppress.
+CALC_API_INLINE void CALC_STDCALL calcSuppressDiagnostic(CalcDiagnosticCode_t code)
+{
+    calcSetDiagnosticLevel(code, CALC_DIAGNOSTIC_LEVEL_SUPPRESSED);
+
+    return;
+}
 
 #ifndef calcCreateDiagnosticFromCode
 /// @brief Creates a new diagnostic from a specific diagnostic code.
