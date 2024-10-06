@@ -23,10 +23,10 @@
 #define CALC_BASE_DEFS_H_
 
 #ifndef _CRT_SECURE_NO_WARNINGS
- /// @brief Disable CRT standard C library functions
- ///        deprecations. (This macro avoids errors and
- ///        warnings while compiling with MSVC compiler
- ///        or clang-cl on Windows)
+/// @brief Disable CRT standard C library functions
+///        deprecations. (This macro avoids errors and
+///        warnings while compiling with MSVC compiler
+///        or clang-cl on Windows)
 #   define _CRT_SECURE_NO_WARNINGS 1
 #endif // _CRT_SECURE_NO_WARNINGS
 
@@ -34,14 +34,18 @@
 
 #ifndef CALC_C_HEADER_BEGIN
 #   ifdef __cplusplus
-#       ifdef _CRT_BEGIN_C_HEADER
+#       if   defined _CRT_BEGIN_C_HEADER
 /// @brief Marks the beginning of a C header file for C++
 ///        compilers.
 #           define CALC_C_HEADER_BEGIN _CRT_BEGIN_C_HEADER
-#       else
+#       elif defined __cplusplus
 /// @brief Marks the beginning of a C header file for C++
 ///        compilers.
 #           define CALC_C_HEADER_BEGIN extern "C" {
+#       else
+/// @brief Marks the beginning of a C header file for C++
+///        compilers.
+#           define CALC_C_HEADER_BEGIN
 #       endif
 #   else
 /// @brief Marks the beginning of a C header file for C++
@@ -52,12 +56,15 @@
 
 #ifndef CALC_C_HEADER_END
 #   ifdef __cplusplus
-#       ifdef _CRT_END_C_HEADER
+#       if   defined _CRT_END_C_HEADER
 /// @brief Marks the ending of a C header file for C++ compilers.
 #           define CALC_C_HEADER_END _CRT_END_C_HEADER
-#       else
+#       elif defined __cplusplus
 /// @brief Marks the ending of a C header file for C++ compilers.
 #           define CALC_C_HEADER_END }
+#       else
+/// @brief Marks the ending of a C header file for C++ compilers.
+#           define CALC_C_HEADER_END
 #       endif
 #   else
 /// @brief Marks the ending of a C header file for C++ compilers.
