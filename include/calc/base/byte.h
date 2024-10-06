@@ -148,15 +148,10 @@ CALC_INLINE byte_t *CALC_STDCALL bufrev(byte_t *const dest, const byte_t *const 
 {
     assert((dest != NULL) && (source != NULL));
 
-    CALC_REGISTER size_t i, midCount = count >> 1;
-    CALC_REGISTER byte_t bTemp;
+    CALC_REGISTER size_t i;
 
-    for (i = 0; i < midCount; i++)
-    {
-        bTemp = source[i];
-        source[i] = source[count - i - 1];
-        source[count - i - 1] = bTemp;
-    }
+    for (i = 0; i < count; i++)
+        dest[i] = source[count - i - 1];
 
     return dest;
 }
