@@ -15,7 +15,7 @@
  *              Tony Kelman, Jonas Fonseca, and other contributors listed
  *              in the git history.
  *
- *              This file (and its .c implementation) is partially derived
+ *              This file (like its .c implementation) is partially derived
  *              from utf8proc library:
  *
  *              https://github.com/JuliaStrings/utf8proc.git
@@ -29,6 +29,7 @@
 #ifndef CALC_BASE_UTF8_H_
 #define CALC_BASE_UTF8_H_
 
+#include "calc/base/bool.h"
 #include "calc/base/bits.h"
 
 CALC_C_HEADER_BEGIN
@@ -279,14 +280,14 @@ CALC_EXTERN const int8_t utf8_utf8class[256];
 /// @brief Returns the utf8proc API version as a string MAJOR.MINOR.PATCH
 ///        (http://semver.org format), possibly with a "-dev" suffix for
 ///        development versions.
-CALC_EXTERN const char *utf8_version(void);
+CALC_EXTERN const char *CALC_STDCALL utf8_version(void);
 
 /// @brief Returns the utf8proc supported Unicode version as a string MAJOR.MINOR.PATCH.
-CALC_EXTERN const char *utf8_unicode_version(void);
+CALC_EXTERN const char *CALC_STDCALL utf8_unicode_version(void);
 
 /// @brief Returns an informative error string for the given utf8proc error code
 ///        (e.g. the error codes returned by utf8_map()).
-CALC_EXTERN const char *utf8_errmsg(ssize_t errcode);
+CALC_EXTERN const char *CALC_STDCALL utf8_errmsg(ssize_t errcode);
 
 /// @brief Reads a single codepoint from the UTF-8 sequence being pointed to by `str`.
 ///        The maximum number of bytes read is `strlen`, unless `strlen` is
@@ -297,12 +298,12 @@ CALC_EXTERN const char *utf8_errmsg(ssize_t errcode);
 ///        In case of success, the number of bytes read is returned; otherwise, a
 ///        negative error code is returned.
 ///
-CALC_EXTERN ssize_t utf8_iterate(const uint8_t *str, ssize_t strlen, int32_t *codepoint_ref);
+CALC_EXTERN ssize_t CALC_STDCALL utf8_iterate(const uint8_t *str, ssize_t strlen, int32_t *codepoint_ref);
 
 /// @brief Check if a codepoint is valid (regardless of whether it has been
 ///        assigned a value by the current Unicode standard).
 /// @return 1 if the given `codepoint` is valid and otherwise return 0.
-CALC_EXTERN bool_t utf8_codepoint_valid(int32_t codepoint);
+CALC_EXTERN bool_t CALC_STDCALL utf8_codepoint_valid(int32_t codepoint);
 
 /// @brief Encodes the codepoint as an UTF-8 string in the byte array pointed
 ///        to by `dst`. This array must be at least 4 bytes long.
@@ -312,7 +313,7 @@ CALC_EXTERN bool_t utf8_codepoint_valid(int32_t codepoint);
 ///
 ///        This function does not check whether `codepoint` is valid Unicode.
 ///
-CALC_EXTERN ssize_t utf8_encode_char(int32_t codepoint, uint8_t *dst);
+CALC_EXTERN ssize_t CALC_STDCALL utf8_encode_char(int32_t codepoint, uint8_t *dst);
 
 /// @brief Look up the properties for a given codepoint.
 ///
@@ -324,7 +325,7 @@ CALC_EXTERN ssize_t utf8_encode_char(int32_t codepoint, uint8_t *dst);
 /// If the codepoint is unassigned or invalid, a pointer to a special struct is
 /// returned in which `category` is 0 (UTF8_CATEGORY_CN).
 ///
-CALC_EXTERN const utf8_property_t *utf8_get_property(int32_t codepoint);
+CALC_EXTERN const utf8_property_t *CALC_STDCALL utf8_get_property(int32_t codepoint);
 
 /// @brief Decompose a codepoint into an array of codepoints.
 ///
@@ -353,7 +354,7 @@ CALC_EXTERN const utf8_property_t *utf8_get_property(int32_t codepoint);
 /// required buffer size is returned, while the buffer will be overwritten with
 /// undefined data.
 ///
-CALC_EXTERN ssize_t utf8_decompose_char(
+CALC_EXTERN ssize_t CALC_STDCALL utf8_decompose_char(
     int32_t codepoint, int32_t *dst, ssize_t bufsize,
     utf8_option_t options, int *last_boundclass);
 
@@ -373,7 +374,7 @@ CALC_EXTERN ssize_t utf8_decompose_char(
 /// required buffer size is returned, while the buffer will be overwritten with
 /// undefined data.
 ///
-CALC_EXTERN ssize_t utf8_decompose(
+CALC_EXTERN ssize_t CALC_STDCALL utf8_decompose(
     const uint8_t *str, ssize_t strlen,
     int32_t *buffer, ssize_t bufsize, utf8_option_t options);
 
@@ -381,7 +382,7 @@ CALC_EXTERN ssize_t utf8_decompose(
 ///        that is called on each codepoint in `str` before any other transformations
 ///        (along with a `custom_data` pointer that is passed through to `custom_func`).
 ///        The `custom_func` argument is ignored if it is `NULL`.  See also utf8_map_custom().
-CALC_EXTERN ssize_t utf8_decompose_custom(
+CALC_EXTERN ssize_t CALC_STDCALL utf8_decompose_custom(
     const uint8_t *str, ssize_t strlen,
     int32_t *buffer, ssize_t bufsize, utf8_option_t options,
     utf8_custom_func_t custom_func, void *custom_data);
@@ -407,7 +408,7 @@ CALC_EXTERN ssize_t utf8_decompose_custom(
 /// @warning The entries of the array pointed to by `str` have to be in the
 ///          range `0x0000` to `0x10FFFF`. Otherwise, the program might crash!
 ///
-CALC_EXTERN ssize_t utf8_normalize_utf32(int32_t *buffer, ssize_t length, utf8_option_t options);
+CALC_EXTERN ssize_t CALC_STDCALL utf8_normalize_utf32(int32_t *buffer, ssize_t length, utf8_option_t options);
 
 /// @brief Reencodes the sequence of `length` codepoints pointed to by `buffer`
 ///        UTF-8 data in-place (i.e., the result is also stored in `buffer`).
@@ -435,7 +436,7 @@ CALC_EXTERN ssize_t utf8_normalize_utf32(int32_t *buffer, ssize_t length, utf8_o
 ///          entries of the array pointed to by `str` have to be in the
 ///          range `0x0000` to `0x10FFFF`. Otherwise, the program might crash!
 ///
-CALC_EXTERN ssize_t utf8_reencode(int32_t *buffer, ssize_t length, utf8_option_t options);
+CALC_EXTERN ssize_t CALC_STDCALL utf8_reencode(int32_t *buffer, ssize_t length, utf8_option_t options);
 
 /// @brief Given a pair of consecutive codepoints, return whether a grapheme break is
 ///        permitted between them (as defined by the extended grapheme clusters in UAX#29).
@@ -453,36 +454,36 @@ CALC_EXTERN ssize_t utf8_reencode(int32_t *buffer, ssize_t length, utf8_option_t
 ///          be called IN ORDER on ALL potential breaks in a string.  However, it
 ///          is safe to reset the state to zero after a grapheme break.
 ///
-CALC_EXTERN bool_t utf8_grapheme_break_stateful(
+CALC_EXTERN bool_t CALC_STDCALL utf8_grapheme_break_stateful(
     int32_t codepoint1, int32_t codepoint2, int32_t *state);
 
 /// @brief Same as utf8_grapheme_break_stateful(), except without support for the
 ///        Unicode 9 additions to the algorithm. Supported for legacy reasons.
-CALC_EXTERN bool_t utf8_grapheme_break(
+CALC_EXTERN bool_t CALC_STDCALL utf8_grapheme_break(
     int32_t codepoint1, int32_t codepoint2);
 
 /// @brief Given a codepoint `c`, return the codepoint of the corresponding
 ///        lower-case character, if any; otherwise (if there is no lower-case
 ///        variant, or if `c` is not a valid codepoint) return `c`.
-CALC_EXTERN int32_t utf8_tolower(int32_t c);
+CALC_EXTERN int32_t CALC_STDCALL utf8_tolower(int32_t c);
 
 /// @brief Given a codepoint `c`, return the codepoint of the corresponding
 ///        upper-case character, if any; otherwise (if there is no upper-case
 ///        variant, or if `c` is not a valid codepoint) return `c`.
-CALC_EXTERN int32_t utf8_toupper(int32_t c);
+CALC_EXTERN int32_t CALC_STDCALL utf8_toupper(int32_t c);
 
 /// @brief Given a codepoint `c`, return the codepoint of the corresponding
 ///        title-case character, if any; otherwise (if there is no title-case
 ///        variant, or if `c` is not a valid codepoint) return `c`.
-CALC_EXTERN int32_t utf8_totitle(int32_t c);
+CALC_EXTERN int32_t CALC_STDCALL utf8_totitle(int32_t c);
 
 /// @brief Given a codepoint `c`, return `1` if the codepoint corresponds to a lower-case character
 ///        and `0` otherwise.
-CALC_EXTERN int utf8_islower(int32_t c);
+CALC_EXTERN int CALC_STDCALL utf8_islower(int32_t c);
 
 /// @brief Given a codepoint `c`, return `1` if the codepoint corresponds to an upper-case character
 ///        and `0` otherwise.
-CALC_EXTERN int utf8_isupper(int32_t c);
+CALC_EXTERN int CALC_STDCALL utf8_isupper(int32_t c);
 
 /// @brief Given a codepoint, return a character width analogous to `wcwidth(codepoint)`,
 ///        except that a width of 0 is returned for non-printable codepoints
@@ -491,22 +492,22 @@ CALC_EXTERN int utf8_isupper(int32_t c);
 /// @note If you want to check for particular types of non-printable characters,
 ///       (analogous to `isprint` or `iscntrl`), use utf8_category().
 ///
-CALC_EXTERN int utf8_charwidth(int32_t codepoint);
+CALC_EXTERN int CALC_STDCALL utf8_charwidth(int32_t codepoint);
 
 /// @brief Given a codepoint, return whether it has East Asian width class A (Ambiguous)
 ///
 /// Codepoints with this property are considered to have charwidth 1 (if they are printable)
 /// but some East Asian fonts render them as double width.
 ///
-CALC_EXTERN bool_t utf8_charwidth_ambiguous(int32_t codepoint);
+CALC_EXTERN bool_t CALC_STDCALL utf8_charwidth_ambiguous(int32_t codepoint);
 
 /// @brief Return the Unicode category for the codepoint (one of the
 ///        utf8_category_t constants.)
-CALC_EXTERN utf8_category_t utf8_category(int32_t codepoint);
+CALC_EXTERN utf8_category_t CALC_STDCALL utf8_category(int32_t codepoint);
 
 /// @brief Return the two-letter (nul-terminated) Unicode category string for
 ///        the codepoint (e.g. `"Lu"` or `"Co"`).
-CALC_EXTERN const char *utf8_category_string(int32_t codepoint);
+CALC_EXTERN const char *CALC_STDCALL utf8_category_string(int32_t codepoint);
 
 /// @brief Maps the given UTF-8 string pointed to by `str` to a new UTF-8
 ///        string, allocated dynamically by `malloc` and returned via `dstptr`.
@@ -526,14 +527,14 @@ CALC_EXTERN const char *utf8_category_string(int32_t codepoint);
 /// @note The memory of the new UTF-8 string will have been allocated
 ///       with `malloc`, and should therefore be deallocated with `free`.
 ///
-CALC_EXTERN ssize_t utf8_map(
+CALC_EXTERN ssize_t CALC_STDCALL utf8_map(
     const uint8_t *str, ssize_t strlen, uint8_t **dstptr, utf8_option_t options);
 
 /// @brief Like utf8_map(), but also takes a `custom_func` mapping function
 ///        that is called on each codepoint in `str` before any other transformations
 ///        (along with a `custom_data` pointer that is passed through to `custom_func`).
 ///        The `custom_func` argument is ignored if it is `NULL`.
-CALC_EXTERN ssize_t utf8_map_custom(
+CALC_EXTERN ssize_t CALC_STDCALL utf8_map_custom(
     const uint8_t *str, ssize_t strlen, uint8_t **dstptr, utf8_option_t options,
     utf8_custom_func_t custom_func, void *custom_data);
 
@@ -546,16 +547,16 @@ CALC_EXTERN ssize_t utf8_map_custom(
 ///
 /// @{
 /// @brief NFD normalization (UTF8_DECOMPOSE).
-CALC_EXTERN uint8_t *utf8_NFD(const uint8_t *str);
+CALC_EXTERN uint8_t *CALC_STDCALL utf8_NFD(const uint8_t *str);
 /// @brief NFC normalization (UTF8_COMPOSE).
-CALC_EXTERN uint8_t *utf8_NFC(const uint8_t *str);
+CALC_EXTERN uint8_t *CALC_STDCALL utf8_NFC(const uint8_t *str);
 /// @brief NFKD normalization (UTF8_DECOMPOSE and UTF8_COMPAT).
-CALC_EXTERN uint8_t *utf8_NFKD(const uint8_t *str);
+CALC_EXTERN uint8_t *CALC_STDCALL utf8_NFKD(const uint8_t *str);
 /// @brief NFKC normalization (UTF8_COMPOSE and UTF8_COMPAT).
-CALC_EXTERN uint8_t *utf8_NFKC(const uint8_t *str);
+CALC_EXTERN uint8_t *CALC_STDCALL utf8_NFKC(const uint8_t *str);
 /// @brief NFKC_Casefold normalization (UTF8_COMPOSE and UTF8_COMPAT
 ///        and UTF8_CASEFOLD and UTF8_IGNORE).
-CALC_EXTERN uint8_t *utf8_NFKC_Casefold(const uint8_t *str);
+CALC_EXTERN uint8_t *CALC_STDCALL utf8_NFKC_Casefold(const uint8_t *str);
 /// @}
 
 CALC_C_HEADER_END
