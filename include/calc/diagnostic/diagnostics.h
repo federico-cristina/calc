@@ -90,7 +90,7 @@ CALC_API_INLINE const char *CALC_STDCALL calcGetDiagnosticLevelName(CalcDiagnost
 typedef enum _CalcDiagnosticCode
 {
     /// @brief NoError: No error has been reported.
-    CALC_DIAGNOSTIC_CODE_CE0000 = 0,
+    CALC_DIAGNOSTIC_CODE_E0000 = 0,
 
 #pragma push_macro("calcDefineDiagnosticCode")
 
