@@ -1,3 +1,4 @@
+#include "calc/base/string.h"
 #include "calc/source/source_stream.h"
 
 #include <time.h>
