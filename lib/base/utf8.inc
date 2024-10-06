@@ -1,4 +1,11 @@
 /**
+ * =------------------------------------------------*- C -*-=
+ * 
+ * This file contains UTF-8 codepoints data and is designed to
+ * be included in the utf8.c file.
+ * 
+ * =--------------------------------------------------------=
+ * 
  * This file is part of the calc scripting language project,
  * under the Apache License v2.0. See LICENSE for license
  * informations.
@@ -9,7 +16,7 @@
  * https://github.com/JuliaStrings/utf8proc.git
  */
 
-static const uint16_t CALC_STDCALL utf8_sequences[] = {
+static const uint16_t utf8_sequences[] = {
     97,
     98,
     99,

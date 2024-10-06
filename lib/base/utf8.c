@@ -47,7 +47,7 @@ const char *CALC_STDCALL utf8_errmsg(ssize_t errcode)
 
 #include "utf8.inc"
 
-const int8_t CALC_STDCALL utf8_utf8class[256] = {
+const int8_t utf8_utf8class[256] = {
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
