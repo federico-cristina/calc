@@ -1,7 +1,18 @@
+/**
+ * This file is part of the calc scripting language project,
+ * under the Apache License v2.0. See LICENSE for license
+ * informations.
+ *
+ * The content of this file is derived from the utf8proc
+ * library:
+ *
+ * https://github.com/JuliaStrings/utf8proc.git
+ */
+
 #include "calc/base/error.h"
 #include "calc/base/utf8.h"
 
-const char *utf8_errmsg(ssize_t errcode)
+const char *CALC_STDCALL utf8_errmsg(ssize_t errcode)
 {
     const char *message = NULL;
 
@@ -36,7 +47,7 @@ const char *utf8_errmsg(ssize_t errcode)
 
 #include "utf8.inc"
 
-const int8_t utf8_utf8class[256] = {
+const int8_t CALC_STDCALL utf8_utf8class[256] = {
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -80,19 +91,19 @@ const int8_t utf8_utf8class[256] = {
    be different, being based on ABI compatibility.): */
 #define STRINGIZEx(x) #x
 #define STRINGIZE(x) STRINGIZEx(x)
-const char *utf8_version(void)
+const char *CALC_STDCALL utf8_version(void)
 {
     return STRINGIZE(UTF8_VERSION_MAJOR) "." STRINGIZE(UTF8_VERSION_MINOR) "." STRINGIZE(UTF8_VERSION_PATCH) "";
 }
 
-const char *utf8_unicode_version(void)
+const char *CALC_STDCALL utf8_unicode_version(void)
 {
     return "15.1.0";
 }
 
 #define utf_cont(ch) (((ch) & 0xc0) == 0x80)
 
-ssize_t utf8_iterate(
+ssize_t CALC_STDCALL utf8_iterate(
     const uint8_t *str, ssize_t strlen, int32_t *dst)
 {
     int32_t uc;
@@ -151,12 +162,12 @@ ssize_t utf8_iterate(
     return 4;
 }
 
-bool_t utf8_codepoint_valid(int32_t uc)
+bool_t CALC_STDCALL utf8_codepoint_valid(int32_t uc)
 {
     return (((uint32_t)uc) - 0xd800 > 0x07ff) && ((uint32_t)uc < 0x110000);
 }
 
-ssize_t utf8_encode_char(int32_t uc, uint8_t *dst)
+ssize_t CALC_STDCALL utf8_encode_char(int32_t uc, uint8_t *dst)
 {
     if (uc < 0x00)
     {
@@ -195,7 +206,7 @@ ssize_t utf8_encode_char(int32_t uc, uint8_t *dst)
 }
 
 /* internal version used for inserting 0xff bytes between graphemes */
-static ssize_t charbound_encode_char(int32_t uc, uint8_t *dst)
+static ssize_t CALC_STDCALL charbound_encode_char(int32_t uc, uint8_t *dst)
 {
     if (uc < 0x00)
     {
@@ -237,13 +248,13 @@ static ssize_t charbound_encode_char(int32_t uc, uint8_t *dst)
 }
 
 /* internal "unsafe" version that does not check whether uc is in range */
-static const utf8_property_t *unsafe_get_property(int32_t uc)
+static const utf8_property_t *CALC_STDCALL unsafe_get_property(int32_t uc)
 {
     /* ASSERT: uc >= 0 && uc < 0x110000 */
     return utf8_properties + (utf8_stage2table[utf8_stage1table[uc >> 8] + (uc & 0xFF)]);
 }
 
-const utf8_property_t *utf8_get_property(int32_t uc)
+const utf8_property_t *CALC_STDCALL utf8_get_property(int32_t uc)
 {
     return uc < 0 || uc >= 0x110000 ? utf8_properties : unsafe_get_property(uc);
 }
@@ -263,7 +274,7 @@ const utf8_property_t *utf8_get_property(int32_t uc)
 
    See the special support in grapheme_break_extended, for required bookkeeping by the caller.
 */
-static bool_t grapheme_break_simple(int lbc, int tbc)
+static bool_t CALC_STDCALL grapheme_break_simple(int lbc, int tbc)
 {
     return (lbc == UTF8_BOUNDCLASS_START) ? TRUE : // GB1
                (lbc == UTF8_BOUNDCLASS_CR &&       // GB3
@@ -309,7 +320,7 @@ static bool_t grapheme_break_simple(int lbc, int tbc)
                TRUE; // GB999
 }
 
-static bool_t grapheme_break_extended(int lbc, int tbc, int licb, int ticb, int32_t *state)
+static bool_t CALC_STDCALL grapheme_break_extended(int lbc, int tbc, int licb, int ticb, int32_t *state)
 {
     if (state)
     {
@@ -363,7 +374,7 @@ static bool_t grapheme_break_extended(int lbc, int tbc, int licb, int ticb, int3
         return grapheme_break_simple(lbc, tbc);
 }
 
-bool_t utf8_grapheme_break_stateful(
+bool_t CALC_STDCALL utf8_grapheme_break_stateful(
     int32_t c1, int32_t c2, int32_t *state)
 {
 
@@ -376,13 +387,13 @@ bool_t utf8_grapheme_break_stateful(
                                    state);
 }
 
-bool_t utf8_grapheme_break(
+bool_t CALC_STDCALL utf8_grapheme_break(
     int32_t c1, int32_t c2)
 {
     return utf8_grapheme_break_stateful(c1, c2, NULL);
 }
 
-static int32_t seqindex_decode_entry(const uint16_t **entry)
+static int32_t CALC_STDCALL seqindex_decode_entry(const uint16_t **entry)
 {
     int32_t entry_cp = **entry;
     if ((entry_cp & 0xF800) == 0xD800)
@@ -394,13 +405,13 @@ static int32_t seqindex_decode_entry(const uint16_t **entry)
     return entry_cp;
 }
 
-static int32_t seqindex_decode_index(const uint32_t seqindex)
+static int32_t CALC_STDCALL seqindex_decode_index(const uint32_t seqindex)
 {
     const uint16_t *entry = &utf8_sequences[seqindex];
     return seqindex_decode_entry(&entry);
 }
 
-static ssize_t seqindex_write_char_decomposed(uint16_t seqindex, int32_t *dst, ssize_t bufsize, utf8_option_t options, int *last_boundclass)
+static ssize_t CALC_STDCALL seqindex_write_char_decomposed(uint16_t seqindex, int32_t *dst, ssize_t bufsize, utf8_option_t options, int *last_boundclass)
 {
     ssize_t written = 0;
     const uint16_t *entry = &utf8_sequences[seqindex & 0x3FFF];
@@ -423,31 +434,31 @@ static ssize_t seqindex_write_char_decomposed(uint16_t seqindex, int32_t *dst, s
     return written;
 }
 
-int32_t utf8_tolower(int32_t c)
+int32_t CALC_STDCALL utf8_tolower(int32_t c)
 {
     int32_t cl = utf8_get_property(c)->lowercase_seqindex;
     return cl != UINT16_MAX ? seqindex_decode_index((uint32_t)cl) : c;
 }
 
-int32_t utf8_toupper(int32_t c)
+int32_t CALC_STDCALL utf8_toupper(int32_t c)
 {
     int32_t cu = utf8_get_property(c)->uppercase_seqindex;
     return cu != UINT16_MAX ? seqindex_decode_index((uint32_t)cu) : c;
 }
 
-int32_t utf8_totitle(int32_t c)
+int32_t CALC_STDCALL utf8_totitle(int32_t c)
 {
     int32_t cu = utf8_get_property(c)->titlecase_seqindex;
     return cu != UINT16_MAX ? seqindex_decode_index((uint32_t)cu) : c;
 }
 
-int utf8_islower(int32_t c)
+int CALC_STDCALL utf8_islower(int32_t c)
 {
     const utf8_property_t *p = utf8_get_property(c);
     return p->lowercase_seqindex != p->uppercase_seqindex && p->lowercase_seqindex == UINT16_MAX;
 }
 
-int utf8_isupper(int32_t c)
+int CALC_STDCALL utf8_isupper(int32_t c)
 {
     const utf8_property_t *p = utf8_get_property(c);
     return p->lowercase_seqindex != p->uppercase_seqindex && p->uppercase_seqindex == UINT16_MAX && p->category != UTF8_CATEGORY_LT;
@@ -455,22 +466,22 @@ int utf8_isupper(int32_t c)
 
 /* return a character width analogous to wcwidth (except portable and
    hopefully less buggy than most system wcwidth functions). */
-int utf8_charwidth(int32_t c)
+int CALC_STDCALL utf8_charwidth(int32_t c)
 {
     return utf8_get_property(c)->charwidth;
 }
 
-bool_t utf8_charwidth_ambiguous(int32_t c)
+bool_t CALC_STDCALL utf8_charwidth_ambiguous(int32_t c)
 {
     return utf8_get_property(c)->ambiguous_width;
 }
 
-utf8_category_t utf8_category(int32_t c)
+utf8_category_t CALC_STDCALL utf8_category(int32_t c)
 {
     return (utf8_category_t)utf8_get_property(c)->category;
 }
 
-const char *utf8_category_string(int32_t c)
+const char *CALC_STDCALL utf8_category_string(int32_t c)
 {
     static const char s[][3] = {"Cn", "Lu", "Ll", "Lt", "Lm", "Lo", "Mn", "Mc", "Me", "Nd", "Nl", "No", "Pc", "Pd", "Ps", "Pe", "Pi", "Pf", "Po", "Sm", "Sc", "Sk", "So", "Zs", "Zl", "Zp", "Cc", "Cf", "Cs", "Co"};
     return s[utf8_category(c)];
@@ -480,7 +491,7 @@ const char *utf8_category_string(int32_t c)
     return utf8_decompose_char((replacement_uc), dst, bufsize, \
                                options & ~(unsigned int)UTF8_LUMP, last_boundclass)
 
-ssize_t utf8_decompose_char(int32_t uc, int32_t *dst, ssize_t bufsize, utf8_option_t options, int *last_boundclass)
+ssize_t CALC_STDCALL utf8_decompose_char(int32_t uc, int32_t *dst, ssize_t bufsize, utf8_option_t options, int *last_boundclass)
 {
     const utf8_property_t *property;
     uint16_t category;
@@ -602,14 +613,14 @@ ssize_t utf8_decompose_char(int32_t uc, int32_t *dst, ssize_t bufsize, utf8_opti
     return 1;
 }
 
-ssize_t utf8_decompose(
+ssize_t CALC_STDCALL utf8_decompose(
     const uint8_t *str, ssize_t strlen,
     int32_t *buffer, ssize_t bufsize, utf8_option_t options)
 {
     return utf8_decompose_custom(str, strlen, buffer, bufsize, options, NULL, NULL);
 }
 
-ssize_t utf8_decompose_custom(
+ssize_t CALC_STDCALL utf8_decompose_custom(
     const uint8_t *str, ssize_t strlen,
     int32_t *buffer, ssize_t bufsize, utf8_option_t options,
     utf8_custom_func_t custom_func, void *custom_data)
@@ -694,7 +705,7 @@ ssize_t utf8_decompose_custom(
     return wpos;
 }
 
-ssize_t utf8_normalize_utf32(int32_t *buffer, ssize_t length, utf8_option_t options)
+ssize_t CALC_STDCALL utf8_normalize_utf32(int32_t *buffer, ssize_t length, utf8_option_t options)
 {
     /* UTF8_NULLTERM option will be ignored, 'length' is never ignored */
     if (options & (UTF8_NLF2LS | UTF8_NLF2PS | UTF8_STRIPCC))
@@ -842,7 +853,7 @@ ssize_t utf8_normalize_utf32(int32_t *buffer, ssize_t length, utf8_option_t opti
     return length;
 }
 
-ssize_t utf8_reencode(int32_t *buffer, ssize_t length, utf8_option_t options)
+ssize_t CALC_STDCALL utf8_reencode(int32_t *buffer, ssize_t length, utf8_option_t options)
 {
     /* UTF8_NULLTERM option will be ignored, 'length' is never ignored
        ASSERT: 'buffer' has one spare byte of free space at the end! */
@@ -873,13 +884,13 @@ ssize_t utf8_reencode(int32_t *buffer, ssize_t length, utf8_option_t options)
     }
 }
 
-ssize_t utf8_map(
+ssize_t CALC_STDCALL utf8_map(
     const uint8_t *str, ssize_t strlen, uint8_t **dstptr, utf8_option_t options)
 {
     return utf8_map_custom(str, strlen, dstptr, options, NULL, NULL);
 }
 
-ssize_t utf8_map_custom(
+ssize_t CALC_STDCALL utf8_map_custom(
     const uint8_t *str, ssize_t strlen, uint8_t **dstptr, utf8_option_t options,
     utf8_custom_func_t custom_func, void *custom_data)
 {
@@ -914,35 +925,35 @@ ssize_t utf8_map_custom(
     return result;
 }
 
-uint8_t *utf8_NFD(const uint8_t *str)
+uint8_t *CALC_STDCALL utf8_NFD(const uint8_t *str)
 {
     uint8_t *retval;
     utf8_map(str, 0, &retval, UTF8_NULLTERM | UTF8_STABLE | UTF8_DECOMPOSE);
     return retval;
 }
 
-uint8_t *utf8_NFC(const uint8_t *str)
+uint8_t *CALC_STDCALL utf8_NFC(const uint8_t *str)
 {
     uint8_t *retval;
     utf8_map(str, 0, &retval, UTF8_NULLTERM | UTF8_STABLE | UTF8_COMPOSE);
     return retval;
 }
 
-uint8_t *utf8_NFKD(const uint8_t *str)
+uint8_t *CALC_STDCALL utf8_NFKD(const uint8_t *str)
 {
     uint8_t *retval;
     utf8_map(str, 0, &retval, UTF8_NULLTERM | UTF8_STABLE | UTF8_DECOMPOSE | UTF8_COMPAT);
     return retval;
 }
 
-uint8_t *utf8_NFKC(const uint8_t *str)
+uint8_t *CALC_STDCALL utf8_NFKC(const uint8_t *str)
 {
     uint8_t *retval;
     utf8_map(str, 0, &retval, UTF8_NULLTERM | UTF8_STABLE | UTF8_COMPOSE | UTF8_COMPAT);
     return retval;
 }
 
-uint8_t *utf8_NFKC_Casefold(const uint8_t *str)
+uint8_t *CALC_STDCALL utf8_NFKC_Casefold(const uint8_t *str)
 {
     uint8_t *retval;
     utf8_map(str, 0, &retval, UTF8_NULLTERM | UTF8_STABLE | UTF8_COMPOSE | UTF8_COMPAT | UTF8_CASEFOLD | UTF8_IGNORE);
