@@ -1,4 +1,4 @@
-/**
+/**                                                                     -*- C -*-
  * @file        diagnsotics.inc
  *
  * @author      Federico Cristina <federico.cristina@outlook.it>
