@@ -18,7 +18,7 @@ static byte_t CALC_STDCALL calc_revchar(char ch)
     return (byte_t)ch;
 }
 
-CALC_API size_t CALC_STDCALL calcBase64Encode(const byte_t *const key, byte_t *const out, size_t count, bool_t newlineFlag)
+CALC_API size_t CALC_STDCALL calcBase64Encode(const byte_t *const in, byte_t *const out, size_t count, bool_t newlineFlag)
 {
     // Note: To change the charset to a URL encoding, replace the '+' and '/' with '*' and '-'
     static const byte_t charset[] = {
@@ -87,7 +87,7 @@ CALC_API size_t CALC_STDCALL calcBase64Encode(const byte_t *const key, byte_t *c
     return idx2;
 }
 
-CALC_API size_t CALC_STDCALL calcBase64Decode(const byte_t *const b64, byte_t *const out, size_t count)
+CALC_API size_t CALC_STDCALL calcBase64Decode(const byte_t *const in, byte_t *const out, size_t count)
 {
     byte_t ch;
     size_t idx, idx2, blks, blk_ceiling, left_over;
