@@ -1,10 +1,12 @@
 set(HEADERS
     "base64.h"
+    "sha256.h"
     "hash.h"
 )
 
 set(SOURCES
     "base64.c"
+    "sha256.c"
     "hash.c"
 )
 
