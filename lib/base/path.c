@@ -5,6 +5,7 @@
  */
 
 #include "calc/base/path.h"
+#include "calc/base/string.h"
 
 static size_t CALC_STDCALL _path_getlastsep(const char *const path, size_t *const outLength)
 {
