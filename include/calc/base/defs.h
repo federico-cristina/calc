@@ -13,8 +13,8 @@
  *
  * @brief       In this header are defined common macros and constants
  *              expecially the ones used to mark C++ files as extern "C",
- *              to control the right use of inline functions, of the
- *              register keyword and the calling conventions, and finally
+ *              to control the right use of inline functions, the use of
+ *              register keyword and the calling conventions, and finally,
  *              the macros regarding dll import/export and other attributes
  *              usage.
  */
@@ -23,10 +23,10 @@
 #define CALC_BASE_DEFS_H_
 
 #ifndef _CRT_SECURE_NO_WARNINGS
-/// @brief Disable CRT standard C library functions
-///        deprecations. (This macro avoids errors and
-///        warnings while compiling with MSVC compiler
-///        or clang-cl on Windows)
+ /// @brief Disable CRT standard C library functions
+ ///        deprecations. (This macro avoids errors and
+ ///        warnings while compiling with MSVC compiler
+ ///        or clang-cl on Windows)
 #   define _CRT_SECURE_NO_WARNINGS 1
 #endif // _CRT_SECURE_NO_WARNINGS
 
@@ -34,37 +34,33 @@
 
 #ifndef CALC_C_HEADER_BEGIN
 #   ifdef __cplusplus
-#       if   defined _CRT_BEGIN_C_HEADER
+#       ifdef _CRT_BEGIN_C_HEADER
 /// @brief Marks the beginning of a C header file for C++
 ///        compilers.
 #           define CALC_C_HEADER_BEGIN _CRT_BEGIN_C_HEADER
-#       elif defined __cplusplus
-/// @brief Marks the beginning of a C header file for C++
-///        compilers.
-#           define CALC_C_HEADER_BEGIN extern "C" {
 #       else
 /// @brief Marks the beginning of a C header file for C++
 ///        compilers.
-#           define CALC_C_HEADER_BEGIN
+#           define CALC_C_HEADER_BEGIN extern "C" {
 #       endif
 #   else
+/// @brief Marks the beginning of a C header file for C++
+///        compilers.
 #       define CALC_C_HEADER_BEGIN
 #   endif
 #endif // CALC_C_HEADER_BEGIN
 
 #ifndef CALC_C_HEADER_END
 #   ifdef __cplusplus
-#       if   defined _CRT_END_C_HEADER
+#       ifdef _CRT_END_C_HEADER
 /// @brief Marks the ending of a C header file for C++ compilers.
 #           define CALC_C_HEADER_END _CRT_END_C_HEADER
-#       elif defined __cplusplus
-/// @brief Marks the ending of a C header file for C++ compilers.
-#           define CALC_C_HEADER_END }
 #       else
 /// @brief Marks the ending of a C header file for C++ compilers.
-#           define CALC_C_HEADER_END
+#           define CALC_C_HEADER_END }
 #       endif
 #   else
+/// @brief Marks the ending of a C header file for C++ compilers.
 #       define CALC_C_HEADER_END
 #   endif
 #endif // CALC_C_HEADER_END
@@ -212,9 +208,10 @@
 ///        of memory. The compiler may or may not follow this
 ///        hint.
 ///
-///        In C++17 the register keyword is deprecated and out
+/// @note  In C++17 the register keyword is deprecated and out
 ///        of support. So since that version is not useful
 ///        specify it.
+///
 #       define CALC_REGISTER
 #   else
 /// @brief Register storage, in C, adivises the compiler to
@@ -222,9 +219,10 @@
 ///        of memory. The compiler may or may not follow this
 ///        hint.
 ///
-///        In C++17 the register keyword is deprecated and out
+/// @note  In C++17 the register keyword is deprecated and out
 ///        of support. So since that version is not useful
 ///        specify it.
+///
 #       define CALC_REGISTER register
 #   endif
 #endif // CALC_REGISTER
