@@ -11,9 +11,9 @@
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
  *
- * @brief       In this header are defined utility macros and constants
- *              to work with type sizes. In this header are also defined
- *              fixed bit width datatypes.
+ * @brief       In this header are defined fixed bit-width datatypes,
+ *              their constant limits and also useful macros to deal with
+ *              datatype sizes.
  */
 
 #ifndef CALC_BASE_BITS_H_
@@ -23,7 +23,7 @@
 //#   define _BITS_STDINT_INTN_H 1
 //#endif
 
-#include "calc/base/bool.h"
+#include "calc/base/defs.h"
 
 #include <float.h>
 #include <limits.h>
@@ -32,8 +32,8 @@
 /// @brief Computes the number of elements in a specified
 ///        array.
 ///
-///        NOTE: This macro works only if used with arrays
-///        and NOT with pointer NOR pointers to an array.
+/// @note  This macro works only if used with arrays and
+///        NOT with pointers NOR pointers to an array.
 ///
 /// @param array The array which is requested the length.
 /// @returns The number of elements in the array.
@@ -43,13 +43,13 @@
 #ifndef CALC_BITSOF_CHAR
 /// @brief This macro holds the number of bits in a system char
 ///        to compute the number of bits in other data types.
-#   define CALC_BITSOF_CHAR CHAR_BIT
+#   define CALC_BITSOF_CHAR     CHAR_BIT
 #endif // CALC_BITSOF_CHAR
 
 #ifndef CALC_BITSOF_WORD
 /// @brief This macro holds the number of bits in a system word
 ///        to compute the number of words in other data types.
-#   define CALC_BITSOF_WORD (CALC_BITSOF_CHAR * sizeof(int))
+#   define CALC_BITSOF_WORD     (CALC_BITSOF_CHAR * sizeof(int))
 #endif // CALC_BITSOF_WORD
 
 #ifndef CALC_BITSOF_WORD_PTR
@@ -89,7 +89,7 @@
 
 CALC_C_HEADER_BEGIN
 
-#if CALC_C_STANDARD >= 99
+#if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 #   include <stdint.h>
 #else
 
@@ -172,25 +172,6 @@ typedef long long int64_t;
 #endif
 
 // Unsigned integers
-
-#if !defined UINT1_MIN || !defined UINT1_MAX
-
-/// @brief Unsigned 1-bit integer datatype.
-typedef bool_t uint1_t;
-
-#ifndef INT1_MIN
-/// @brief This macro represents the minimum value representable
-///        with an 1-bit unsigned integer.
-#   define INT1_MIN ((uint1_t)(FALSE))
-#endif // INT1_MIN
-
-#ifndef INT1_MAX
-/// @brief This macro represents the maximum value representable
-///        with an 8-bit unsigned integer.
-#   define INT1_MAX ((uint1_t)(TRUE))
-#endif // INT1_MAX
-
-#endif
 
 #if !defined UINT8_MIN || !defined UINT8_MAX
 
