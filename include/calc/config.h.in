@@ -383,14 +383,14 @@
 
 // Other
 
-#ifndef CALC_MAGICNUM
+#ifndef CALC_MAGIC_NUMBER
 /// @brief CALC magic number...
-#   define CALC_MAGICNUM 0x43414C43
-#endif // CALC_MAGICNUM
+#   define CALC_MAGIC_NUMBER 0x43414C43
+#endif // CALC_MAGIC_NUMBER
 
-#ifndef CALC_MAGICSTR
-/// @brief CALC magic number...
-#   define CALC_MAGICSTR "\x43\x41\x4C\x43"
-#endif // CALC_MAGICSTR
+#ifndef CALC_MAGIC_STRING
+/// @brief CALC magic string...
+#   define CALC_MAGIC_STRING "\x43\x41\x4C\x43"
+#endif // CALC_MAGIC_STRING
 
 #endif // CALC_CONFIG_H_
