@@ -1,3 +1,9 @@
+/**
+ * This file is part of the calc scripting language project,
+ * under the Apache License v2.0. See LICENSE for license
+ * informations.
+ */
+
 #include "calc/base/path.h"
 
 static size_t CALC_STDCALL _path_getlastsep(const char *const path, size_t *const outLength)
