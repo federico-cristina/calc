@@ -74,7 +74,7 @@
 /// @brief This macro represents the version string
 ///        to display when requested.
 ///
-///        NOTE: To compare the version with another
+/// @note  To compare the version with another
 ///        could be better use a numeric version of
 ///        this macro. The numeric version of this
 ///        string (as hexadecimal number) can be the
@@ -90,8 +90,21 @@
 #   define CALC_VERSION_ID 0x0${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}
 #endif // CALC_VERSION_ID
 
+// C Standard Infos
+
+/// @brief C89/C90 standard number.
+#define CALC_C_STANDARD_C89 90
+/// @brief C99 standard number.
+#define CALC_C_STANDARD_C99 99
+/// @brief C11 standard number.
+#define CALC_C_STANDARD_C11 11
+/// @brief C17 standard number.
+#define CALC_C_STANDARD_C17 17
+/// @brief C23 standard number.
+#define CALC_C_STANDARD_C23 23
+
 #ifndef CALC_C_STANDARD
-/// @brief C standatd code. (90 = C89)
+/// @brief C standard number.
 #   define CALC_C_STANDARD ${CMAKE_C_STANDARD}
 #endif // CALC_C_STANDARD
 
