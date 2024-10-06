@@ -20,7 +20,6 @@ set(SOURCES
     "error.c"
     "dload.c"
     "string.c"
-    "file.c"
     "path.c"
     "utf8.c"
 )

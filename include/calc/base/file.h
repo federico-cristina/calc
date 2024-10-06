@@ -12,13 +12,14 @@
  *              informations.
  *
  * @brief       In this header are defined macros, constants and functions
- *              to manipulate files.
+ *              to checks existance and manipulate files and directories.
  */
 
 #ifndef CALC_BASE_FILE_H_
 #define CALC_BASE_FILE_H_
 
 #include "calc/base/bool.h"
+#include "calc/base/error.h"
 
 #include <stdio.h>
 
@@ -122,7 +123,26 @@ CALC_INLINE bool_t CALC_STDCALL fexists(const char *const path)
 /// @param stream The file stream to use as source to compute
 ///               the size.
 /// @return The size, in bytes, of the specified file stream.
-CALC_EXTERN size_t CALC_STDCALL fgetsiz(FILE *const stream);
+CALC_INLINE size_t CALC_STDCALL fgetsiz(FILE *const stream) {
+    fpos_t fpos;
+
+    if (fgetpos(stream, &fpos))
+        return failno("fgetpos is failed"), 0;
+
+    if (fseek(stream, 0, SEEK_END))
+        return failno("fseek is failed"), 0;
+
+#if CALC_PLATFORM_ID == CALC_PLATFORM_ID_WIN64
+    size_t fsiz = _ftelli64(stream);
+#else
+    size_t fsiz = ftell(stream);
+#endif
+
+    if (fsetpos(stream, &fpos))
+        return failno("fsetpos is failed"), 0;
+    else
+        return fsiz;
+}
 
 CALC_C_HEADER_END
 
