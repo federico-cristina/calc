@@ -1,14 +1,13 @@
-#include "calc/core/hash.h"
+#include "calc/core/sha256.h"
 
 #include <stdio.h>
 
 int main()
 {
-    const char *const text = "Hello, world!";
-
-    CalcHashCode_t hash = calcGetSha256HashCode((const byte_t *)text);
-
-    printf("%s -> %u\n", text, hash);
+    const byte_t *bytes = (byte_t *)"Hello, world!\n";
+    CalcSha256HashBlock_t output;
+    
+    calcSha256Encrypt(output, bytes, NULL);
 
     return 0;
 }
