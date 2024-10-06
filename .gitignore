@@ -6,5 +6,8 @@ $*/
 out/
 build/
 
+# Python Cache Directory
+__pycache__/
+
 # Configuration File
 config.h
