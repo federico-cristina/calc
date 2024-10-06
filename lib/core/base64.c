@@ -59,10 +59,10 @@ CALC_API size_t CALC_STDCALL calcBase64Encode(const byte_t *const in, byte_t *co
 
         for (idx = 0, idx2 = 0; idx < blk_ceiling; idx += 3, idx2 += 4)
         {
-            out[idx2] = charset[key[idx] >> 2];
-            out[idx2 + 1] = charset[((key[idx] & 0x03) << 4) | (key[idx + 1] >> 4)];
-            out[idx2 + 2] = charset[((key[idx + 1] & 0x0f) << 2) | (key[idx + 2] >> 6)];
-            out[idx2 + 3] = charset[key[idx + 2] & 0x3F];
+            out[idx2] = charset[in[idx] >> 2];
+            out[idx2 + 1] = charset[((in[idx] & 0x03) << 4) | (in[idx + 1] >> 4)];
+            out[idx2 + 2] = charset[((in[idx + 1] & 0x0f) << 2) | (in[idx + 2] >> 6)];
+            out[idx2 + 3] = charset[in[idx + 2] & 0x3F];
 
             // The offical standard requires a newline every 76 characters.
             // (Eg, first newline is character 77 of the output.)
@@ -77,8 +77,8 @@ CALC_API size_t CALC_STDCALL calcBase64Encode(const byte_t *const in, byte_t *co
 
         if (left_over == 1)
         {
-            out[idx2] = charset[key[idx] >> 2];
-            out[idx2 + 1] = charset[(key[idx] & 0x03) << 4];
+            out[idx2] = charset[in[idx] >> 2];
+            out[idx2 + 1] = charset[(in[idx] & 0x03) << 4];
             out[idx2 + 2] = '=';
             out[idx2 + 3] = '=';
 
@@ -86,9 +86,9 @@ CALC_API size_t CALC_STDCALL calcBase64Encode(const byte_t *const in, byte_t *co
         }
         else if (left_over == 2)
         {
-            out[idx2] = charset[key[idx] >> 2];
-            out[idx2 + 1] = charset[((key[idx] & 0x03) << 4) | (key[idx + 1] >> 4)];
-            out[idx2 + 2] = charset[(key[idx + 1] & 0x0F) << 2];
+            out[idx2] = charset[in[idx] >> 2];
+            out[idx2 + 1] = charset[((in[idx] & 0x03) << 4) | (in[idx + 1] >> 4)];
+            out[idx2 + 2] = charset[(in[idx + 1] & 0x0F) << 2];
             out[idx2 + 3] = '=';
 
             idx2 += 4;
@@ -103,9 +103,9 @@ CALC_API size_t CALC_STDCALL calcBase64Decode(const byte_t *const in, byte_t *co
     byte_t ch;
     size_t idx, idx2, blks, blk_ceiling, left_over;
 
-    if (b64[count - 1] == '=')
+    if (in[count - 1] == '=')
         count--;
-    if (b64[count - 1] == '=')
+    if (in[count - 1] == '=')
         count--;
 
     blks = count / 4;
@@ -113,7 +113,7 @@ CALC_API size_t CALC_STDCALL calcBase64Decode(const byte_t *const in, byte_t *co
 
     if (out == NULL)
     {
-        if (count >= 77 && b64[NEWLINE_INVL] == '\n')   // Verify that newlines where used.
+        if (count >= 77 && in[NEWLINE_INVL] == '\n')   // Verify that newlines where used.
             count -= count / (NEWLINE_INVL + 1);
 
         blks = count / 4;
@@ -132,24 +132,24 @@ CALC_API size_t CALC_STDCALL calcBase64Decode(const byte_t *const in, byte_t *co
 
         for (idx = 0, idx2 = 0; idx2 < blk_ceiling; idx += 3, idx2 += 4)
         {
-            if (b64[idx2] == '\n')
+            if (in[idx2] == '\n')
                 idx2++;
 
-            out[idx] = (calc_revchar(b64[idx2]) << 2) | ((calc_revchar(b64[idx2 + 1]) & 0x30) >> 4);
-            out[idx + 1] = (calc_revchar(b64[idx2 + 1]) << 4) | (calc_revchar(b64[idx2 + 2]) >> 2);
-            out[idx + 2] = (calc_revchar(b64[idx2 + 2]) << 6) | calc_revchar(b64[idx2 + 3]);
+            out[idx] = (calc_revchar(in[idx2]) << 2) | ((calc_revchar(in[idx2 + 1]) & 0x30) >> 4);
+            out[idx + 1] = (calc_revchar(in[idx2 + 1]) << 4) | (calc_revchar(in[idx2 + 2]) >> 2);
+            out[idx + 2] = (calc_revchar(in[idx2 + 2]) << 6) | calc_revchar(in[idx2 + 3]);
         }
 
         if (left_over == 2)
         {
-            out[idx] = (calc_revchar(b64[idx2]) << 2) | ((calc_revchar(b64[idx2 + 1]) & 0x30) >> 4);
+            out[idx] = (calc_revchar(in[idx2]) << 2) | ((calc_revchar(in[idx2 + 1]) & 0x30) >> 4);
 
             idx++;
         }
         else if (left_over == 3)
         {
-            out[idx] = (calc_revchar(b64[idx2]) << 2) | ((calc_revchar(b64[idx2 + 1]) & 0x30) >> 4);
-            out[idx + 1] = (calc_revchar(b64[idx2 + 1]) << 4) | (calc_revchar(b64[idx2 + 2]) >> 2);
+            out[idx] = (calc_revchar(in[idx2]) << 2) | ((calc_revchar(in[idx2 + 1]) & 0x30) >> 4);
+            out[idx + 1] = (calc_revchar(in[idx2 + 1]) << 4) | (calc_revchar(in[idx2 + 2]) >> 2);
 
             idx += 2;
         }
