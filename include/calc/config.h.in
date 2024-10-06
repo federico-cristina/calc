@@ -93,19 +93,19 @@
 // C Standard Infos
 
 /// @brief C89/C90 standard number.
-#define CALC_C_STANDARD_C89 90
+#define CALC_C_STANDARD_C90 1990
 /// @brief C99 standard number.
-#define CALC_C_STANDARD_C99 99
+#define CALC_C_STANDARD_C99 1999
 /// @brief C11 standard number.
-#define CALC_C_STANDARD_C11 11
+#define CALC_C_STANDARD_C11 2011
 /// @brief C17 standard number.
-#define CALC_C_STANDARD_C17 17
+#define CALC_C_STANDARD_C17 2017
 /// @brief C23 standard number.
-#define CALC_C_STANDARD_C23 23
+#define CALC_C_STANDARD_C23 2023
 
 #ifndef CALC_C_STANDARD
 /// @brief C standard number.
-#   define CALC_C_STANDARD ${CMAKE_C_STANDARD}
+#   define CALC_C_STANDARD CALC_C_STANDARD_C${CMAKE_C_STANDARD}
 #endif // CALC_C_STANDARD
 
 // Architecture Infos
