@@ -138,6 +138,29 @@ CALC_INLINE byte_t *CALC_STDCALL bufswp(byte_t *const b1, byte_t *const b2, size
     return b1;
 }
 
+/// @brief Revetes the content of a buffer.
+/// @param dest Destination buffer pointer.
+/// @param source Source buffer pointer.
+/// @param count The number of bytes in the buffer.
+/// @return In case of success this function returns a pointer
+///         to the destination buffer.
+CALC_INLINE byte_t *CALC_STDCALL bufrev(byte_t *const dest, const byte_t *const source, size_t count)
+{
+    assert((dest != NULL) && (source != NULL));
+
+    CALC_REGISTER size_t i, midCount = count >> 1;
+    CALC_REGISTER byte_t bTemp;
+
+    for (i = 0; i < midCount; i++)
+    {
+        bTemp = source[i];
+        source[i] = source[count - i - 1];
+        source[count - i - 1] = bTemp;
+    }
+
+    return dest;
+}
+
 // Buffer Checking Functions
 
 /// @brief Compares a portion two buffers to check if they've
