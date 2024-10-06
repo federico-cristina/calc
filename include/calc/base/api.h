@@ -40,11 +40,11 @@
 #   endif // CALC_API_PUB
 #endif // CALC_API
 
-#ifndef CALC_API_LOC
+#ifndef CALC_API_STATIC
 /// @brief This macro marks a function to be hidden
 ///        while building a dynamic library.
-#   define CALC_API_LOC CALC_DLL_STATIC
-#endif // CALC_API_LOC
+#   define CALC_API_STATIC CALC_DLL_STATIC
+#endif // CALC_API_STATIC
 
 #ifndef CALC_API
 /// @brief This macro marks a function as an API
