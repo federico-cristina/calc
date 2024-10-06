@@ -12697,7 +12697,7 @@ static const uint16_t utf8_sequences[] = {
     56832,
 };
 
-static const uint16_t CALC_STDCALL utf8_stage1table[] = {
+static const uint16_t utf8_stage1table[] = {
     0,
     256,
     512,
@@ -17052,7 +17052,7 @@ static const uint16_t CALC_STDCALL utf8_stage1table[] = {
     44544,
 };
 
-static const uint16_t CALC_STDCALL utf8_stage2table[] = {
+static const uint16_t utf8_stage2table[] = {
     1,
     1,
     1,
@@ -61855,7 +61855,7 @@ static const uint16_t CALC_STDCALL utf8_stage2table[] = {
     0,
 };
 
-static const utf8_property_t CALC_STDCALL utf8_properties[] = {
+static const utf8_property_t utf8_properties[] = {
     {0, 0, 0, 0, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, FALSE, FALSE, FALSE, FALSE, 1, 0, 0, UTF8_BOUNDCLASS_OTHER, UTF8_INDIC_CONJUNCT_BREAK_NONE},
     {UTF8_CATEGORY_CC, 0, UTF8_BIDI_CLASS_BN, 0, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, FALSE, FALSE, FALSE, TRUE, 0, FALSE, 0, UTF8_BOUNDCLASS_CONTROL, UTF8_INDIC_CONJUNCT_BREAK_NONE},
     {UTF8_CATEGORY_CC, 0, UTF8_BIDI_CLASS_S, 0, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, FALSE, FALSE, FALSE, TRUE, 0, FALSE, 0, UTF8_BOUNDCLASS_CONTROL, UTF8_INDIC_CONJUNCT_BREAK_NONE},
@@ -70139,7 +70139,7 @@ static const utf8_property_t CALC_STDCALL utf8_properties[] = {
     {UTF8_CATEGORY_CF, 0, UTF8_BIDI_CLASS_BN, 0, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, UINT16_MAX, FALSE, FALSE, TRUE, TRUE, 0, FALSE, 0, UTF8_BOUNDCLASS_EXTEND, UTF8_INDIC_CONJUNCT_BREAK_NONE},
 };
 
-static const uint16_t CALC_STDCALL utf8_combinations[] = {
+static const uint16_t utf8_combinations[] = {
     0,
     46,
     192,
