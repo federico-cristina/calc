@@ -1,8 +1,10 @@
 set(HEADERS
+    "base64.h"
     "hash.h"
 )
 
 set(SOURCES
+    "base64.c"
     "hash.c"
 )
 
