@@ -1,4 +1,4 @@
-/**
+/**                                                                     -*- C -*-
  * @file        tokens.inc
  *
  * @author      Federico Cristina <federico.cristina@outlook.it>
