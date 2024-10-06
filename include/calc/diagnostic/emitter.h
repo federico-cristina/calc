@@ -18,6 +18,8 @@
 #ifndef CALC_DIAGNOSTIC_EMITTER_H_
 #define CALC_DIAGNOSTIC_EMITTER_H_
 
+#include "calc/core/result.h"
+
 #include "calc/diagnostic/diagnostics.h"
 
 CALC_C_HEADER_BEGIN
@@ -55,16 +57,6 @@ CALC_API int CALC_STDCALL calcEmitDiagnosticTrace(char *const hint, CalcDiagnost
 CALC_API int CALC_STDCALL calcEmitDiagnostic(CalcDiagnostic_t *const diagnostic, FILE *const stream, bool_t useColors);
 
 // Diagnostics Emitter
-
-/// @brief Enumerates possible states (SUCCESS or FAILURE) of the
-///        result of an operation.
-typedef enum _CalcResult
-{
-    /// @brief Success status.
-    CALC_SUCCESS = TRUE,
-    /// @brief Failure status.
-    CALC_FAILURE = FALSE,
-} CalcResult_t;
 
 /// @brief Enumerates each possible diagnsotic emitter status.
 typedef enum _CalcDiagnosticEmitterStatus
