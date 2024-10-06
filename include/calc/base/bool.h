@@ -11,7 +11,7 @@
  *              under the Apache License v2.0. See LICENSE for license
  *              informations.
  *
- * @brief       In this header is defined onld-style boolean datatype
+ * @brief       In this header is defined old-style boolean datatype
  *              with TRUE/FALSE constants.
  */
 
