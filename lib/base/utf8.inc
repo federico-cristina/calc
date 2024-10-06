@@ -1,11 +1,7 @@
-/**
- * =------------------------------------------------*- C -*-=
- * 
+/**                                                                     -*- C -*-
  * This file contains UTF-8 codepoints data and is designed to
  * be included in the utf8.c file.
- * 
- * =--------------------------------------------------------=
- * 
+ *
  * This file is part of the calc scripting language project,
  * under the Apache License v2.0. See LICENSE for license
  * informations.
