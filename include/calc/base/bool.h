@@ -7,12 +7,14 @@
  *
  * @copyright   Copyright (c) 2024 Federico Cristina
  *
- *              This file is part of the calc scripting language project,
- *              under the Apache License v2.0. See LICENSE for license
+ *              This file is part of the calc programming language project,
+ *              under the Apache License v2.0. See LICENSE file for license
  *              informations.
  *
- * @brief       In this header is defined old-style boolean datatype
- *              with TRUE/FALSE constants.
+ * @version     1.1
+ *
+ * @brief       In this header is defined old-style boolean datatype with
+ *              TRUE/FALSE constants.
  */
 
 #ifndef CALC_BASE_BOOL_H_
@@ -22,28 +24,34 @@
 
 CALC_C_HEADER_BEGIN
 
-/// @brief Boolean data type. This is a type alias to emultate
-///        the bool data type, its size is the same of an unsigned
-///        char, but it should (logically) contain only TRUE (1)
-///        or FALSE (0) constant values.
+/**
+ * @brief       Boolean datatype. This is a type alias to emultate the bool
+ *              datatype, its size is the same of an unsigned char, but it
+ *              should (logically) contain only `TRUE` (1) or `FALSE` (0)
+ *              constant values.
+ */
 typedef unsigned char bool_t;
 
 #ifndef FALSE
-/// @brief This macro represents the boolean false value for the
-///        bool_t data type.
+/**
+ * @brief       This constant represents the boolean false value for the `bool_t`
+ *              datatype.
+ */
 #   define FALSE ((bool_t)0x00)
-#elif FALSE
+#elif   FALSE
 #   error FALSE must be false
-#endif // FALSE
+#endif
 
 #ifndef TRUE
-/// @brief This macro represents the boolean true value for the
-///        bool_t data type.
+/**
+ * @brief       This constant represents the boolean true value for the `bool_t`
+ *              datatype.
+ */
 #   define TRUE  ((bool_t)0x01)
-#elif !TRUE
+#elif  !TRUE
 #   error TRUE must be true
-#endif // TRUE
+#endif
 
 CALC_C_HEADER_END
 
-#endif // CALC_BASE_BOOL_H_
+#endif /* CALC_BASE_BOOL_H_ */
