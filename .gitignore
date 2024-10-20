@@ -6,6 +6,9 @@ $*/
 out/
 build/
 
+# Doxygen Output Directory
+doxygen/
+
 # Python Cache Directory
 __pycache__/
 
