@@ -90,7 +90,7 @@
  * @brief       This macro gets its parameter back, expanding it if it's a
  *              symbolic constant.
  *
- * @param x     The value to get back.
+ * @param       x       The value to get back.
  * @return      The value of the `x` parameter.
  */
 #   define calcExpandMacro(x) x
@@ -101,8 +101,8 @@
  * @brief       This macro concatenates the given tokens, if their constants
  *              they will be expanded.
  *
- * @param x     Prefix token sequence.
- * @param y     Suffix token sequence.
+ * @param       x       Prefix token sequence.
+ * @param       y       Suffix token sequence.
  * @return      The concatenated token sequence.
  */
 #   define calcConcatMacro(x, y) calcExpandMacro(x) ## calcExpandMacro(y)
@@ -120,7 +120,7 @@
 /**
  * @brief       This macro gets a string version of the given token sequence.
  *
- * @param x     Token sequence to stringify.
+ * @param       x       Token sequence to stringify.
  * @return      A string version of the `x` parameter.
  */
 #   define calcMacroToString(x) calc_MacroToString(x)
