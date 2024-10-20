@@ -24,6 +24,7 @@
 #ifndef numcmp
 /**
  * @brief       Compares two numbers.
+ * 
  * @param x     First number to compare.
  * @param y     Second number to compare.
  * @return      -1 if x is less than y, +1 if x is grater than y, or 0 if x and
@@ -36,6 +37,7 @@
 #ifndef min
 /**
  * @brief       Gets the minimum value between its two parameters.
+ *
  * @param x     First number.
  * @param y     Second number.
  * @return      x if is less than y, else y.
@@ -46,6 +48,7 @@
 #ifndef max
 /**
  * @brief       Gets the maximum value between its two parameters.
+ *
  * @param x     First number.
  * @param y     Second number.
  * @return      x if is greater than y, else y.
@@ -56,6 +59,7 @@
 #ifndef hasflag
 /**
  * @brief       Checks if an integral value has a bit flag.
+ *
  * @param value Value to check.
  * @param flag  Bit flag to check.
  * @return      1 if value has the bit flag, else 0.
