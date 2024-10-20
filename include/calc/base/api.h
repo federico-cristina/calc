@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @file        config.h
+ * @file        api.h
  *
  * @author      Federico Cristina <federico.cristina@outlook.it>
  *
