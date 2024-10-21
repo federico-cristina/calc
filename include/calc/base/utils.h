@@ -25,8 +25,8 @@
 /**
  * @brief       Compares two numbers.
  * 
- * @param       x       First number to compare.
- * @param       y       Second number to compare.
+ * @param       x First number to compare.
+ * @param       y Second number to compare.
  * @return      -1 if x is less than y, +1 if x is grater than y, or 0 if x and
  *              y have the same value.
  */
@@ -38,8 +38,8 @@
 /**
  * @brief       Gets the minimum value between its two parameters.
  *
- * @param       x       First number.
- * @param       y       Second number.
+ * @param       x First number.
+ * @param       y Second number.
  * @return      x if is less than y, else y.
  */
 #   define min(x, y) (((x) < (y)) ? (x) : (y))
