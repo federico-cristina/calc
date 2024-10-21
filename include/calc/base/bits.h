@@ -316,7 +316,7 @@ typedef unsigned int uint32_t;
 
 #endif
 
-#if (!defined UINT64_MIN || !defined UINT64_MAX) && (CALC_PLATFORM_IS_MACOS && CALC_C_EXTENSIONS)
+#if (!defined UINT64_MIN || !defined UINT64_MAX) && !(CALC_PLATFORM_IS_MACOS && CALC_C_EXTENSIONS)
 
 #if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 /**
