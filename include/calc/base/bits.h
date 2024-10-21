@@ -193,25 +193,48 @@ typedef int int32_t;
 
 #if (!defined INT64_MIN || !defined INT64_MAX) && CALC_PLATFORM_IS_WINDOWS
 
+#if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 /**
  * @brief       Signed 64-bit integer datatype.
  */
 typedef long long int64_t;
+#else
+/**
+ * @brief       Signed 64-bit integer datatype.
+ */
+typedef int32_t int64_t;
+#endif
 
 #ifndef INT64_MIN
+#   if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 /**
  * @brief       This macro represents the minimum value representable with an
  *              64-bit signed integer.
  */
-#   define INT64_MIN ((int64_t)(-0x8000000000000000))
+#       define INT64_MIN ((int64_t)(-0x8000000000000000))
+#   else
+/**
+ * @brief       This macro represents the minimum value representable with an
+ *              64-bit signed integer.
+ */
+#       define INT64_MIN ((int64_t)INT32_MIN)
+#   endif
 #endif
 
 #ifndef INT64_MAX
+#   if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 /**
  * @brief       This macro represents the maximum value representable with an
  *              64-bit signed integer.
  */
-#   define INT64_MAX ((int64_t)(+0x7FFFFFFFFFFFFFFF))
+#       define INT64_MAX ((int64_t)(+0x7FFFFFFFFFFFFFFF))
+#   else
+/**
+ * @brief       This macro represents the maximum value representable with an
+ *              64-bit signed integer.
+ */
+#       define INT64_MAX ((int64_t)INT32_MAX)
+#   endif
 #endif
 
 #endif
@@ -295,25 +318,48 @@ typedef unsigned int uint32_t;
 
 #if !defined UINT64_MIN || !defined UINT64_MAX
 
+#if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 /**
  * @brief       Unsigned 64-bit integer datatype.
  */
 typedef unsigned long long uint64_t;
+#else
+/**
+ * @brief       Unsigned 64-bit integer datatype.
+ */
+typedef uint32_t uint64_t;
+#endif
 
 #ifndef UINT64_MIN
+#   if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 /**
  * @brief       This macro represents the minimum value representable with an
  *              64-bit unsigned integer.
  */
-#   define UINT64_MIN ((uint64_t)(0x0000000000000000U))
+#       define UINT64_MIN ((uint64_t)(0x0000000000000000U))
+#   else
+/**
+ * @brief       This macro represents the minimum value representable with an
+ *              64-bit unsigned integer.
+ */
+#       define UINT64_MIN ((uint64_t)UINT32_MIN)
+#   endif
 #endif
 
 #ifndef UINT64_MAX
+#   if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 /**
  * @brief       This macro represents the maximum value representable with an
  *              64-bit unsigned integer.
  */
-#   define UINT64_MAX ((uint64_t)(0xFFFFFFFFFFFFFFFFU))
+#       define UINT64_MAX ((uint64_t)(0xFFFFFFFFFFFFFFFFU))
+#   else
+/**
+ * @brief       This macro represents the maximum value representable with an
+ *              64-bit unsigned integer.
+ */
+#       define UINT64_MAX ((uint64_t)UINT32_MAX)
+#   endif
 #endif
 
 #endif
@@ -335,17 +381,31 @@ typedef unsigned long long uint64_t;
 typedef SSIZE_T ssize_t;
 
 #ifndef SSIZE_MIN
+#   ifdef LLONG_MIN
 /**
  * @brief       This constant represents the minimum ssize_t value.
  */
-#   define SSIZE_MIN ((ssize_t)LLONG_MIN)
+#       define SSIZE_MIN ((ssize_t)LLONG_MIN)
+#   else
+/**
+ * @brief       This constant represents the minimum ssize_t value.
+ */
+#       define SSIZE_MIN ((ssize_t)LONG_MIN)
+#   endif
 #endif
 
 #ifndef SSIZE_MAX
+#   ifdef LLONG_MAX
 /**
  * @brief       This constant represents the maximum ssize_t value.
  */
-#   define SSIZE_MAX ((ssize_t)LLONG_MAX)
+#       define SSIZE_MIN ((ssize_t)LLONG_MAX)
+#   else
+/**
+ * @brief       This constant represents the maximum ssize_t value.
+ */
+#       define SSIZE_MIN ((ssize_t)LONG_MAX)
+#   endif
 #endif
 
 #endif
