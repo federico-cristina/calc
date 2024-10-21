@@ -316,7 +316,7 @@ typedef unsigned int uint32_t;
 
 #endif
 
-#if (!defined UINT64_MIN || !defined UINT64_MAX) && CALC_PLATFORM_IS_WINDOWS
+#if !defined UINT64_MIN || !defined UINT64_MAX
 
 #if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 /**
