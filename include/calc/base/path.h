@@ -210,4 +210,4 @@ CALC_EXTERN char *CALC_STDCALL path_getbase(char *const dest, const char *const 
 
 CALC_C_HEADER_END
 
-#endif // CALC_BASE_PATH_H_
+#endif /* CALC_BASE_PATH_H_ */
