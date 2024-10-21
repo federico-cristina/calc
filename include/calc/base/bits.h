@@ -316,7 +316,7 @@ typedef unsigned int uint32_t;
 
 #endif
 
-#if !defined UINT64_MIN || !defined UINT64_MAX
+#if (!defined UINT64_MIN || !defined UINT64_MAX) && CALC_PLATFORM_IS_WINDOWS
 
 #if CALC_C_STANDARD >= CALC_C_STANDARD_C99
 /**
@@ -399,12 +399,12 @@ typedef SSIZE_T ssize_t;
 /**
  * @brief       This constant represents the maximum ssize_t value.
  */
-#       define SSIZE_MIN ((ssize_t)LLONG_MAX)
+#       define SSIZE_MAX ((ssize_t)LLONG_MAX)
 #   else
 /**
  * @brief       This constant represents the maximum ssize_t value.
  */
-#       define SSIZE_MIN ((ssize_t)LONG_MAX)
+#       define SSIZE_MAX ((ssize_t)LONG_MAX)
 #   endif
 #endif
 
