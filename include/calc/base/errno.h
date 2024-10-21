@@ -7,9 +7,11 @@
  *
  * @copyright   Copyright (c) 2024 Federico Cristina
  *
- *              This file is part of the calc scripting language project,
- *              under the Apache License v2.0. See LICENSE for license
+ *              This file is part of the calc programming language project,
+ *              under the Apache License v2.0. See LICENSE file for license
  *              informations.
+ *
+ * @version     1.1
  *
  * @brief       In this header are defined functions to print on the
  *              standard error stream and functions to handle errno
@@ -31,27 +33,36 @@
 
 CALC_C_HEADER_BEGIN
 
-// stderr print functions
+/**
+ * @defgroup    STDERR_FORMATTED_OUTPUT_FUNCTIONS stderr Formatted Output Functions
+ * @{
+ */
 
-/// @brief This function prints an error message on the standard error
-///        stream.
-/// @param format Pointer to a null-terminated byte string specifying
-///               how to interpret the data.
-/// @param arglist Variable argument list containing the data to print.
-/// @return The number of characters written if successful or negative
-///         value if an error occurred.
+#pragma region stderr Formatted Output Functions
+
+/**
+ * @brief       This function prints an error message on the standard error stream.
+ * 
+ * @param       format Pointer to a null-terminated byte string specifying how to
+ *              interpret the data.
+ * @param       arglist Variable argument list containing the data to print.
+ * @return      The number of characters written if successful or negative value
+ *              if an error occurred.
+ */
 CALC_INLINE int CALC_STDCALL veprintf(const char *const format, va_list arglist)
 {
     return vfprintf(stderr, format, arglist);
 }
 
-/// @brief This function prints an error message on the standard error
-///        stream.
-/// @param format Pointer to a null-terminated byte string specifying
-///               how to interpret the data.
-/// @param others Variable argument list containing the data to print.
-/// @return The number of characters written if successful or negative
-///         value if an error occurred.
+/**
+ * @brief       This function prints an error message on the standard error stream.
+ * 
+ * @param       format Pointer to a null-terminated byte string specifying how to
+ *              interpret the data.
+ * @param       others Variable argument list containing the data to print.
+ * @return      The number of characters written if successful or negative value
+ *              if an error occurred.
+ */
 CALC_INLINE int CALC_CDECL eprintf(const char *const format, ...)
 {
     int result;
@@ -64,13 +75,16 @@ CALC_INLINE int CALC_CDECL eprintf(const char *const format, ...)
     return result;
 }
 
-/// @brief This function prints an error message on the standard error
-///        stream with a line terminator at the end.
-/// @param format Pointer to a null-terminated byte string specifying
-///               how to interpret the data.
-/// @param arglist Variable argument list containing the data to print.
-/// @return The number of characters written if successful or negative
-///         value if an error occurred.
+/**
+ * @brief       This function prints an error message on the standard error stream
+ *              with a line terminator at the end.
+ * 
+ * @param       format Pointer to a null-terminated byte string specifying how to
+ *              interpret the data.
+ * @param       arglist Variable argument list containing the data to print.
+ * @return      The number of characters written if successful or negative value
+ *              if an error occurred.
+ */
 CALC_INLINE int CALC_STDCALL veprintfn(const char *const format, va_list arglist)
 {
     int result = 0;
@@ -81,13 +95,16 @@ CALC_INLINE int CALC_STDCALL veprintfn(const char *const format, va_list arglist
     return result;
 }
 
-/// @brief This function prints an error message on the standard error
-///        stream with a line terminator at the end.
-/// @param format Pointer to a null-terminated byte string specifying
-///               how to interpret the data.
-/// @param others Variable argument list containing the data to print.
-/// @return The number of characters written if successful or negative
-///         value if an error occurred.
+/**
+ * @brief       This function prints an error message on the standard error stream
+ *              with a line terminator at the end.
+ * 
+ * @param       format Pointer to a null-terminated byte string specifying how to
+ *              interpret the data.
+ * @param       others Variable argument list containing the data to print.
+ * @return      The number of characters written if successful or negative value
+ *              if an error occurred.
+ */
 CALC_INLINE int CALC_CDECL eprintfn(const char *const format, ...)
 {
     int result;
@@ -100,18 +117,32 @@ CALC_INLINE int CALC_CDECL eprintfn(const char *const format, ...)
     return result;
 }
 
-// errno handling functions
+#pragma endregion
 
-/// @brief This function provides maps each errno code to its name (or
-///        associated macro name).
-/// @param no Errno code.
-/// @return A pointer to the constant string containing the name of the
-///         errno.
+/**
+ * @}
+ * 
+ * @defgroup    ERRNO_HANDLING_FUNCTIONS errno Handling Functions
+ * @{
+ */
+
+#pragma region errno Handling Functions
+
+/**
+ * @brief       This function provides maps each errno code to its name (or
+ *              associated macro name).
+ * 
+ * @param       no Errno code.
+ * @return      A pointer to the constant string containing the name of the
+ *              errno.
+ */
 CALC_EXTERN const char *CALC_STDCALL errnoname(int no);
 
-/// @brief This function prints on the error stream a message in which is
-///        displayed the errno and its message. (This function has been
-///        created to be used with atexit(...) function)
+/**
+ * @brief       This function prints on the error stream a message in which is
+ *              displayed the errno and its message. (This function has been
+ *              created to be used with atexit(...) function)
+ */
 CALC_INLINE void CALC_STDCALL perrno(void)
 {
     if (errno)
@@ -120,6 +151,12 @@ CALC_INLINE void CALC_STDCALL perrno(void)
     return;
 }
 
+#pragma endregion
+
+/**
+ * @}
+ */
+
 CALC_C_HEADER_END
 
-#endif // CALC_BASE_ERRNO_H_
+#endif /* CALC_BASE_ERRNO_H_ */
