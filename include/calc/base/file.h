@@ -7,9 +7,11 @@
  *
  * @copyright   Copyright (c) 2024 Federico Cristina
  *
- *              This file is part of the calc scripting language project,
- *              under the Apache License v2.0. See LICENSE for license
+ *              This file is part of the calc programming language project,
+ *              under the Apache License v2.0. See LICENSE file for license
  *              informations.
+ *
+ * @version     1.1
  *
  * @brief       In this header are defined macros, constants and functions
  *              to checks existance and manipulate files and directories.
@@ -31,17 +33,26 @@
 
 CALC_C_HEADER_BEGIN
 
-/// @brief Enumerates the access modes, to use in access(...)
-///        function.
+/**
+ * @brief       Enumerates the access modes, to use in access(...) function.
+ */
 typedef enum _AccessMode
 {
-    /// @brief Existance only check.
+    /**
+     * @brief   Existance only check.
+     */
     F_OK = 0x00,
-    /// @brief Write permission check.
+    /**
+     * @brief   Write permission check.
+     */
     W_OK = 0x02,
-    /// @brief Read permission check.
+    /**
+     * @brief   Read permission check.
+     */
     R_OK = 0x04,
-    /// @brief Both read and write permissions check.
+    /**
+     * @brief   Both read and write permissions check.
+     */
     X_OK = W_OK | R_OK,
 } amode_t;
 
@@ -49,19 +60,21 @@ CALC_C_HEADER_END
 
 #   endif
 
-/// @brief The access() function shall check the file named
-///        by the pathname pointed to by the path argument
-///        for accessibility according to the bit pattern
-///        contained in mode, using the real user ID in place
-///        of the effective user ID and the real group ID in
-///        place of the effective group ID.
-/// @param path Path of the file to check.
-/// @param mode The value of amode is either the bitwise-inclusive
-///             OR of the access permissions to be checked (R_OK,
-///             W_OK, X_OK) or the existence test (F_OK).
-/// @return If the requested access is permitted, access() succeeds
-///         and shall return 0; otherwise, -1 shall be returned
-///         and errno shall be set to indicate the error.
+/**
+ * @brief       The access() function shall check the file named by the pathname
+ *              pointed to by the path argument for accessibility according to
+ *              the bit pattern contained in mode, using the real user ID in place
+ *              of the effective user ID and the real group ID in place of the
+ *              effective group ID.
+ * 
+ * @param       path Path of the file to check.
+ * @param       mode The value of amode is either the bitwise-inclusive OR of the
+ *              access permissions to be checked (R_OK, W_OK, X_OK) or the existence
+ *              test (F_OK).
+ * @return      If the requested access is permitted, access() succeeds and shall
+ *              return 0; otherwise, -1 shall be returned and errno shall be set to
+ *              indicate the error.
+ */
 #   define access(path, mode)  _access((path), (mode))
 #else
 #   include <unistd.h>
@@ -69,68 +82,82 @@ CALC_C_HEADER_END
 
 CALC_C_HEADER_BEGIN
 
-/// @brief Checks the existance of a file.
-/// @param path A path to a file.
-/// @return TRUE if the file exists, otherwise FALSE.
+/**
+ * @brief       Checks the existance of a file.
+ * 
+ * @param       path A path to a file.
+ * @return      TRUE if the file exists, otherwise FALSE. 
+ */
 CALC_INLINE bool_t CALC_STDCALL fexists(const char *const path)
 {
     return (bool_t)!access(path, F_OK);
 }
 
 #ifndef EOF
-/// @brief This macro represents the end of file character.
-///
-///        NOTE: Normally this macro should be defined in stdio.h,
-///        if is redefined here, maybe there's something that don't
-///        work...
-///
+/**
+ * @brief       This constant represents the 'end of file' character.
+ * 
+ * @note        Normally this macro should be defined in stdio.h, if is redefined
+ *              here, maybe there's something that don't work...
+ */
 #   define EOF (-1)
-#endif // EOF
+#endif
 
 #ifndef EOL
-/// @brief This macro represents the end of line character (LF).
+/**
+ * @brief       This constant represents the end of line character (LF).
+ */
 #   define EOL '\n'
-#endif // EOL
+#endif
 
 #ifndef NUL
-/// @brief This macro represents the string terminator character
-///        (NUL).
+/**
+ * @brief       This constant represents the string terminator character (NUL).
+ */
 #   define NUL '\0'
-#endif // NUL
+#endif
 
 #ifndef TAB
-/// @brief This macro represents the horizontal tabulation
-///        character (HTB).
+/**
+ * @brief       This constant represents the horizontal tabulation character (HTB).
+ */
 #   define TAB '\t'
-#endif // TAB
+#endif
 
 #ifndef CALC_LOADMOD
 #   if CALC_PLATFORM_IS_WINDOWS
-/// @brief This macro represents the default mode to apply to a
-///        file if the intention is to load its content. On
-///        Windows systems (that uses CRLF line endings) the
-///        read mode doesn't work properly, so it's necessary
-///        read the file as a binary stream.
+/**
+ * @brief       This constant represents the default mode to apply to a file if the
+ *              intention is to load its content. On Windows systems (that uses CRLF
+ *              line endings) the read mode doesn't work properly, so it's necessary
+ *              read the file as a binary stream.
+ */
 #       define CALC_LOADMOD "rb"
 #   else
-/// @brief This macro represents the default mode to apply to a
-///        file if the intention is to load its content.
+/**
+ * @brief       This constant represents the default mode to apply to a file if the
+ *              intention is to load its content. On Windows systems (that uses CRLF
+ *              line endings) the read mode doesn't work properly, so it's necessary
+ *              read the file as a binary stream.
+ */
 #       define CALC_LOADMOD "r"
 #   endif
-#endif // CALC_LOADMOD
+#endif
 
-/// @brief This function computes the size of a file (in bytes).
-/// @param stream The file stream to use as source to compute
-///               the size.
-/// @return The size, in bytes, of the specified file stream.
+/**
+ * @brief       This function computes the size of a file (in bytes).
+ * 
+ * @param       stream The file stream to use as source to compute the size.
+ * @return      The size, in bytes, of the specified file stream. 
+ */
 CALC_INLINE size_t CALC_STDCALL fgetsiz(FILE *const stream) {
     fpos_t fpos;
 
     if (fgetpos(stream, &fpos))
-        return failno("fgetpos is failed"), 0;
+        failno("fgetpos is failed");
 
     if (fseek(stream, 0, SEEK_END))
-        return failno("fseek is failed"), 0;
+        failno("fseek is failed");
 
 #if CALC_PLATFORM_ID == CALC_PLATFORM_ID_WIN64
     size_t fsiz = _ftelli64(stream);
@@ -139,11 +166,11 @@ CALC_INLINE size_t CALC_STDCALL fgetsiz(FILE *const stream) {
 #endif
 
     if (fsetpos(stream, &fpos))
-        return failno("fsetpos is failed"), 0;
+        failno("fsetpos is failed");
     else
         return fsiz;
 }
 
 CALC_C_HEADER_END
 
-#endif // CALC_BASE_FILE_H_
+#endif /* CALC_BASE_FILE_H_ */
